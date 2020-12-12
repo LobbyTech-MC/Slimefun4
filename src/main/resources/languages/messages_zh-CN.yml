@@ -1,4 +1,4 @@
----
+
 commands:
   help: 展示此帮助页面
   cheat: 使用作弊模式获取 Slimefun 的物品
@@ -10,21 +10,33 @@ commands:
   search: 搜索 Slimefun 物品
   open_guide: 使用命令打开 Slimefun 指南
   stats: 查看玩家的统计数据
+
   research:
     description: 解锁/重置玩家的研究
     reset: "&c你已重置了 %player% 的所有研究"
     reset-target: "&c你的所有研究已被重置"
+    
   backpack:
     description: 获取你其中一个背包的拷贝
     invalid-id: "&4背包 ID 必须为非负数!"
     player-never-joined: "&4找不到叫这个名字的玩家!"
     backpack-does-not-exist: "&4你指定的背包不存在!"
     restored-backpack-given: "&a你的背包已被恢复并且已经放入了你的物品栏!"
+    
   charge:
     description: 为你手持的物品充电
     charge-success: 充电完成!
     not-rechargeable: 这个物品不能充电!
+    
 guide:
+  locked: '已锁定'
+  work-in-progress: '这个物品正在开发中'
+  
+  locked-category:
+  - '要解锁这个类别'
+  - '你需要解锁以下'
+  - '类别的所有物品'
+
   search:
     message: "&b你想要搜索什么?"
     name: "&7搜索..."
@@ -33,6 +45,7 @@ guide:
     lore:
     - "&b你想要搜索什么?"
     - "&7将要搜索的物品的名字输入在聊天栏上"
+    
   cheat:
     no-multiblocks: "&4你不能在作弊模式下直接获得多方块结构的机器, 你必须自己建造!"
   languages:
@@ -117,6 +130,7 @@ messages:
   disabled-item: "&4&l这个物品已经被禁用了! 你是怎么得到它的?"
   no-tome-yourself: "&c你不能对你自己使用 &4学识巨著 &c..."
   multimeter: "&b已储存的能源: &3%stored% &b/ &3%capacity%"
+  bee-suit-slow-fall: '&e你的蜜蜂翅膀使你开始缓慢降落'
   talisman:
     anvil: "&a&o你的护身符使你的工具免于损坏"
     miner: "&a&o你的护身符使矿物双倍掉落了"

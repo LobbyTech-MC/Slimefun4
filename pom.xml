@@ -293,7 +293,8 @@
             <groupId>com.github.TheBusyBiscuit</groupId>
             <artifactId>CS-CoreLib</artifactId>
             <version>1.7</version>
-            <scope>provided</scope>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/CS-CoreLib v1.7.jar</systemPath>
         </dependency>
 
         <!-- Development dependencies -->
