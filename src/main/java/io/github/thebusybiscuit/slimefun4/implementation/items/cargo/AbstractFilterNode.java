@@ -64,7 +64,7 @@ abstract class AbstractFilterNode extends AbstractCargoNode {
             preset.addItem(i, new CustomItem(Material.CYAN_STAINED_GLASS_PANE, " "), ChestMenuUtils.getEmptyClickHandler());
         }
 
-        preset.addItem(2, new CustomItem(Material.PAPER, "&3Items", "", "&bPut in all Items you want to", "&bblacklist/whitelist"), ChestMenuUtils.getEmptyClickHandler());
+        preset.addItem(2, new CustomItem(Material.PAPER, "&3物品", "", "&b放入黑名单/白名单", "&b对应的物品"), ChestMenuUtils.getEmptyClickHandler());
     }
 
     @Override
@@ -73,14 +73,14 @@ abstract class AbstractFilterNode extends AbstractCargoNode {
         String filterType = BlockStorage.getLocationInfo(loc, FILTER_TYPE);
 
         if (!BlockStorage.hasBlockInfo(b) || filterType == null || filterType.equals("whitelist")) {
-            menu.replaceExistingItem(15, new CustomItem(Material.WHITE_WOOL, "&7Type: &rWhitelist", "", "&e> Click to change it to Blacklist"));
+            menu.replaceExistingItem(15, new CustomItem(Material.WHITE_WOOL, "&7模式: &r白名单", "", "&e> 点击切换为黑名单模式"));
             menu.addMenuClickHandler(15, (p, slot, item, action) -> {
                 BlockStorage.addBlockInfo(b, FILTER_TYPE, "blacklist");
                 updateBlockMenu(menu, b);
                 return false;
             });
         } else {
-            menu.replaceExistingItem(15, new CustomItem(Material.BLACK_WOOL, "&7Type: &8Blacklist", "", "&e> Click to change it to Whitelist"));
+            menu.replaceExistingItem(15, new CustomItem(Material.BLACK_WOOL, "&7模式: &8黑名单", "", "&e> 点击切换为白名单模式"));
             menu.addMenuClickHandler(15, (p, slot, item, action) -> {
                 BlockStorage.addBlockInfo(b, FILTER_TYPE, "whitelist");
                 updateBlockMenu(menu, b);
@@ -91,14 +91,14 @@ abstract class AbstractFilterNode extends AbstractCargoNode {
         String lore = BlockStorage.getLocationInfo(b.getLocation(), FILTER_LORE);
 
         if (!BlockStorage.hasBlockInfo(b) || lore == null || lore.equals(String.valueOf(true))) {
-            menu.replaceExistingItem(25, new CustomItem(Material.MAP, "&7Include Lore: &2\u2714", "", "&e> Click to toggle whether the Lore has to match"));
+            menu.replaceExistingItem(25, new CustomItem(Material.MAP, "&7匹配描述: &2\u2714", "", "&e> 点击开关是否匹配描述"));
             menu.addMenuClickHandler(25, (p, slot, item, action) -> {
                 BlockStorage.addBlockInfo(b, FILTER_LORE, String.valueOf(false));
                 updateBlockMenu(menu, b);
                 return false;
             });
         } else {
-            menu.replaceExistingItem(25, new CustomItem(Material.MAP, "&7Include Lore: &4\u2718", "", "&e> Click to toggle whether the Lore has to match"));
+            menu.replaceExistingItem(25, new CustomItem(Material.MAP, "&7匹配描述: &4\u2718", "", "&e> 点击开关是否匹配描述"));
             menu.addMenuClickHandler(25, (p, slot, item, action) -> {
                 BlockStorage.addBlockInfo(b, FILTER_LORE, String.valueOf(true));
                 updateBlockMenu(menu, b);

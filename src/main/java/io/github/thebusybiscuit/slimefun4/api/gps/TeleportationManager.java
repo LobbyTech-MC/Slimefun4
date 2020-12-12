@@ -44,7 +44,7 @@ public final class TeleportationManager {
         teleporterUsers.add(p.getUniqueId());
 
         PlayerProfile.fromUUID(uuid, profile -> {
-            ChestMenu menu = new ChestMenu("&3Teleporter");
+            ChestMenu menu = new ChestMenu("&3传送器");
             menu.addMenuCloseHandler(pl -> teleporterUsers.remove(pl.getUniqueId()));
 
             for (int slot : teleporterBorder) {

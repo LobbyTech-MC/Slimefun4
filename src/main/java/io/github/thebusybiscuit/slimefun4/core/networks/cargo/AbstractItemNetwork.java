@@ -60,7 +60,7 @@ abstract class AbstractItemNetwork extends Network {
     private static final int[] TERMINAL_SLOTS = { 0, 1, 2, 3, 4, 5, 6, 9, 10, 11, 12, 13, 14, 15, 18, 19, 20, 21, 22, 23, 24, 27, 28, 29, 30, 31, 32, 33, 36, 37, 38, 39, 40, 41, 42 };
     private static final int TERMINAL_OUT_SLOT = 17;
 
-    private final ItemStack terminalPlaceholderItem = new CustomItem(Material.BARRIER, "&4No Item cached");
+    private final ItemStack terminalPlaceholderItem = new CustomItem(Material.BARRIER, "&4找不到物品");
 
     protected final Set<Location> terminals = new HashSet<>();
     protected final Set<Location> imports = new HashSet<>();
@@ -368,13 +368,13 @@ abstract class AbstractItemNetwork extends Network {
             ItemMeta im = stack.getItemMeta();
             List<String> lore = new ArrayList<>();
             lore.add("");
-            lore.add(ChatColors.color("&7Stored Items: &f" + DoubleHandler.getFancyDouble(item.getInt())));
+            lore.add(ChatColors.color("&7储存的物品: &f" + DoubleHandler.getFancyDouble(item.getInt())));
 
             if (stack.getMaxStackSize() > 1) {
                 int amount = item.getInt() > stack.getMaxStackSize() ? stack.getMaxStackSize() : item.getInt();
-                lore.add(ChatColors.color("&7<Left Click: Request 1 | Right Click: Request " + amount + ">"));
+                lore.add(ChatColors.color("&7<左键:需要 1 | 右键: 需要 " + amount + ">"));
             } else {
-                lore.add(ChatColors.color("&7<Left Click: Request 1>"));
+                lore.add(ChatColors.color("&7<左键: 需要 1>"));
             }
 
             lore.add("");

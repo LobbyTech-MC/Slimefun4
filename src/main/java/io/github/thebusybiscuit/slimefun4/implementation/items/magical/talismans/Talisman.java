@@ -74,9 +74,9 @@ public class Talisman extends SlimefunItem {
         this.chance = chance;
 
         if (!(this instanceof EnderTalisman)) {
-            String name = "&5Ender " + ChatColor.stripColor(getItem().getItemMeta().getDisplayName());
+            String name = "&5末影" + ChatColor.stripColor(getItem().getItemMeta().getDisplayName());
             List<String> lore = new ArrayList<>();
-            lore.add("&7&oEnder Infused");
+            lore.add("&7&o末影");
             lore.add("");
 
             for (String line : getItem().getItemMeta().getLore()) {

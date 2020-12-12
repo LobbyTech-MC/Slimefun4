@@ -136,7 +136,7 @@ public class BlockPlacer extends SlimefunItem {
         }
 
         OfflinePlayer player = Bukkit.getOfflinePlayer(UUID.fromString(owner));
-        return SlimefunPlugin.getProtectionManager().hasPermission(player, target, ProtectableAction.PLACE_BLOCK);
+        return SlimefunPlugin.getProtectionManager().hasPermission(player, target, ProtectableAction.BREAK_BLOCK);
     }
 
     private boolean isBlacklisted(Material type) {

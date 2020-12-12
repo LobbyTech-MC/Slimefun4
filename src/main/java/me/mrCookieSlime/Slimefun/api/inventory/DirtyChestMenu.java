@@ -15,6 +15,8 @@ import org.bukkit.inventory.ItemStack;
 import io.github.thebusybiscuit.cscorelib2.inventory.InvUtils;
 import io.github.thebusybiscuit.cscorelib2.inventory.ItemUtils;
 import io.github.thebusybiscuit.cscorelib2.item.CustomItem;
+import io.github.thebusybiscuit.cscorelib2.protection.ProtectableAction;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.utils.itemstack.ItemStackWrapper;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 
@@ -58,6 +60,9 @@ public class DirtyChestMenu extends ChestMenu {
     }
 
     public boolean canOpen(Block b, Player p) {
+    	if (!(p.hasPermission("slimefun.inventory.bypass") || SlimefunPlugin.getProtectionManager().hasPermission(p, b.getLocation(), ProtectableAction.INTERACT_BLOCK))) {
+            return false;
+        }
         return preset.canOpen(b, p);
     }
 

@@ -38,11 +38,10 @@ import me.mrCookieSlime.Slimefun.api.Slimefun;
 /**
  * The {@link BlockListener} is responsible for listening to the {@link BlockPlaceEvent}
  * and {@link BlockBreakEvent}.
- *
+ * 
  * @author TheBusyBiscuit
  * @author Linox
- * @author Patbox
- *
+ * 
  * @see BlockPlaceHandler
  * @see BlockBreakHandler
  * @see ToolUseHandler
@@ -59,20 +58,7 @@ public class BlockListener implements Listener {
         // This prevents Players from placing a block where another block already exists
         // While this can cause ghost blocks it also prevents them from replacing grass
         // or saplings etc...
-        Block block = e.getBlock();
-
-        if (e.getBlockReplacedState().getType().isAir()) {
-            SlimefunItem sfItem = BlockStorage.check(block);
-
-            if (sfItem != null) {
-                for (ItemStack item : sfItem.getDrops()) {
-                    if (item != null && !item.getType().isAir()) {
-                        block.getWorld().dropItemNaturally(block.getLocation(), item);
-                    }
-                }
-                BlockStorage.clearBlockInfo(block);
-            }
-        } else if (BlockStorage.hasBlockInfo(e.getBlock())) {
+        if (BlockStorage.hasBlockInfo(e.getBlock())) {
             e.setCancelled(true);
         }
     }
@@ -184,7 +170,7 @@ public class BlockListener implements Listener {
      * This method checks for a sensitive {@link Block}.
      * Sensitive {@link Block Blocks} are pressure plates or saplings, which should be broken
      * when the block beneath is broken as well.
-     *
+     * 
      * @param p
      *            The {@link Player} who broke this {@link Block}
      * @param b

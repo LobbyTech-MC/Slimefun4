@@ -4,18 +4,18 @@ options:
   # Note: When running a stable build auto-updates ONLY update to other stable builds! Perfect eh?
   # You can download the latest stable build here: https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun4/stable/
 
-  auto-update: true
-  backwards-compatibility: true
-  chat-prefix: '&a&lSlimefun 4&7> '
+  auto-update: false
+  backwards-compatibility: false
+  chat-prefix: '&a&l粘液科技&7> '
   armor-update-interval: 10
   enable-armor-effects: true
   auto-save-delay-in-minutes: 10
   legacy-ore-washer: false
   legacy-dust-washer: false
   legacy-ore-grinder: true
-  language: en
+  language: zh-CN
   enable-translations: true
-  log-duplicate-block-entries: true
+  log-duplicate-block-entries: false
   burn-players-when-radioactive: true
   drop-excess-sf-give-items: false
 
@@ -35,7 +35,7 @@ URID:
 
 networks:
   max-size: 200
-  cargo-ticker-delay: 0
+  cargo-ticker-delay: 1
   enable-visualizer: true
   delete-excess-items: false
 

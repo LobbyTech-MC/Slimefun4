@@ -52,7 +52,7 @@ public class IndustrialMiner extends MultiBlockMachine {
     private final ItemSetting<Boolean> canMineAncientDebris = new ItemSetting<>("can-mine-ancient-debris", false);
 
     public IndustrialMiner(Category category, SlimefunItemStack item, Material baseMaterial, boolean silkTouch, int range) {
-        super(category, item, new ItemStack[] { null, null, null, new CustomItem(Material.PISTON, "Piston (facing up)"), new ItemStack(Material.CHEST), new CustomItem(Material.PISTON, "Piston (facing up)"), new ItemStack(baseMaterial), new ItemStack(Material.BLAST_FURNACE), new ItemStack(baseMaterial) }, BlockFace.UP);
+        super(category, item, new ItemStack[] { null, null, null, new CustomItem(Material.PISTON, "活塞(面朝上方)"), new ItemStack(Material.CHEST), new CustomItem(Material.PISTON, "活塞(面朝上方)"), new ItemStack(baseMaterial), new ItemStack(Material.BLAST_FURNACE), new ItemStack(baseMaterial) }, BlockFace.UP);
 
         this.range = range;
         this.silkTouch = silkTouch;
@@ -164,7 +164,7 @@ public class IndustrialMiner extends MultiBlockMachine {
             ItemStack item = fuel.getInput().clone();
             ItemMeta im = item.getItemMeta();
             List<String> lore = new ArrayList<>();
-            lore.add(ChatColors.color("&8\u21E8 &7Lasts for max. " + fuel.getTicks() + " Ores"));
+            lore.add(ChatColors.color("&8\u21E8 &7可开采" + fuel.getTicks() + "个矿石"));
             im.setLore(lore);
             item.setItemMeta(im);
             list.add(item);

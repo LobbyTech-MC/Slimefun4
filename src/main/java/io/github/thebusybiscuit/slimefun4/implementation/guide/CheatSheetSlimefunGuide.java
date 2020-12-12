@@ -34,7 +34,7 @@ public class CheatSheetSlimefunGuide extends ChestSlimefunGuide {
     public CheatSheetSlimefunGuide() {
         super(false);
 
-        item = new SlimefunGuideItem(this, "&cSlimefun Guide &4(Cheat Sheet)");
+        item = new SlimefunGuideItem(this, "&c粘液科技指南&4(作弊模式)");
     }
 
     @Override

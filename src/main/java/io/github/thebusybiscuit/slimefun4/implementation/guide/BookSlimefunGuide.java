@@ -53,7 +53,7 @@ public class BookSlimefunGuide implements SlimefunGuideImplementation {
     private final ItemStack item;
 
     public BookSlimefunGuide() {
-        item = new SlimefunGuideItem(this, "&aSlimefun Guide &7(Book GUI)");
+        item = new SlimefunGuideItem(this, "&a粘液科技指南&7(书本界面)");
     }
 
     @Override
@@ -128,7 +128,7 @@ public class BookSlimefunGuide implements SlimefunGuideImplementation {
                         }
                     }
 
-                    lines.add(new ChatComponent(ChatColor.DARK_GRAY + "\u21E8" + ChatColor.DARK_BLUE + " Tier " + tier + "\n"));
+                    lines.add(new ChatComponent(ChatColor.DARK_GRAY + "\u21E8" + ChatColor.DARK_BLUE + "等级" + tier + "\n"));
                 }
 
                 addCategory(p, profile, category, lines);
