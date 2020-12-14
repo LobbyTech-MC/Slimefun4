@@ -293,8 +293,7 @@
             <groupId>com.github.TheBusyBiscuit</groupId>
             <artifactId>CS-CoreLib</artifactId>
             <version>1.7</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/CS-CoreLib v1.7.jar</systemPath>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Development dependencies -->
@@ -315,7 +314,7 @@
         <dependency>
             <groupId>com.github.seeseemelk</groupId>
             <artifactId>MockBukkit-v1.16</artifactId>
-            <version>0.17.0</version>
+            <version>0.18.0</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
