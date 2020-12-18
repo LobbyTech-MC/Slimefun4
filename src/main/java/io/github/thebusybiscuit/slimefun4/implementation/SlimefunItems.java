@@ -300,11 +300,6 @@ public final class SlimefunItems {
 
     public static final SlimefunItemStack BOOTS_OF_THE_STOMPER = new SlimefunItemStack("BOOTS_OF_THE_STOMPER", Material.LEATHER_BOOTS, Color.AQUA, "&b践踏者之靴", "", "&9你受到的所有摔落伤害", "&9将转给附近的生物/玩家", "", "&9+ 减免摔落伤害");
 
-    public static final SlimefunItemStack BEE_HELMET = new SlimefunItemStack("BEE_HELMET", Material.GOLDEN_HELMET, "&e&l蜜蜂头盔", " ", "&e&o不会被蜜蜂锥到");
-    public static final SlimefunItemStack BEE_WINGS = new SlimefunItemStack("BEE_WINGS", Material.ELYTRA, "&e&l蜜蜂翅膀", " ", "&e&o像蜜蜂一样飞行", " ", "&9当接近地面时", "&9缓慢降落", " ");
-    public static final SlimefunItemStack BEE_LEGGINGS = new SlimefunItemStack("BEE_LEGGINGS", Material.GOLDEN_LEGGINGS, "&e&l蜜蜂护腿", " ", "&e&o像蜜蜂的腿一样的护腿");
-    public static final SlimefunItemStack BEE_BOOTS = new SlimefunItemStack("BEE_BOOTS", Material.GOLDEN_BOOTS, "&e&l蜜蜂靴子", "", "&e&o不再担心够不到了", "", "&9+ 跳跃提升", "&9+ 免疫摔落伤害");
-
     static {
         Map<Enchantment, Integer> cactusEnchs = new HashMap<>();
         cactusEnchs.put(Enchantment.THORNS, 3);
