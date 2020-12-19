@@ -18,19 +18,18 @@ import org.bukkit.inventory.ItemStack;
 
 import io.github.thebusybiscuit.cscorelib2.blocks.Vein;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
+import io.github.thebusybiscuit.slimefun4.core.attributes.TickingBlock;
+import io.github.thebusybiscuit.slimefun4.core.attributes.TickingMethod;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
-import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import io.github.thebusybiscuit.slimefun4.utils.itemstack.ItemStackWrapper;
-import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu.AdvancedMenuClickHandler;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ClickAction;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
-import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
@@ -44,7 +43,7 @@ import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
  * @author Linox
  *
  */
-public class FluidPump extends SimpleSlimefunItem<BlockTicker> implements InventoryBlock, EnergyNetComponent {
+public class FluidPump extends SlimefunItem implements InventoryBlock, EnergyNetComponent, TickingBlock {
 
     private static final int ENERGY_CONSUMPTION = 32;
     private static final int RANGE = 42;
@@ -121,7 +120,13 @@ public class FluidPump extends SimpleSlimefunItem<BlockTicker> implements Invent
         return 512;
     }
 
-    protected void tick(@Nonnull Block b) {
+    @Override
+    public TickingMethod getTickingMethod() {
+        return TickingMethod.MAIN_THREAD;
+    }
+
+    @Override
+    public void tick(@Nonnull Block b) {
         Block fluid = b.getRelative(BlockFace.DOWN);
 
         if (fluid.isLiquid() && getCharge(b.getLocation()) >= ENERGY_CONSUMPTION) {
@@ -206,22 +211,7 @@ public class FluidPump extends SimpleSlimefunItem<BlockTicker> implements Invent
                 return levelled.getLevel() == 0;
             }
         }
+
         return false;
-    }
-
-    @Override
-    public BlockTicker getItemHandler() {
-        return new BlockTicker() {
-
-            @Override
-            public void tick(Block b, SlimefunItem sf, Config data) {
-                FluidPump.this.tick(b);
-            }
-
-            @Override
-            public boolean isSynchronized() {
-                return true;
-            }
-        };
     }
 }
