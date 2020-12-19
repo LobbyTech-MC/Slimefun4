@@ -32,6 +32,8 @@
 #### Changes
 * Performance optimizations for Cargo networks
 * Removed an old version of bStats
+* Performance Improvements and Optimizations for Cobblestone/Stone/Basalt generators and mining androids
+* Androids operating on a Cobblestone/Stone/Basalt generator now work faster
 
 #### Fixes
 * Fixed a couple of compatibility issues with ItemsAdder

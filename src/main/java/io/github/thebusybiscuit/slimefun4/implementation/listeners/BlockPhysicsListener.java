@@ -84,6 +84,7 @@ public class BlockPhysicsListener implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onLiquidFlow(BlockFromToEvent e) {
         Block block = e.getToBlock();
+        Material type = block.getType();
 
         // Check if this Material can be destroyed by fluids
         if (SlimefunTag.FLUID_SENSITIVE_MATERIALS.isTagged(block.getType())) {
