@@ -619,7 +619,7 @@ public class ProgrammableAndroid extends SlimefunItem implements InventoryBlock,
     
     @Override
     public TickingMethod getTickingMethod() {
-        return TickingMethod.MAIN_THREAD;
+        return TickingMethod.SEPERATE_THREAD;
     }
 
     @Override

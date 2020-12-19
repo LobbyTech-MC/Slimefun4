@@ -122,7 +122,7 @@ public class FluidPump extends SlimefunItem implements InventoryBlock, EnergyNet
 
     @Override
     public TickingMethod getTickingMethod() {
-        return TickingMethod.MAIN_THREAD;
+        return TickingMethod.SEPERATE_THREAD;
     }
 
     @Override

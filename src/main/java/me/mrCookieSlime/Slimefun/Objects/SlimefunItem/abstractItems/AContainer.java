@@ -332,7 +332,7 @@ public abstract class AContainer extends SlimefunItem implements InventoryBlock,
 
             @Override
             public boolean isSynchronized() {
-                return false;
+                return true;
             }
         });
     }
