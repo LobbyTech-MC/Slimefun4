@@ -80,7 +80,7 @@ public class AutoBreeder extends SlimefunItem implements InventoryBlock, EnergyN
 
     @Override
     public TickingMethod getTickingMethod() {
-        return TickingMethod.SEPERATE_THREAD;
+        return TickingMethod.MAIN_THREAD;
     }
 
     @Override

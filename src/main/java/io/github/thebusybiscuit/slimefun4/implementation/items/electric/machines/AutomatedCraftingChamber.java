@@ -218,7 +218,7 @@ public abstract class AutomatedCraftingChamber extends SlimefunItem implements I
 
             @Override
             public boolean isSynchronized() {
-                return true;
+                return false;
             }
         });
     }

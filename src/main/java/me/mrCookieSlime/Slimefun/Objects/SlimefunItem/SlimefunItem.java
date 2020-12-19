@@ -509,7 +509,7 @@ public class SlimefunItem implements Placeable {
 
                     @Override
                     public boolean isSynchronized() {
-                        return ticker.getTickingMethod() == TickingMethod.SEPERATE_THREAD;
+                        return ticker.getTickingMethod() == TickingMethod.MAIN_THREAD;
                     }
 
                     @Override

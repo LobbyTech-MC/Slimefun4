@@ -102,7 +102,7 @@ public class RainbowBlock extends SlimefunItem implements TickingBlock {
 
     @Override
     public TickingMethod getTickingMethod() {
-        return TickingMethod.SEPERATE_THREAD;
+        return TickingMethod.MAIN_THREAD;
     }
 
     /**
