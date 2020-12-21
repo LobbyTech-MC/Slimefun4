@@ -39,6 +39,7 @@
 * Fixed a couple of compatibility issues with ItemsAdder
 * Fixed #2575
 * Fixed ghost blocks to some extent (ghost blocks will now drop and be replaced)
+* Fixed #2636 (hotfix)
 
 ## Release Candidate 18 (03 Dec 2020)
 
