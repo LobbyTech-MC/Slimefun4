@@ -94,7 +94,7 @@ class ItemFilter implements Predicate<ItemStack> {
 
             for (int slot : CargoUtils.getFilteringSlots()) {
                 
-                if(slot < menu.toInventory().getMaxStackSize()) {
+                if(slot < menu.toInventory().getSize()) {
                 	ItemStack stack = menu.getItemInSlot(slot);
                 	
                 	if (stack != null && stack.getType() != Material.AIR) {
