@@ -6,15 +6,12 @@ import java.util.UUID;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
 
-import io.github.thebusybiscuit.slimefun4.api.gps.GPSNetwork;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.attributes.TickingBlock;
 import io.github.thebusybiscuit.slimefun4.core.attributes.TickingMethod;
@@ -46,7 +43,7 @@ public abstract class GPSTransmitter extends SimpleSlimefunItem<BlockPlaceHandle
     }
 
     @Nonnull
-    private BlockPlaceHandler onPlace() {
+	protected BlockPlaceHandler onPlace() {
         return new BlockPlaceHandler(false) {
 
             @Override

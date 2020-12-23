@@ -18,6 +18,7 @@ import io.github.thebusybiscuit.cscorelib2.item.CustomItem;
 import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactivity;
+import io.github.thebusybiscuit.slimefun4.core.handlers.BlockPlaceHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.implementation.items.RadioactiveItem;
@@ -1791,6 +1792,11 @@ public final class SlimefunItemSetup {
                 return 1;
             }
 
+            @Override
+			public BlockPlaceHandler getItemHandler() {
+				return onPlace();
+			}
+
         }.register(plugin);
 
         new GPSTransmitter(categories.gps, 2, SlimefunItems.GPS_TRANSMITTER_2, RecipeType.ENHANCED_CRAFTING_TABLE,
@@ -1805,6 +1811,11 @@ public final class SlimefunItemSetup {
             public int getEnergyConsumption() {
                 return 3;
             }
+
+            @Override
+			public BlockPlaceHandler getItemHandler() {
+				return onPlace();
+			}
 
         }.register(plugin);
 
@@ -1821,6 +1832,11 @@ public final class SlimefunItemSetup {
                 return 11;
             }
 
+			@Override
+			public BlockPlaceHandler getItemHandler() {
+				return onPlace();
+			}
+
         }.register(plugin);
 
         new GPSTransmitter(categories.gps, 4, SlimefunItems.GPS_TRANSMITTER_4, RecipeType.ENHANCED_CRAFTING_TABLE,
@@ -1835,6 +1851,11 @@ public final class SlimefunItemSetup {
             public int getEnergyConsumption() {
                 return 46;
             }
+
+            @Override
+			public BlockPlaceHandler getItemHandler() {
+				return onPlace();
+			}
             
         }.register(plugin);
 
