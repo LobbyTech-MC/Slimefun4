@@ -62,14 +62,14 @@ public class BlockListener implements Listener {
         if (e.getBlockReplacedState().getType().isAir()) {
             SlimefunItem sfItem = BlockStorage.check(block);
 
-            if (sfItem != null) {
-                /* Temp fix for #2636
+            // Fixes #2636
+            if (sfItem != null && !SlimefunPlugin.getTickerTask().isDeletedSoon(block.getLocation())) {
                 for (ItemStack item : sfItem.getDrops()) {
                     if (item != null && !item.getType().isAir()) {
                         block.getWorld().dropItemNaturally(block.getLocation(), item);
                     }
                 }
-                 */
+
                 BlockStorage.clearBlockInfo(block);
             }
         } else if (BlockStorage.hasBlockInfo(e.getBlock())) {
@@ -84,7 +84,7 @@ public class BlockListener implements Listener {
         SlimefunItem sfItem = SlimefunItem.getByItem(item);
 
         if (sfItem != null && !(sfItem instanceof NotPlaceable) && Slimefun.isEnabled(e.getPlayer(), sfItem, true)) {
-            if (!Slimefun.hasUnlocked(e.getPlayer(), sfItem, true)) {
+            if (!sfItem.canUse(e.getPlayer(), true)) {
                 e.setCancelled(true);
             } else {
                 if (SlimefunPlugin.getBlockDataService().isTileEntity(e.getBlock().getType())) {
@@ -115,7 +115,7 @@ public class BlockListener implements Listener {
         int fortune = getBonusDropsWithFortune(item, e.getBlock());
         List<ItemStack> drops = new ArrayList<>();
 
-        if (!e.isCancelled() && item.getType() != Material.AIR) {
+        if (!item.getType().isAir()) {
             callToolHandler(e, item, fortune, drops);
         }
 
@@ -131,7 +131,7 @@ public class BlockListener implements Listener {
         SlimefunItem tool = SlimefunItem.getByItem(item);
 
         if (tool != null) {
-            if (Slimefun.hasUnlocked(e.getPlayer(), tool, true)) {
+            if (tool.canUse(e.getPlayer(), true)) {
                 tool.callItemHandler(ToolUseHandler.class, handler -> handler.onToolUse(e, item, fortune, drops));
             } else {
                 e.setCancelled(true);
