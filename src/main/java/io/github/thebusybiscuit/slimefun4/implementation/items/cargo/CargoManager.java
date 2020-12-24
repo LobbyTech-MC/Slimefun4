@@ -3,7 +3,6 @@ package io.github.thebusybiscuit.slimefun4.implementation.items.cargo;
 import java.util.Optional;
 
 import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
@@ -15,11 +14,6 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.TickingMethod;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockUseHandler;
 import io.github.thebusybiscuit.slimefun4.core.networks.cargo.CargoNet;
 import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
-import io.github.thebusybiscuit.slimefun4.api.events.PlayerRightClickEvent;
-import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
-import io.github.thebusybiscuit.slimefun4.core.handlers.BlockUseHandler;
-import io.github.thebusybiscuit.slimefun4.core.networks.cargo.CargoNet;
-import io.github.thebusybiscuit.slimefun4.implementation.handlers.SimpleBlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.utils.holograms.SimpleHologram;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
@@ -28,22 +22,13 @@ import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 
 public class CargoManager extends SimpleSlimefunItem<BlockUseHandler> implements TickingBlock {
 
-    @ParametersAreNonnullByDefault
     public CargoManager(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(category, item, recipeType, recipe);
 
-        addItemHandler(onBreak());
-    }
-
-    @Nonnull
-    private BlockBreakHandler onBreak() {
-        return new SimpleBlockBreakHandler() {
-
-            @Override
-            public void onBlockBreak(@Nonnull Block b) {
-                SimpleHologram.remove(b);
-            }
-        };
+        registerBlockHandler(getId(), (p, b, tool, reason) -> {
+            SimpleHologram.remove(b);
+            return true;
+        });
     }
 
     @Override

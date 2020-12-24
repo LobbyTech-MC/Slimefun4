@@ -78,7 +78,6 @@ import io.github.thebusybiscuit.slimefun4.implementation.listeners.GadgetsListen
 import io.github.thebusybiscuit.slimefun4.implementation.listeners.GrapplingHookListener;
 import io.github.thebusybiscuit.slimefun4.implementation.listeners.ItemDropListener;
 import io.github.thebusybiscuit.slimefun4.implementation.listeners.ItemPickupListener;
-import io.github.thebusybiscuit.slimefun4.implementation.listeners.MiningAndroidListener;
 import io.github.thebusybiscuit.slimefun4.implementation.listeners.MultiBlockListener;
 import io.github.thebusybiscuit.slimefun4.implementation.listeners.NetworkListener;
 import io.github.thebusybiscuit.slimefun4.implementation.listeners.PlayerProfileListener;
@@ -524,7 +523,6 @@ public final class SlimefunPlugin extends JavaPlugin implements SlimefunAddon {
         new GrindstoneListener(this);
         new CartographyTableListener(this);
         new ButcherAndroidListener(this);
-        new MiningAndroidListener(this);
         new NetworkListener(this, networkManager);
 
         // Bees were added in 1.15

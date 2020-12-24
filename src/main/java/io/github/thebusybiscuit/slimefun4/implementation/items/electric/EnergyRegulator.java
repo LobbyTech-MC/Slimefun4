@@ -10,10 +10,8 @@ import org.bukkit.inventory.ItemStack;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.attributes.TickingBlock;
 import io.github.thebusybiscuit.slimefun4.core.attributes.TickingMethod;
-import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockPlaceHandler;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNet;
-import io.github.thebusybiscuit.slimefun4.implementation.handlers.SimpleBlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.utils.holograms.SimpleHologram;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
@@ -36,18 +34,11 @@ public class EnergyRegulator extends SlimefunItem implements TickingBlock {
     public EnergyRegulator(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(category, item, recipeType, recipe);
 
-        addItemHandler(onBreak());
-    }
-
-    @Nonnull
-    private BlockBreakHandler onBreak() {
-        return new SimpleBlockBreakHandler() {
-
-            @Override
-            public void onBlockBreak(@Nonnull Block b) {
-                SimpleHologram.remove(b);
-            }
-        };
+        addItemHandler(onPlace());
+        SlimefunItem.registerBlockHandler(getId(), (p, b, stack, reason) -> {
+            SimpleHologram.remove(b);
+            return true;
+        });
     }
 
     @Nonnull

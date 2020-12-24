@@ -34,12 +34,6 @@
 * Removed an old version of bStats
 * Performance Improvements and Optimizations for Cobblestone/Stone/Basalt generators and mining androids
 * Androids operating on a Cobblestone/Stone/Basalt generator now work faster
-* General performance improvements
-* Improvements to the BlockBreakHandler (API)
-
-#### Fixes
-* Fixed "block-explosions" (e.g. beds in Nether) not properly respecting explosion-resistant blocks
-* Fixed #2560
 
 #### Fixes
 * Fixed a couple of compatibility issues with ItemsAdder

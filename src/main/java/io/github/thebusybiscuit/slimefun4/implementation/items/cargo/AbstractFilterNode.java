@@ -1,7 +1,6 @@
 package io.github.thebusybiscuit.slimefun4.implementation.items.cargo;
 
 import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -10,9 +9,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.thebusybiscuit.cscorelib2.item.CustomItem;
-import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.core.networks.cargo.CargoNet;
-import io.github.thebusybiscuit.slimefun4.implementation.handlers.SimpleBlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
@@ -36,26 +33,18 @@ abstract class AbstractFilterNode extends AbstractCargoNode {
     private static final String FILTER_TYPE = "filter-type";
     private static final String FILTER_LORE = "filter-lore";
 
-    @ParametersAreNonnullByDefault
     public AbstractFilterNode(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, ItemStack recipeOutput) {
         super(category, item, recipeType, recipe, recipeOutput);
 
-        addItemHandler(onBreak());
-    }
+        registerBlockHandler(getId(), (p, b, stack, reason) -> {
+            BlockMenu inv = BlockStorage.getInventory(b);
 
-    @Nonnull
-    private BlockBreakHandler onBreak() {
-        return new SimpleBlockBreakHandler() {
-
-            @Override
-            public void onBlockBreak(@Nonnull Block b) {
-                BlockMenu inv = BlockStorage.getInventory(b);
-
-                if (inv != null) {
-                    inv.dropItems(b.getLocation(), SLOTS);
-                }
+            if (inv != null) {
+                inv.dropItems(b.getLocation(), SLOTS);
             }
-        };
+
+            return true;
+        });
     }
 
     protected abstract int[] getBorder();

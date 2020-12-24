@@ -222,11 +222,11 @@ final class CargoUtils {
         int maxSlot = range[1];
 
         for (int slot = minSlot; slot < maxSlot; slot++) {
-            ItemStack item = contents[slot];
+            ItemStack is = contents[slot];
 
-            if (matchesFilter(network, node, item)) {
+            if (matchesFilter(network, node, is)) {
                 inv.setItem(slot, null);
-                return new ItemStackAndInteger(item, slot);
+                return new ItemStackAndInteger(is, slot);
             }
         }
 
@@ -330,9 +330,9 @@ final class CargoUtils {
     static DirtyChestMenu getChestMenu(@Nonnull Block block) {
         if (BlockStorage.hasInventory(block)) {
             return BlockStorage.getInventory(block);
-        } else {
-            return BlockStorage.getUniversalInventory(block);
         }
+
+        return BlockStorage.getUniversalInventory(block);
     }
 
     static boolean matchesFilter(@Nonnull AbstractItemNetwork network, @Nonnull Block node, @Nullable ItemStack item) {

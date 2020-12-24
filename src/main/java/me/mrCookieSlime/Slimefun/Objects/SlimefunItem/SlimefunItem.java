@@ -43,7 +43,6 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
 import io.github.thebusybiscuit.slimefun4.core.attributes.TickingBlock;
 import io.github.thebusybiscuit.slimefun4.core.attributes.TickingMethod;
 import io.github.thebusybiscuit.slimefun4.core.guide.SlimefunGuide;
-import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.core.researching.Research;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.implementation.items.VanillaItem;
@@ -1168,17 +1167,6 @@ public class SlimefunItem implements Placeable {
         return SlimefunPlugin.getRegistry().getPublicItemHandlers().computeIfAbsent(identifier, c -> new HashSet<>());
     }
 
-    /**
-     * This has been deprecated.
-     * 
-     * @deprecated Please use {@link #addItemHandler(ItemHandler...)} and {@link BlockBreakHandler} instead
-     * 
-     * @param id
-     *            The id
-     * @param handler
-     *            The handler
-     */
-    @Deprecated
     public static void registerBlockHandler(String id, SlimefunBlockHandler handler) {
         SlimefunPlugin.getRegistry().getBlockHandlers().put(id, handler);
     }
