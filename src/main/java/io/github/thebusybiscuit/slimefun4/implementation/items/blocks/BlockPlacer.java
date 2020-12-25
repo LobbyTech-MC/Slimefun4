@@ -12,6 +12,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Block;
 import org.bukkit.block.Dispenser;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -22,6 +23,7 @@ import io.github.thebusybiscuit.slimefun4.api.events.BlockPlacerPlaceEvent;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemSetting;
 import io.github.thebusybiscuit.slimefun4.api.items.settings.MaterialTagSetting;
 import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;
+import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockDispenseHandler;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockPlaceHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
@@ -54,6 +56,14 @@ public class BlockPlacer extends SlimefunItem {
 
         addItemSetting(blacklist);
         addItemHandler(onPlace(), onBlockDispense());
+        
+        SlimefunItem.registerBlockHandler(getId(), (p, b, tool, reason) -> {
+        	if(b.isBlockIndirectlyPowered() || b.isBlockPowered()) {
+        		return false;
+        	}
+
+            return true;
+        });
     }
 
     private BlockPlaceHandler onPlace() {
@@ -68,6 +78,7 @@ public class BlockPlacer extends SlimefunItem {
             }
         };
     }
+    
 
     private BlockDispenseHandler onBlockDispense() {
         return (e, dispenser, facedBlock, machine) -> {
