@@ -34,6 +34,7 @@
 * Removed an old version of bStats
 * Performance Improvements and Optimizations for Cobblestone/Stone/Basalt generators and mining androids
 * Androids operating on a Cobblestone/Stone/Basalt generator now work faster
+* CraftBukkit is officially no longer supported, Slimefun will now be disabled on old builds of CraftBukkit
 
 #### Fixes
 * Fixed a couple of compatibility issues with ItemsAdder
@@ -42,6 +43,8 @@
 * Fixed some backpack opening issues
 * Fixed #2636 (hotfix)
 * Fixed #2647
+* Fixed #2664
+* Fixed #2655
 
 ## Release Candidate 18 (03 Dec 2020)
 

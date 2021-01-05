@@ -2,7 +2,7 @@
 name: "\U0001F41E Bug Report"
 about: Report a Bug or an Issue with Slimefun 4.
 title: ''
-labels: "\U0001F41E Bug Report"
+labels: "\U0001F3AF Needs testing, \U0001F41E Bug Report"
 assignees: ''
 
 ---
