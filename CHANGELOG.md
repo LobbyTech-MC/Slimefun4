@@ -35,6 +35,7 @@
 * Performance Improvements and Optimizations for Cobblestone/Stone/Basalt generators and mining androids
 * Androids operating on a Cobblestone/Stone/Basalt generator now work faster
 * CraftBukkit is officially no longer supported, Slimefun will now be disabled on old builds of CraftBukkit
+* Removed the deprecated ItemManipulationAPI for BlockMenus
 
 #### Fixes
 * Fixed a couple of compatibility issues with ItemsAdder
