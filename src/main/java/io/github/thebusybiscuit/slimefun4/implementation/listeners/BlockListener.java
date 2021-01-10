@@ -61,22 +61,8 @@ public class BlockListener implements Listener {
          * While this can cause ghost blocks it also prevents them from replacing grass
          * or saplings etc...
          */
-        Block block = e.getBlock();
 
-        if (e.getBlockReplacedState().getType().isAir()) {
-            SlimefunItem sfItem = BlockStorage.check(block);
-
-            // Fixes #2636
-            if (sfItem != null && !SlimefunPlugin.getTickerTask().isDeletedSoon(block.getLocation())) {
-                for (ItemStack item : sfItem.getDrops()) {
-                    if (item != null && !item.getType().isAir()) {
-                        block.getWorld().dropItemNaturally(block.getLocation(), item);
-                    }
-                }
-
-                BlockStorage.clearBlockInfo(block);
-            }
-        } else if (BlockStorage.hasBlockInfo(e.getBlock())) {
+        if (BlockStorage.hasBlockInfo(e.getBlock())) {
             e.setCancelled(true);
         }
     }
