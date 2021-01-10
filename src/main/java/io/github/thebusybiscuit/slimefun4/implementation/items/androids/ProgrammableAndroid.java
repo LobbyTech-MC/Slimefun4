@@ -59,7 +59,6 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineFuel;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
 import me.mrCookieSlime.Slimefun.Objects.handlers.ItemHandler;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
@@ -406,7 +405,7 @@ public class ProgrammableAndroid extends SlimefunItem implements InventoryBlock,
                             openScriptEditor(player, b);
                         }
                     } catch (Exception x) {
-                        Slimefun.getLogger().log(Level.SEVERE, "An Exception was thrown when a User tried to download a Script!", x);
+                        SlimefunPlugin.logger().log(Level.SEVERE, "An Exception was thrown when a User tried to download a Script!", x);
                     }
 
                     return false;
