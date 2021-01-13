@@ -158,7 +158,12 @@ public class LockedCategory extends Category {
 
         for (Category category : parents) {
             for (SlimefunItem item : category.getItems()) {
-                if (!item.canUse(p, false)) {
+                /*
+                 * Should probably be replaced with Slimefun.hasUnlocked(...)
+                 * However this will result in better performance because we don't
+                 * request the PlayerProfile everytime
+                 */
+                if (Slimefun.isEnabled(p, item, false) && Slimefun.hasPermission(p, item, false) && !profile.hasUnlocked(item.getResearch())) {
                     return false;
                 }
             }
