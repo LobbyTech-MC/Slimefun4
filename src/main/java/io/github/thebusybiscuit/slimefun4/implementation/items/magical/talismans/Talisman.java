@@ -33,6 +33,7 @@ import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 
 public class Talisman extends SlimefunItem {
@@ -73,9 +74,9 @@ public class Talisman extends SlimefunItem {
         this.chance = chance;
 
         if (!(this instanceof EnderTalisman)) {
-            String name = "&5末影" + ChatColor.stripColor(getItem().getItemMeta().getDisplayName());
+            String name = "&5Ender " + ChatColor.stripColor(getItem().getItemMeta().getDisplayName());
             List<String> lore = new ArrayList<>();
-            lore.add("&7&o末影");
+            lore.add("&7&oEnder Infused");
             lore.add("");
 
             for (String line : getItem().getItemMeta().getLore()) {
@@ -174,7 +175,7 @@ public class Talisman extends SlimefunItem {
         ItemStack talismanItem = talisman.getItem();
 
         if (SlimefunUtils.containsSimilarItem(p.getInventory(), talismanItem, true)) {
-            if (talisman.canUse(p, true)) {
+            if (Slimefun.hasUnlocked(p, talisman, true)) {
                 activateTalisman(e, p, p.getInventory(), talisman, talismanItem);
                 return true;
             } else {
@@ -184,7 +185,7 @@ public class Talisman extends SlimefunItem {
             ItemStack enderTalisman = talisman.getEnderVariant();
 
             if (SlimefunUtils.containsSimilarItem(p.getEnderChest(), enderTalisman, true)) {
-                if (talisman.canUse(p, true)) {
+                if (Slimefun.hasUnlocked(p, talisman, true)) {
                     activateTalisman(e, p, p.getEnderChest(), talisman, enderTalisman);
                     return true;
                 } else {

@@ -25,6 +25,7 @@ import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
+import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.inventory.UniversalBlockMenu;
@@ -93,10 +94,8 @@ public class SlimefunItemInteractListener implements Listener {
         Optional<SlimefunItem> optional = event.getSlimefunItem();
 
         if (optional.isPresent()) {
-            SlimefunItem sfItem = optional.get();
-
-            if (sfItem.canUse(e.getPlayer(), true)) {
-                return sfItem.callItemHandler(ItemUseHandler.class, handler -> handler.onRightClick(event));
+            if (Slimefun.hasUnlocked(e.getPlayer(), optional.get(), true)) {
+                return optional.get().callItemHandler(ItemUseHandler.class, handler -> handler.onRightClick(event));
             } else {
                 event.setUseItem(Result.DENY);
             }
@@ -110,14 +109,12 @@ public class SlimefunItemInteractListener implements Listener {
         Optional<SlimefunItem> optional = event.getSlimefunBlock();
 
         if (optional.isPresent()) {
-            SlimefunItem sfItem = optional.get();
-
-            if (!sfItem.canUse(event.getPlayer(), true)) {
+            if (!Slimefun.hasUnlocked(event.getPlayer(), optional.get(), true)) {
                 event.getInteractEvent().setCancelled(true);
                 return false;
             }
 
-            boolean interactable = sfItem.callItemHandler(BlockUseHandler.class, handler -> handler.onRightClick(event));
+            boolean interactable = optional.get().callItemHandler(BlockUseHandler.class, handler -> handler.onRightClick(event));
 
             if (!interactable) {
                 String id = optional.get().getId();

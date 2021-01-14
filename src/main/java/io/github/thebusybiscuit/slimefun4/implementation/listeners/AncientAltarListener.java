@@ -41,6 +41,7 @@ import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import io.github.thebusybiscuit.slimefun4.utils.itemstack.ItemStackWrapper;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
+import me.mrCookieSlime.Slimefun.api.Slimefun;
 
 /**
  * This {@link Listener} is responsible for providing the core mechanics of the {@link AncientAltar}
@@ -104,13 +105,12 @@ public class AncientAltarListener implements Listener {
         }
 
         String id = slimefunBlock.get().getId();
-        Player p = e.getPlayer();
 
         if (id.equals(pedestalItem.getId())) {
             e.cancel();
-            usePedestal(b, p);
+            usePedestal(b, e.getPlayer());
         } else if (id.equals(altarItem.getId())) {
-            if (!altarItem.canUse(p, true) || altarsInUse.contains(b.getLocation())) {
+            if (!Slimefun.hasUnlocked(e.getPlayer(), altarItem, true) || altarsInUse.contains(b.getLocation())) {
                 e.cancel();
                 return;
             }
@@ -119,7 +119,7 @@ public class AncientAltarListener implements Listener {
             altarsInUse.add(b.getLocation());
             e.cancel();
 
-            useAltar(b, p);
+            useAltar(b, e.getPlayer());
         }
     }
 
@@ -212,9 +212,8 @@ public class AncientAltarListener implements Listener {
         }
 
         Optional<ItemStack> result = getRecipeOutput(catalyst, input);
-
         if (result.isPresent()) {
-            if (SlimefunUtils.canPlayerUseItem(p, result.get(), true)) {
+            if (Slimefun.hasUnlocked(p, result.get(), true)) {
                 List<ItemStack> consumed = new ArrayList<>();
                 consumed.add(catalyst);
 

@@ -18,6 +18,7 @@ import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.implementation.items.misc.BasicCircuitBoard;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import me.mrCookieSlime.Slimefun.api.Slimefun;
 
 /**
  * This {@link Listener} is responsible for handling any custom mob drops.
@@ -54,7 +55,7 @@ public class MobDropListener implements Listener {
             if (item.getType() != Material.AIR) {
                 SlimefunItem sfItem = SlimefunItem.getByItem(item);
 
-                if (sfItem != null && sfItem.canUse(p, true)) {
+                if (sfItem != null && Slimefun.hasUnlocked(p, sfItem, true)) {
                     sfItem.callItemHandler(EntityKillHandler.class, handler -> handler.onKill(e, e.getEntity(), p, item));
                 }
             }
@@ -62,21 +63,21 @@ public class MobDropListener implements Listener {
     }
 
     private boolean canDrop(@Nonnull Player p, @Nonnull ItemStack item) {
-        SlimefunItem sfItem = SlimefunItem.getByItem(item);
+        SlimefunItem sfi = SlimefunItem.getByItem(item);
 
-        if (sfItem == null) {
+        if (sfi == null) {
             return true;
-        } else if (sfItem.canUse(p, true)) {
-            if (sfItem instanceof RandomMobDrop) {
+        } else if (Slimefun.hasUnlocked(p, sfi, true)) {
+            if (sfi instanceof RandomMobDrop) {
                 int random = ThreadLocalRandom.current().nextInt(100);
 
-                if (((RandomMobDrop) sfItem).getMobDropChance() <= random) {
+                if (((RandomMobDrop) sfi).getMobDropChance() <= random) {
                     return false;
                 }
             }
 
-            if (sfItem instanceof BasicCircuitBoard) {
-                return ((BasicCircuitBoard) sfItem).isDroppedFromGolems();
+            if (sfi instanceof BasicCircuitBoard) {
+                return ((BasicCircuitBoard) sfi).isDroppedFromGolems();
             }
 
             return true;
