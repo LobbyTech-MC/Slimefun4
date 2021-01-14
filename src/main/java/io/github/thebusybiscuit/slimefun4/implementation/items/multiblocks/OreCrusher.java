@@ -25,7 +25,6 @@ import io.papermc.lib.PaperLib;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 
 /**
@@ -40,7 +39,7 @@ public class OreCrusher extends MultiBlockMachine {
     private final DoubleOreSetting doubleOres = new DoubleOreSetting();
 
     public OreCrusher(Category category, SlimefunItemStack item) {
-        super(category, item, new ItemStack[] { null, null, null, null, new ItemStack(Material.NETHER_BRICK_FENCE), null, new ItemStack(Material.IRON_BARS), new CustomItem(Material.DISPENSER, "Dispenser (Facing up)"), new ItemStack(Material.IRON_BARS) }, BlockFace.SELF);
+        super(category, item, new ItemStack[] { null, null, null, null, new ItemStack(Material.NETHER_BRICK_FENCE), null, new ItemStack(Material.IRON_BARS), new CustomItem(Material.DISPENSER, "发射器(口朝上)"), new ItemStack(Material.IRON_BARS) }, BlockFace.SELF);
 
         addItemSetting(doubleOres);
     }
@@ -135,7 +134,7 @@ public class OreCrusher extends MultiBlockMachine {
                         ItemStack adding = RecipeType.getRecipeOutput(this, convert);
                         Inventory outputInv = findOutputInventory(adding, dispBlock, inv);
 
-                        if (Slimefun.hasUnlocked(p, adding, true)) {
+                        if (SlimefunUtils.canPlayerUseItem(p, adding, true)) {
                             if (outputInv != null) {
                                 ItemStack removing = current.clone();
                                 removing.setAmount(convert.getAmount());
