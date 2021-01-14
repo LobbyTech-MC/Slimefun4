@@ -252,7 +252,7 @@ public class TickerTask implements Runnable {
      * 
      * @return Whether this {@link Location} has been reserved and will be filled upon the next tick
      */
-    public boolean isReserved(@Nonnull Location l) {
+    public boolean isOccupiedSoon(@Nonnull Location l) {
         Validate.notNull(l, "Null is not a valid Location!");
 
         return movingQueue.containsValue(l);

@@ -10,6 +10,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -50,7 +51,10 @@ import me.mrCookieSlime.Slimefun.api.Slimefun;
  */
 public class BlockListener implements Listener {
 
+    private final SlimefunPlugin plugin;
+
     public BlockListener(@Nonnull SlimefunPlugin plugin) {
+        this.plugin = plugin;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
@@ -104,7 +108,6 @@ public class BlockListener implements Listener {
         int fortune = getBonusDropsWithFortune(item, e.getBlock());
         List<ItemStack> drops = new ArrayList<>();
 
-
         if (!item.getType().isAir()) {
             callToolHandler(e, item, fortune, drops);
         }
@@ -145,9 +148,13 @@ public class BlockListener implements Listener {
             SlimefunBlockHandler blockHandler = SlimefunPlugin.getRegistry().getBlockHandlers().get(sfItem.getId());
 
             if (blockHandler != null) {
-                if (!blockHandler.onBreak(e.getPlayer(), e.getBlock(), sfItem, UnregisterReason.PLAYER_BREAK)) {
-                    e.setCancelled(true);
-                    return;
+                try {
+                    if (!blockHandler.onBreak(e.getPlayer(), e.getBlock(), sfItem, UnregisterReason.PLAYER_BREAK)) {
+                        e.setCancelled(true);
+                        return;
+                    }
+                } catch (Exception | LinkageError x) {
+                    sfItem.error("Something went wrong while triggering a BlockHandler", x);
                 }
             } else {
                 sfItem.callItemHandler(BlockBreakHandler.class, handler -> handler.onBlockBreak(e, item, fortune, drops));
