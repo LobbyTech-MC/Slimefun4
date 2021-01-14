@@ -3,8 +3,6 @@ package io.github.thebusybiscuit.slimefun4.implementation.items.magical.runes;
 import java.util.Collection;
 import java.util.Optional;
 
-import javax.annotation.Nonnull;
-
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
@@ -21,6 +19,7 @@ import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 
 /**
@@ -48,7 +47,7 @@ public class SoulboundRune extends SimpleSlimefunItem<ItemDropHandler> {
         return (e, p, item) -> {
             if (isItem(item.getItemStack())) {
 
-                if (!canUse(p, true)) {
+                if (!Slimefun.hasUnlocked(p, this, true)) {
                     return true;
                 }
 
@@ -60,7 +59,7 @@ public class SoulboundRune extends SimpleSlimefunItem<ItemDropHandler> {
         };
     }
 
-    private void activate(@Nonnull Player p, @Nonnull Item rune) {
+    private void activate(Player p, Item rune) {
         // Being sure the entity is still valid and not picked up or whatsoever.
         if (!rune.isValid()) {
             return;

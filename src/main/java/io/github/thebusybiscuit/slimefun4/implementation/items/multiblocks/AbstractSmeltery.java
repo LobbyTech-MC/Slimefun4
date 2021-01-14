@@ -19,6 +19,7 @@ import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import io.papermc.lib.PaperLib;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
+import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 
 /**
@@ -47,7 +48,7 @@ abstract class AbstractSmeltery extends MultiBlockMachine {
                 if (canCraft(inv, inputs, i)) {
                     ItemStack output = RecipeType.getRecipeOutputList(this, inputs.get(i)).clone();
 
-                    if (SlimefunUtils.canPlayerUseItem(p, output, true)) {
+                    if (Slimefun.hasUnlocked(p, output, true)) {
                         Inventory outputInv = findOutputInventory(output, dispBlock, inv);
 
                         if (outputInv != null) {

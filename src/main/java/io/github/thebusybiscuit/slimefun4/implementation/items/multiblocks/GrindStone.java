@@ -28,7 +28,7 @@ import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 public class GrindStone extends MultiBlockMachine {
 
     public GrindStone(Category category, SlimefunItemStack item) {
-        super(category, item, new ItemStack[] { null, null, null, null, new ItemStack(Material.OAK_FENCE), null, null, new CustomItem(Material.DISPENSER, "发射器(口朝上)"), null }, BlockFace.SELF);
+        super(category, item, new ItemStack[] { null, null, null, null, new ItemStack(Material.OAK_FENCE), null, null, new CustomItem(Material.DISPENSER, "Dispenser (Facing up)"), null }, BlockFace.SELF);
     }
 
     @Override

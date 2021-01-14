@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.implementation.items.magical.BeeWings;
 import io.github.thebusybiscuit.slimefun4.implementation.tasks.BeeWingsTask;
+import me.mrCookieSlime.Slimefun.api.Slimefun;
 
 /**
  * This {@link Listener} is responsible for the slow falling effect given to the {@link Player}
@@ -43,7 +44,7 @@ public class BeeWingsListener implements Listener {
         Player player = (Player) e.getEntity();
         ItemStack chestplate = player.getInventory().getChestplate();
 
-        if (wings.isItem(chestplate) && wings.canUse(player, true)) {
+        if (wings.isItem(chestplate) && Slimefun.hasUnlocked(player, chestplate, true)) {
             new BeeWingsTask(player).scheduleRepeating(3, 1);
         }
     }
