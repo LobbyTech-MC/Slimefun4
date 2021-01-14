@@ -1,7 +1,5 @@
 package io.github.thebusybiscuit.slimefun4.implementation.items.electric.machines;
 
-import javax.annotation.Nonnull;
-
 import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Ageable;
@@ -36,7 +34,7 @@ public class AnimalGrowthAccelerator extends AbstractGrowthAccelerator {
     }
 
     @Override
-    public void tick(@Nonnull Block b) {
+    protected void tick(Block b) {
         BlockMenu inv = BlockStorage.getInventory(b);
 
         for (Entity n : b.getWorld().getNearbyEntities(b.getLocation(), RADIUS, RADIUS, RADIUS, this::isReadyToGrow)) {

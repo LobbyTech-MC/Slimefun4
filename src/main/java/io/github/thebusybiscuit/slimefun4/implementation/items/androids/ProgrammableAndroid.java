@@ -36,8 +36,6 @@ import io.github.thebusybiscuit.cscorelib2.inventory.ItemUtils;
 import io.github.thebusybiscuit.cscorelib2.item.CustomItem;
 import io.github.thebusybiscuit.cscorelib2.skull.SkullBlock;
 import io.github.thebusybiscuit.slimefun4.core.attributes.RecipeDisplayItem;
-import io.github.thebusybiscuit.slimefun4.core.attributes.TickingBlock;
-import io.github.thebusybiscuit.slimefun4.core.attributes.TickingMethod;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockPlaceHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
@@ -57,6 +55,7 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.UnregisterReason;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineFuel;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
+import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
 import me.mrCookieSlime.Slimefun.Objects.handlers.ItemHandler;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
@@ -64,7 +63,7 @@ import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
 
-public class ProgrammableAndroid extends SlimefunItem implements InventoryBlock, RecipeDisplayItem, TickingBlock {
+public class ProgrammableAndroid extends SlimefunItem implements InventoryBlock, RecipeDisplayItem {
 
     private static final List<BlockFace> POSSIBLE_ROTATIONS = Arrays.asList(BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST);
     private static final int[] BORDER = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 18, 24, 25, 26, 27, 33, 35, 36, 42, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53 };
@@ -203,6 +202,26 @@ public class ProgrammableAndroid extends SlimefunItem implements InventoryBlock,
         default:
             throw new IllegalStateException("Cannot convert the following Android tier to a fuel type: " + getTier());
         }
+    }
+
+    @Override
+    public void preRegister() {
+        super.preRegister();
+
+        addItemHandler(new BlockTicker() {
+
+            @Override
+            public void tick(Block b, SlimefunItem item, Config data) {
+                if (b != null && data != null) {
+                    ProgrammableAndroid.this.tick(b, data);
+                }
+            }
+
+            @Override
+            public boolean isSynchronized() {
+                return true;
+            }
+        });
     }
 
     @ParametersAreNonnullByDefault
@@ -615,20 +634,12 @@ public class ProgrammableAndroid extends SlimefunItem implements InventoryBlock,
     public int getTier() {
         return tier;
     }
-    
-    @Override
-    public TickingMethod getTickingMethod() {
-        return TickingMethod.MAIN_THREAD;
-    }
 
-    @Override
-    public void tick(Block b) {
+    protected void tick(Block b, Config data) {
         if (b.getType() != Material.PLAYER_HEAD) {
             // The Android was destroyed or moved.
             return;
         }
-        
-        Config data = BlockStorage.getLocationInfo(b.getLocation());
 
         if ("false".equals(data.getString("paused"))) {
             BlockMenu menu = BlockStorage.getInventory(b);
