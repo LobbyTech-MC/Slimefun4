@@ -153,6 +153,9 @@ public class LockedCategory extends Category {
      * @return Whether the {@link Player} has fully completed all parent categories, otherwise false
      */
     public boolean hasUnlocked(@Nonnull Player p, @Nonnull PlayerProfile profile) {
+        Validate.notNull(p, "The player cannot be null!");
+        Validate.notNull(profile, "The Profile cannot be null!");
+
         for (Category category : parents) {
             for (SlimefunItem item : category.getItems()) {
                 /*

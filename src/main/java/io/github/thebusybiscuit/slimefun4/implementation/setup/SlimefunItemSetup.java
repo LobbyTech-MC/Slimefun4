@@ -1791,6 +1791,7 @@ public final class SlimefunItemSetup {
                 return 1;
             }
 
+
         }.register(plugin);
 
         new GPSTransmitter(categories.gps, 2, SlimefunItems.GPS_TRANSMITTER_2, RecipeType.ENHANCED_CRAFTING_TABLE,
@@ -1805,6 +1806,7 @@ public final class SlimefunItemSetup {
             public int getEnergyConsumption() {
                 return 3;
             }
+
 
         }.register(plugin);
 
@@ -1821,6 +1823,7 @@ public final class SlimefunItemSetup {
                 return 11;
             }
 
+
         }.register(plugin);
 
         new GPSTransmitter(categories.gps, 4, SlimefunItems.GPS_TRANSMITTER_4, RecipeType.ENHANCED_CRAFTING_TABLE,
@@ -1835,6 +1838,7 @@ public final class SlimefunItemSetup {
             public int getEnergyConsumption() {
                 return 46;
             }
+
             
         }.register(plugin);
 

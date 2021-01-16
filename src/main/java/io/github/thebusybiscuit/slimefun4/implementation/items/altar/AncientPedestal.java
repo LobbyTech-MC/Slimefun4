@@ -47,7 +47,7 @@ import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
  */
 public class AncientPedestal extends SimpleSlimefunItem<BlockDispenseHandler> {
 
-    public static final String ITEM_PREFIX = ChatColors.color("&dALTAR &3Probe - &e");
+    public static final String ITEM_PREFIX = ChatColors.color("&d祭坛 &3物品 - &e");
 
     @ParametersAreNonnullByDefault
     public AncientPedestal(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, ItemStack recipeOutput) {

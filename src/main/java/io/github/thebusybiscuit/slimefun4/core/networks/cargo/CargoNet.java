@@ -142,16 +142,16 @@ public class CargoNet extends AbstractItemNetwork {
 
     public void tick(Block b) {
         if (!regulator.equals(b.getLocation())) {
-            SimpleHologram.update(b, "&4Multiple Cargo Regulators connected");
+            SimpleHologram.update(b, "&4货运管理器多余");
             return;
         }
 
         super.tick();
 
         if (connectorNodes.isEmpty() && terminusNodes.isEmpty()) {
-            SimpleHologram.update(b, "&cNo Cargo Nodes found");
+            SimpleHologram.update(b, "&c找不到货运节点");
         } else {
-            SimpleHologram.update(b, "&7Status: &a&lONLINE");
+            SimpleHologram.update(b, "&7状态: &a&l在线");
 
             // Skip ticking if the threshold is not reached. The delay is not same as minecraft tick,
             // but it's based on 'custom-ticker-delay' config.

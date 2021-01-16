@@ -21,7 +21,7 @@ import io.github.thebusybiscuit.slimefun4.implementation.items.geo.OilPump;
 class OilResource extends SlimefunResource {
 
     OilResource() {
-        super("oil", "Oil", SlimefunItems.OIL_BUCKET, 8, false);
+        super("oil", "原油", SlimefunItems.OIL_BUCKET, 8, false);
     }
 
     @Override
