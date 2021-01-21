@@ -93,13 +93,10 @@ class ItemFilter implements Predicate<ItemStack> {
             this.rejectOnMatch = !Objects.equals(blockData.getString("filter-type"), "whitelist");
 
             for (int slot : CargoUtils.getFilteringSlots()) {
-                
-                if(slot < menu.toInventory().getSize()) {
-                	ItemStack stack = menu.getItemInSlot(slot);
-                	
-                	if (stack != null && stack.getType() != Material.AIR) {
-                        this.items.add(new ItemStackWrapper(stack));
-                    }
+                ItemStack stack = menu.getItemInSlot(slot);
+
+                if (stack != null && stack.getType() != Material.AIR) {
+                    this.items.add(new ItemStackWrapper(stack));
                 }
             }
         }
