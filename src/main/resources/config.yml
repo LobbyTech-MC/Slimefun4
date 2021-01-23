@@ -34,7 +34,7 @@ URID:
 
 networks:
   max-size: 200
-  cargo-ticker-delay: 1
+  cargo-ticker-delay: 0
   enable-visualizer: true
   delete-excess-items: false
 
