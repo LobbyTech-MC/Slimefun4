@@ -33,7 +33,7 @@ import io.github.thebusybiscuit.slimefun4.implementation.items.gps.GPSTransmitte
 import io.github.thebusybiscuit.slimefun4.implementation.items.gps.Teleporter;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import io.github.thebusybiscuit.slimefun4.utils.HeadTexture;
-import me.mrCookieSlime.CSCoreLibPlugin.cscorelib2.math.DoubleHandler;
+import io.github.thebusybiscuit.slimefun4.utils.NumberUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
@@ -160,7 +160,7 @@ public class GPSNetwork {
             if (sfi instanceof GPSTransmitter) {
                 int slot = inventory[index];
 
-                menu.addItem(slot, new CustomItem(SlimefunItems.GPS_TRANSMITTER, "&bGPS传送器", "&8\u21E8 &7世界: &f" + l.getWorld().getName(), "&8\u21E8 &7X: &f" + l.getX(), "&8\u21E8 &7Y: &f" + l.getY(), "&8\u21E8 &7Z: &f" + l.getZ(), "", "&8\u21E8 &7信号强度h: &f" + ((GPSTransmitter) sfi).getMultiplier(l.getBlockY()), "&8\u21E8 &7延时: &f" + DoubleHandler.fixDouble(1000D / l.getY()) + "毫秒"));
+                menu.addItem(slot, new CustomItem(SlimefunItems.GPS_TRANSMITTER, "&bGPS传送器", "&8\u21E8 &7世界: &f" + l.getWorld().getName(), "&8\u21E8 &7X: &f" + l.getX(), "&8\u21E8 &7Y: &f" + l.getY(), "&8\u21E8 &7Z: &f" + l.getZ(), "", "&8\u21E8 &7信号强度: &f" + ((GPSTransmitter) sfi).getMultiplier(l.getBlockY()), "&8\u21E8 &7延时: &f" + NumberUtils.roundDecimalNumber(1000D / l.getY()) + "毫秒"));
                 menu.addMenuClickHandler(slot, ChestMenuUtils.getEmptyClickHandler());
 
                 index++;
