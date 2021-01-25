@@ -112,7 +112,12 @@ public final class TeleportationManager {
         teleporterUsers.add(uuid);
 
         int time = getTeleportationTime(complexity, source, destination);
-        updateProgress(uuid, Math.max(1, 100 / time), 0, source, destination, resistance);
+        if(time == 0) {
+        	updateProgress(uuid, 1, 0, source, destination, resistance);
+        } else {
+        	updateProgress(uuid, Math.max(1, 100 / time), 0, source, destination, resistance);
+        }
+        
     }
 
     /**
