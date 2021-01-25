@@ -10,6 +10,7 @@ import org.bukkit.Material;
 import org.bukkit.Nameable;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.Dispenser;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -108,7 +109,7 @@ public class BlockPlacer extends SlimefunItem {
                 return;
             }
 
-            if (facedBlock.isEmpty() && !isBlacklisted(material) && dispenser.getInventory().getViewers().isEmpty()) {
+            if (facedBlock.isEmpty() && !isBlacklisted(material) && dispenser.getInventory().getViewers().isEmpty() && dispenser.getBlock().getRelative(BlockFace.DOWN).getType() != Material.HOPPER_MINECART && dispenser.getBlock().getRelative(BlockFace.DOWN).getType() != Material.HOPPER && dispenser.getBlock().getRelative(BlockFace.DOWN).getType() != Material.ACTIVATOR_RAIL ) {
                 SlimefunItem item = SlimefunItem.getByItem(e.getItem());
 
                 if (item != null) {
