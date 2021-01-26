@@ -239,6 +239,8 @@ public abstract class AContainer extends SlimefunItem implements InventoryBlock,
         
         registerDefaultRecipes();
 
+        registerDefaultRecipes();
+
         if (getCapacity() > 0 && getEnergyConsumption() > 0 && getSpeed() > 0) {
             super.register(addon);
         }
