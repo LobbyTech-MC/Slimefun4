@@ -113,7 +113,7 @@ public final class TeleportationManager {
 
         int time = getTeleportationTime(complexity, source, destination);
         if(time == 0) {
-        	updateProgress(uuid, 1, 0, source, destination, resistance);
+        	updateProgress(uuid, 100, 0, source, destination, resistance);
         } else {
         	updateProgress(uuid, Math.max(1, 100 / time), 0, source, destination, resistance);
         }
