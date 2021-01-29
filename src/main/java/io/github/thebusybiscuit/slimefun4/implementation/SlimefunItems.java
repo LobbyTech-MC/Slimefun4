@@ -677,6 +677,8 @@ public final class SlimefunItems {
     public static final SlimefunItemStack AUTO_ANVIL_2 = new SlimefunItemStack("AUTO_ANVIL_2", Material.IRON_BLOCK, "&7自动铁砧 Mk.II", "", LoreBuilder.machine(MachineTier.END_GAME, MachineType.MACHINE), "&8\u21E8 &7可修复百分比: 25%", LoreBuilder.powerPerSecond(32));
     public static final SlimefunItemStack AUTO_BREWER = new SlimefunItemStack("AUTO_BREWER", Material.SMOKER, "&e自动酿造机", "", LoreBuilder.machine(MachineTier.MEDIUM, MachineType.MACHINE), LoreBuilder.speed(1), LoreBuilder.powerPerSecond(12));
 
+    public static final SlimefunItemStack BOOK_BINDER = new SlimefunItemStack("BOOK_BINDER", Material.BOOKSHELF, "&6附魔书升级机", "", "&f将多个附魔书升级为一个高级的", "", LoreBuilder.machine(MachineTier.MEDIUM, MachineType.MACHINE), LoreBuilder.powerPerSecond(16));
+    
     public static final SlimefunItemStack BIO_REACTOR = new SlimefunItemStack("BIO_REACTOR", Material.LIME_TERRACOTTA, "&2生物反应器", "", LoreBuilder.machine(MachineTier.AVERAGE, MachineType.GENERATOR), "&8\u21E8 &e\u26A1 &7128 J 可储存", LoreBuilder.powerPerSecond(8));
     public static final SlimefunItemStack MULTIMETER = new SlimefunItemStack("MULTIMETER", Material.CLOCK, "&e万用表", "", "&r查看机器中储存的能量");
 
