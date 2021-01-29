@@ -50,10 +50,7 @@ import me.mrCookieSlime.Slimefun.api.Slimefun;
  */
 public class BlockListener implements Listener {
 
-    private final SlimefunPlugin plugin;
-
     public BlockListener(@Nonnull SlimefunPlugin plugin) {
-        this.plugin = plugin;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
@@ -97,6 +94,11 @@ public class BlockListener implements Listener {
 
         // Also ignore custom blocks which were placed by other plugins
         if (SlimefunPlugin.getIntegrations().isCustomBlock(e.getBlock())) {
+            return;
+        }
+
+        // Ignore blocks which we have marked as deleted (Fixes #2771)
+        if (SlimefunPlugin.getTickerTask().isDeletedSoon(e.getBlock().getLocation())) {
             return;
         }
 
