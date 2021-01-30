@@ -128,24 +128,24 @@ public abstract class Reactor extends AbstractEnergyProvider implements Hologram
         ReactorMode mode = getReactorMode(b.getLocation());
 
         switch (mode) {
-        case GENERATOR:
-            menu.replaceExistingItem(4, new CustomItem(SlimefunItems.NUCLEAR_REACTOR, "&7模式: &e发电模式", "", "&6你的反应堆将会发电", "&6如果你的能源网络不需要额外电力", "&6他将不会有效产出", "", "&7\u21E8 点击切换模式至 &e产品模式"));
-            menu.addMenuClickHandler(4, (p, slot, item, action) -> {
-                BlockStorage.addBlockInfo(b, MODE, ReactorMode.PRODUCTION.toString());
-                updateInventory(menu, b);
-                return false;
-            });
-            break;
-        case PRODUCTION:
-            menu.replaceExistingItem(4, new CustomItem(SlimefunItems.PLUTONIUM, "&7模式: &e产品模式", "", "&6你的反应堆将产出物品", "&6如果你的能源网络不需要额外电力", "&6他将继续工作", "&6但不会产出任何电量", "", "&7\u21E8 点击切换模式至&e发电模式"));
-            menu.addMenuClickHandler(4, (p, slot, item, action) -> {
-                BlockStorage.addBlockInfo(b, MODE, ReactorMode.GENERATOR.toString());
-                updateInventory(menu, b);
-                return false;
-            });
-            break;
-        default:
-            break;
+            case GENERATOR:
+                menu.replaceExistingItem(4, new CustomItem(SlimefunItems.NUCLEAR_REACTOR, "&7模式: &e发电模式", "", "&6你的反应堆将会发电", "&6如果你的能源网络不需要额外电力", "&6他将不会有效产出", "", "&7\u21E8 点击切换模式至 &e产品模式"));
+                menu.addMenuClickHandler(4, (p, slot, item, action) -> {
+                    BlockStorage.addBlockInfo(b, MODE, ReactorMode.PRODUCTION.toString());
+                    updateInventory(menu, b);
+                    return false;
+                });
+                break;
+            case PRODUCTION:
+                menu.replaceExistingItem(4, new CustomItem(SlimefunItems.PLUTONIUM, "&7&7模式: &e产品模式", "", "&6你的反应堆将产出物品", "&6如果你的能源网络不需要额外电力", "&6他将继续工作", "&6但不会产出任何电量", "", "&7\u21E8 点击切换模式至&e发电模式"));
+                menu.addMenuClickHandler(4, (p, slot, item, action) -> {
+                    BlockStorage.addBlockInfo(b, MODE, ReactorMode.GENERATOR.toString());
+                    updateInventory(menu, b);
+                    return false;
+                });
+                break;
+            default:
+                break;
         }
 
         BlockMenu port = getAccessPort(b.getLocation());
