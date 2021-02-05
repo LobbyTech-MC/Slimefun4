@@ -19,7 +19,6 @@ import io.github.thebusybiscuit.slimefun4.api.player.PlayerProfile;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.api.Slimefun;
 
 /**
  * Represents a {@link Category} that cannot be opened until the parent category/categories
@@ -158,12 +157,7 @@ public class LockedCategory extends Category {
 
         for (Category category : parents) {
             for (SlimefunItem item : category.getItems()) {
-                /*
-                 * Should probably be replaced with Slimefun.hasUnlocked(...)
-                 * However this will result in better performance because we don't
-                 * request the PlayerProfile everytime
-                 */
-                if (Slimefun.isEnabled(p, item, false) && Slimefun.hasPermission(p, item, false) && !profile.hasUnlocked(item.getResearch())) {
+                if (!item.canUse(p, false)) {
                     return false;
                 }
             }

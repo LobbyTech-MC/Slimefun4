@@ -1,7 +1,5 @@
 package me.mrCookieSlime.Slimefun.api;
 
-import java.util.Optional;
-
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 

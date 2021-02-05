@@ -24,10 +24,15 @@
 ## Release Candidate 21 (TBD)
 
 #### Additions
+* Nether Wart Blocks can now be turned into Nether Warts using a Grind Stone
+* Added an option to allow Talismans to send their notifications via the Actionbar
+* /sf versions now shows the Java version and some useful tooltips
 
 #### Changes
 
 #### Fixes
+* Fixed #2794
+* Fixed #2793
 
 ## Release Candidate 20 (30 Jan 2021)
 
@@ -85,7 +90,6 @@
 * Fixed a couple of compatibility issues with ItemsAdder
 * Fixed #2575
 * Fixed ghost blocks to some extent (ghost blocks will now drop and be replaced)
-* Fixed some backpack opening issues
 * Fixed #2636 (hotfix)
 * Fixed #2647
 * Fixed #2664

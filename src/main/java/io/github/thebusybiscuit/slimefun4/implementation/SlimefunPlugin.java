@@ -137,8 +137,8 @@ public final class SlimefunPlugin extends JavaPlugin implements SlimefunAddon {
     private boolean isNewlyInstalled = false;
 
     private final SlimefunRegistry registry = new SlimefunRegistry();
-    private final TickerTask ticker = new TickerTask();
     private final SlimefunCommand command = new SlimefunCommand(this);
+    private final TickerTask ticker = new TickerTask();
 
     // Services - Systems that fulfill certain tasks, treat them as a black box
     private final CustomItemDataService itemDataService = new CustomItemDataService(this, "slimefun_item");
@@ -362,8 +362,12 @@ public final class SlimefunPlugin extends JavaPlugin implements SlimefunAddon {
         Bukkit.getScheduler().cancelTasks(this);
 
         // Finishes all started movements/removals of block data
-        ticker.halt();
-        ticker.run();
+        try {
+            ticker.halt();
+            ticker.run();
+        } catch (Exception x) {
+            getLogger().log(Level.SEVERE, x, () -> "Something went wrong while disabling the ticker task for Slimefun v" + getDescription().getVersion());
+        }
 
         // Kill our Profiler Threads
         profiler.kill();
@@ -619,6 +623,8 @@ public final class SlimefunPlugin extends JavaPlugin implements SlimefunAddon {
         new ButcherAndroidListener(this);
         new NetworkListener(this, networkManager);
         new HopperListener(this);
+        new TalismanListener(this);
+        new SoulboundListener(this);
 
         // Bees were added in 1.15
         if (minecraftVersion.isAtLeast(MinecraftVersion.MINECRAFT_1_15)) {
@@ -639,15 +645,6 @@ public final class SlimefunPlugin extends JavaPlugin implements SlimefunAddon {
         grapplingHookListener.register(this, (GrapplingHook) SlimefunItems.GRAPPLING_HOOK.getItem());
         bowListener.register(this);
         backpackListener.register(this);
-
-        // Toggleable Listeners for performance reasons
-        if (config.getBoolean("items.talismans")) {
-            new TalismanListener(this);
-        }
-
-        if (config.getBoolean("items.soulbound")) {
-            new SoulboundListener(this);
-        }
 
         // Handle Slimefun Guide being given on Join
         new SlimefunGuideListener(this, config.getBoolean("guide.receive-on-first-join"));
