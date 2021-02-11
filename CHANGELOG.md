@@ -29,10 +29,18 @@
 * /sf versions now shows the Java version and some useful tooltips
 
 #### Changes
+* Deprecated Automatic Crafting Chamber
 
 #### Fixes
 * Fixed #2794
 * Fixed #2793
+* Fixed #2809
+* Fixed a small exception which gets thrown when Slimefun is disabled due to an invalid environment
+* Fixed #2810
+* Fixed #2804
+* Fixed #2817
+* Fixed exceptions with inventories not being printed using the logger of the addon that caused it
+* Fixed #2818
 
 ## Release Candidate 20 (30 Jan 2021)
 
