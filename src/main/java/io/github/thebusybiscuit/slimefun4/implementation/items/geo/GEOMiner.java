@@ -41,19 +41,7 @@ public class GEOMiner extends AContainer implements RecipeDisplayItem, HologramO
         super(category, item, recipeType, recipe);
 
         addItemHandler(onPlace());
-        registerBlockHandler(getId(), (p, b, stack, reason) -> {
-            removeHologram(b);
-
-            BlockMenu inv = BlockStorage.getInventory(b);
-
-            if (inv != null) {
-                inv.dropItems(b.getLocation(), getOutputSlots());
-            }
-
-            progress.remove(b);
-            processing.remove(b);
-            return true;
-        });
+        addItemHandler(onBreak());
     }
 
     private BlockPlaceHandler onPlace() {
@@ -61,7 +49,27 @@ public class GEOMiner extends AContainer implements RecipeDisplayItem, HologramO
 
             @Override
             public void onPlayerPlace(BlockPlaceEvent e) {
-                updateHologram(e.getBlock(), "&7扫描中...");
+                updateHologram(e.getBlock(), "&7Idling...");
+            }
+        };
+    }
+
+    @Nonnull
+    private BlockBreakHandler onBreak() {
+        return new SimpleBlockBreakHandler() {
+
+            @Override
+            public void onBlockBreak(@Nonnull Block b) {
+                removeHologram(b);
+
+                BlockMenu inv = BlockStorage.getInventory(b);
+
+                if (inv != null) {
+                    inv.dropItems(b.getLocation(), getOutputSlots());
+                }
+
+                progress.remove(b);
+                processing.remove(b);
             }
         };
     }

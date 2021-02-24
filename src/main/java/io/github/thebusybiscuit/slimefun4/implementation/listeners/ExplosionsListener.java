@@ -41,6 +41,24 @@ public class ExplosionsListener implements Listener {
 
                     if (blockHandler != null) {
                         success = blockHandler.onBreak(null, block, item, UnregisterReason.EXPLODE);
+                    } else {
+                        item.callItemHandler(BlockBreakHandler.class, handler -> {
+                            if (handler.isExplosionAllowed(block)) {
+                                BlockStorage.clearBlockInfo(block);
+                                block.setType(Material.AIR);
+
+                                List<ItemStack> drops = new ArrayList<>();
+                                handler.onExplode(block, drops);
+
+                                for (ItemStack drop : drops) {
+                                    if (drop != null && !drop.getType().isAir()) {
+                                        block.getWorld().dropItemNaturally(block.getLocation(), drop);
+                                    }
+                                }
+                            }
+                        });
+
+                        return;
                     }
 
                     if (success) {
