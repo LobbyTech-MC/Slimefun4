@@ -236,8 +236,6 @@ public abstract class AContainer extends SlimefunItem implements InventoryBlock,
             warn("The processing speed has not been configured correctly. The Item was disabled.");
             warn("Make sure to call '" + getClass().getSimpleName() + "#setProcessingSpeed(...)' before registering!");
         }
-        
-        registerDefaultRecipes();
 
         registerDefaultRecipes();
 

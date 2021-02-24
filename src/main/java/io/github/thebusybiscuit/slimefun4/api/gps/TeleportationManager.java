@@ -57,7 +57,7 @@ public final class TeleportationManager {
             p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, 1F, 1F);
 
             PlayerProfile.fromUUID(uuid, profile -> {
-                ChestMenu menu = new ChestMenu("&3传送器");
+                ChestMenu menu = new ChestMenu("&3Teleporter");
                 menu.addMenuCloseHandler(pl -> teleporterUsers.remove(pl.getUniqueId()));
 
                 for (int slot : teleporterBorder) {
@@ -112,12 +112,7 @@ public final class TeleportationManager {
         teleporterUsers.add(uuid);
 
         int time = getTeleportationTime(complexity, source, destination);
-        if(time == 0) {
-        	updateProgress(uuid, 100, 0, source, destination, resistance);
-        } else {
-        	updateProgress(uuid, Math.max(1, 100 / time), 0, source, destination, resistance);
-        }
-        
+        updateProgress(uuid, Math.max(1, 100 / time), 0, source, destination, resistance);
     }
 
     /**

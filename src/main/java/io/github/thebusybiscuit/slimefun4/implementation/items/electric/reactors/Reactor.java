@@ -27,6 +27,7 @@ import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.core.attributes.HologramOwner;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
+import io.github.thebusybiscuit.slimefun4.implementation.handlers.SimpleBlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.items.cargo.ReactorAccessPort;
 import io.github.thebusybiscuit.slimefun4.implementation.items.electric.AbstractEnergyProvider;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
@@ -107,14 +108,13 @@ public abstract class Reactor extends AbstractEnergyProvider implements Hologram
             }
         };
 
-        registerBlockHandler(getId(), (p, b, tool, reason) -> {
-            BlockMenu inv = BlockStorage.getInventory(b);
+        addItemHandler(onBreak());
+        registerDefaultFuelTypes();
+    }
 
-            if (inv != null) {
-                inv.dropItems(b.getLocation(), getFuelSlots());
-                inv.dropItems(b.getLocation(), getCoolantSlots());
-                inv.dropItems(b.getLocation(), getOutputSlots());
-            }
+    @Nonnull
+    private BlockBreakHandler onBreak() {
+        return new SimpleBlockBreakHandler() {
 
             @Override
             public void onBlockBreak(@Nonnull Block b) {
@@ -138,7 +138,7 @@ public abstract class Reactor extends AbstractEnergyProvider implements Hologram
 
         switch (mode) {
             case GENERATOR:
-                menu.replaceExistingItem(4, new CustomItem(SlimefunItems.NUCLEAR_REACTOR, "&7模式: &e发电模式", "", "&6你的反应堆将会发电", "&6如果你的能源网络不需要额外电力", "&6他将不会有效产出", "", "&7\u21E8 点击切换模式至 &e产品模式"));
+                menu.replaceExistingItem(4, new CustomItem(SlimefunItems.NUCLEAR_REACTOR, "&7Focus: &eElectricity", "", "&6Your Reactor will focus on Power Generation", "&6If your Energy Network doesn't need Power", "&6it will not produce any either", "", "&7\u21E8 Click to change the Focus to &eProduction"));
                 menu.addMenuClickHandler(4, (p, slot, item, action) -> {
                     BlockStorage.addBlockInfo(b, MODE, ReactorMode.PRODUCTION.toString());
                     updateInventory(menu, b);
@@ -146,7 +146,7 @@ public abstract class Reactor extends AbstractEnergyProvider implements Hologram
                 });
                 break;
             case PRODUCTION:
-                menu.replaceExistingItem(4, new CustomItem(SlimefunItems.PLUTONIUM, "&7&7模式: &e产品模式", "", "&6你的反应堆将产出物品", "&6如果你的能源网络不需要额外电力", "&6他将继续工作", "&6但不会产出任何电量", "", "&7\u21E8 点击切换模式至&e发电模式"));
+                menu.replaceExistingItem(4, new CustomItem(SlimefunItems.PLUTONIUM, "&7Focus: &eProduction", "", "&6Your Reactor will focus on producing goods", "&6If your Energy Network doesn't need Power", "&6it will continue to run and simply will", "&6not generate any Power in the mean time", "", "&7\u21E8 Click to change the Focus to &ePower Generation"));
                 menu.addMenuClickHandler(4, (p, slot, item, action) -> {
                     BlockStorage.addBlockInfo(b, MODE, ReactorMode.GENERATOR.toString());
                     updateInventory(menu, b);
@@ -160,7 +160,7 @@ public abstract class Reactor extends AbstractEnergyProvider implements Hologram
         BlockMenu port = getAccessPort(b.getLocation());
 
         if (port != null) {
-            menu.replaceExistingItem(INFO_SLOT, new CustomItem(Material.GREEN_WOOL, "&7反应堆访问接口", "", "&6已连接", "", "&7> 点击查看反应堆访问接口"));
+            menu.replaceExistingItem(INFO_SLOT, new CustomItem(Material.GREEN_WOOL, "&7Access Port", "", "&6Detected", "", "&7> Click to view Access Port"));
             menu.addMenuClickHandler(INFO_SLOT, (p, slot, item, action) -> {
                 port.open(p);
                 updateInventory(menu, b);
@@ -168,7 +168,7 @@ public abstract class Reactor extends AbstractEnergyProvider implements Hologram
                 return false;
             });
         } else {
-            menu.replaceExistingItem(INFO_SLOT, new CustomItem(Material.RED_WOOL, "&7反应堆访问接口", "", "&c未找到", "", "&7反应堆访问接口", "&7必须放在反应堆", "&7上方第三格处!"));
+            menu.replaceExistingItem(INFO_SLOT, new CustomItem(Material.RED_WOOL, "&7Access Port", "", "&cNot detected", "", "&7Access Port must be", "&7placed 3 blocks above", "&7a reactor!"));
             menu.addMenuClickHandler(INFO_SLOT, (p, slot, item, action) -> {
                 updateInventory(menu, b);
                 menu.open(p);
@@ -192,7 +192,7 @@ public abstract class Reactor extends AbstractEnergyProvider implements Hologram
 
         preset.addItem(22, new CustomItem(Material.BLACK_STAINED_GLASS_PANE, " "), ChestMenuUtils.getEmptyClickHandler());
 
-        preset.addItem(1, new CustomItem(getFuelIcon(), "&7燃料槽", "", "&f这个槽位放射性燃料:", "&2铀 &f或 &a镎"), ChestMenuUtils.getEmptyClickHandler());
+        preset.addItem(1, new CustomItem(getFuelIcon(), "&7Fuel Slot", "", "&fThis Slot accepts radioactive Fuel such as:", "&2Uranium &for &aNeptunium"), ChestMenuUtils.getEmptyClickHandler());
 
         for (int i : border_2) {
             preset.addItem(i, new CustomItem(Material.CYAN_STAINED_GLASS_PANE, " "), ChestMenuUtils.getEmptyClickHandler());

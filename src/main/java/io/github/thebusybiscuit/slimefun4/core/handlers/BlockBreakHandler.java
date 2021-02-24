@@ -10,10 +10,29 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
+import io.github.thebusybiscuit.slimefun4.api.events.AndroidMineEvent;
+import io.github.thebusybiscuit.slimefun4.implementation.items.androids.MinerAndroid;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.handlers.ItemHandler;
 
-@FunctionalInterface
-public interface BlockBreakHandler extends ItemHandler {
+/**
+ * The {@link BlockBreakHandler} is called when a {@link Block} is broken
+ * which holds a {@link SlimefunItem}.
+ * The {@link BlockBreakHandler} provides three methods for this, one for block breaking
+ * caused by a {@link Player}, one for a {@link MinerAndroid} and one method for a {@link Block}
+ * being destroyed by an explosion.
+ * 
+ * @author TheBusyBiscuit
+ * 
+ * @see BlockPlaceHandler
+ *
+ */
+public abstract class BlockBreakHandler implements ItemHandler {
+
+    /**
+     * Whether a {@link MinerAndroid} is allowed to break this block.
+     */
+    private final boolean allowAndroids;
 
     /**
      * Whether an explosion is allowed to destroy this block.
@@ -79,7 +98,7 @@ public interface BlockBreakHandler extends ItemHandler {
     }
 
     @Override
-    default Class<? extends ItemHandler> getIdentifier() {
+    public final Class<? extends ItemHandler> getIdentifier() {
         return BlockBreakHandler.class;
     }
 }

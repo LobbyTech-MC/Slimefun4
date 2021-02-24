@@ -4,6 +4,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.OptionalInt;
 
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -16,8 +19,10 @@ import io.github.thebusybiscuit.cscorelib2.item.CustomItem;
 import io.github.thebusybiscuit.slimefun4.api.geo.GEOResource;
 import io.github.thebusybiscuit.slimefun4.core.attributes.HologramOwner;
 import io.github.thebusybiscuit.slimefun4.core.attributes.RecipeDisplayItem;
+import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockPlaceHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
+import io.github.thebusybiscuit.slimefun4.implementation.handlers.SimpleBlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu.AdvancedMenuClickHandler;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ClickAction;
@@ -37,6 +42,7 @@ public class GEOMiner extends AContainer implements RecipeDisplayItem, HologramO
     private static final int[] OUTPUT_SLOTS = { 29, 30, 31, 32, 33, 38, 39, 40, 41, 42 };
     private static final int PROCESSING_TIME = 14;
 
+    @ParametersAreNonnullByDefault
     public GEOMiner(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(category, item, recipeType, recipe);
 
@@ -44,6 +50,7 @@ public class GEOMiner extends AContainer implements RecipeDisplayItem, HologramO
         addItemHandler(onBreak());
     }
 
+    @Nonnull
     private BlockPlaceHandler onPlace() {
         return new BlockPlaceHandler(false) {
 
@@ -164,7 +171,7 @@ public class GEOMiner extends AContainer implements RecipeDisplayItem, HologramO
                 processing.remove(b);
             }
         } else if (!BlockStorage.hasChunkInfo(b.getWorld(), b.getX() >> 4, b.getZ() >> 4)) {
-            updateHologram(b, "&4需要先进行GEO扫描!");
+            updateHologram(b, "&4需要GEO扫描!");
         } else {
             start(b, inv);
         }
@@ -176,7 +183,7 @@ public class GEOMiner extends AContainer implements RecipeDisplayItem, HologramO
                 OptionalInt optional = SlimefunPlugin.getGPSNetwork().getResourceManager().getSupplies(resource, b.getWorld(), b.getX() >> 4, b.getZ() >> 4);
 
                 if (!optional.isPresent()) {
-                    updateHologram(b, "&4需要先进行GEO扫描!");
+                    updateHologram(b, "&4需要GEO扫描!");
                     return;
                 }
 
@@ -191,7 +198,7 @@ public class GEOMiner extends AContainer implements RecipeDisplayItem, HologramO
                     processing.put(b, r);
                     progress.put(b, r.getTicks());
                     SlimefunPlugin.getGPSNetwork().getResourceManager().setSupplies(resource, b.getWorld(), b.getX() >> 4, b.getZ() >> 4, supplies - 1);
-                    updateHologram(b, "&7挖矿中: &r" + resource.getName());
+                    updateHologram(b, "&7正在挖矿: &r" + resource.getName());
                     return;
                 }
             }
