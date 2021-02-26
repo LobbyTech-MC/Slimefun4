@@ -23,11 +23,11 @@ import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
  */
 public final class LoreBuilder {
 
-    public static final String HAZMAT_SUIT_REQUIRED = "&8\u21E8 &4Hazmat Suit required!";
+    public static final String HAZMAT_SUIT_REQUIRED = "&8\u21E8 &4需要防化服套装!";
 
-    public static final String RIGHT_CLICK_TO_USE = "&eRight Click&7 to use";
-    public static final String RIGHT_CLICK_TO_OPEN = "&eRight Click&7 to open";
-    public static final String CROUCH_TO_USE = "&eCrouch&7 to use";
+    public static final String RIGHT_CLICK_TO_USE = "&e右键&7使用";
+    public static final String RIGHT_CLICK_TO_OPEN = "&e右键&7打开";
+    public static final String CROUCH_TO_USE = "&e下蹲&7使用";
 
     private static final DecimalFormat hungerFormat = new DecimalFormat("#.0", DecimalFormatSymbols.getInstance(Locale.ROOT));
 
@@ -45,12 +45,12 @@ public final class LoreBuilder {
 
     @Nonnull
     public static String speed(float speed) {
-        return "&8\u21E8 &b\u26A1 &7Speed: &b" + speed + 'x';
+        return "&8\u21E8 &b\u26A1 &7速度: &b" + speed + 'x';
     }
 
     @Nonnull
     public static String powerBuffer(int power) {
-        return power(power, " Buffer");
+        return power(power, " 可储存");
     }
 
     @Nonnull
@@ -70,17 +70,17 @@ public final class LoreBuilder {
 
     @Nonnull
     public static String material(@Nonnull String material) {
-        return "&8\u21E8 &7Material: &b" + material;
+        return "&8\u21E8 &7材料: &b" + material;
     }
 
     @Nonnull
     public static String hunger(double value) {
-        return "&7&oRestores &b&o" + hungerFormat.format(value) + " &7&oHunger";
+        return "&7&o恢复 &b&o" + hungerFormat.format(value) + " &7&o饱食度";
     }
 
     @Nonnull
     public static String range(int blocks) {
-        return "&7Range: &c" + blocks + " blocks";
+        return "&7范围: &c" + blocks + " 方块";
     }
 
 }
