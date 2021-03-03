@@ -24,7 +24,7 @@ commands:
     charge-success: 充电完成!
     not-rechargeable: 这个物品不能充电!
   timings:
-    description:粘液科技及其附属插件的性能报告
+    description: 粘液科技及其附属插件的性能报告
     please-wait: "&e请稍等一会...结果马上就来!"
     verbose-player: "&4该标记不能对玩家使用!"
     unknown-flag: "&4未知标记: &c%flag%"
@@ -54,7 +54,7 @@ guide:
     - "&7注意: 物品中的文本"
     - "&7暂时无法修改."
   title:
-    main:粘液科技指南
+    main: 粘液科技指南
     settings: 设置 & 详情
     languages: 选择你想要更改的语言
     credits: Slimefun4 贡献者
