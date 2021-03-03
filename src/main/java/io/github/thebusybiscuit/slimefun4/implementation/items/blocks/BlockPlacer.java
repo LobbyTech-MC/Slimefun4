@@ -13,7 +13,7 @@ import org.bukkit.Material;
 import org.bukkit.Nameable;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
+import org.bukkit.block.BlockState;
 import org.bukkit.block.Dispenser;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -60,15 +60,7 @@ public class BlockPlacer extends SlimefunItem {
         super(category, item, recipeType, recipe);
 
         addItemSetting(unplaceableBlocks);
-        addItemHandler(onPlace(), onBlockDispense());
-        
-        SlimefunItem.registerBlockHandler(getId(), (p, b, tool, reason) -> {
-        	if(b.isBlockIndirectlyPowered() || b.isBlockPowered()) {
-        		return false;
-        	}
-
-            return true;
-        });
+        addItemHandler(onPlace(), onBlockBreak(), onBlockDispense());
     }
 
     @Nonnull
@@ -85,6 +77,32 @@ public class BlockPlacer extends SlimefunItem {
         };
     }
     
+
+    @Nonnull
+    private BlockBreakHandler onBlockBreak() {
+        /*
+         * Explosions don't need explicit handling here.
+         * The default of "destroy the dispenser and drop the contents" is
+         * fine for our purposes already.
+         */
+        return new BlockBreakHandler(false, true) {
+
+            @Override
+            public void onPlayerBreak(BlockBreakEvent e, ItemStack item, List<ItemStack> drops) {
+                // Fixes #2852 - Manually drop inventory contents
+                Block b = e.getBlock();
+                BlockState state = PaperLib.getBlockState(b, false).getState();
+
+                if (state instanceof Dispenser) {
+                    for (ItemStack stack : ((Dispenser) state).getInventory()) {
+                        if (stack != null && !stack.getType().isAir()) {
+                            drops.add(stack);
+                        }
+                    }
+                }
+            }
+        };
+    }
 
     @Nonnull
     private BlockDispenseHandler onBlockDispense() {
