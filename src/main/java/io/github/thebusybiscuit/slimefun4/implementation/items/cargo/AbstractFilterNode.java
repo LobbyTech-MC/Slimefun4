@@ -39,8 +39,17 @@ abstract class AbstractFilterNode extends AbstractCargoNode {
     public AbstractFilterNode(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, @Nullable ItemStack recipeOutput) {
         super(category, item, recipeType, recipe, recipeOutput);
 
-        registerBlockHandler(getId(), (p, b, stack, reason) -> {
-            BlockMenu inv = BlockStorage.getInventory(b);
+        addItemHandler(onBreak());
+    }
+
+    @Override
+    public boolean hasItemFilter() {
+        return true;
+    }
+
+    @Nonnull
+    private BlockBreakHandler onBreak() {
+        return new SimpleBlockBreakHandler() {
 
             if (inv != null) {
                 inv.dropItems(b.getLocation(), SLOTS);
