@@ -10,17 +10,20 @@ import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.thebusybiscuit.cscorelib2.protection.ProtectableAction;
 import io.github.thebusybiscuit.slimefun4.api.events.AndroidMineEvent;
+import io.github.thebusybiscuit.slimefun4.api.items.ItemSetting;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
+import io.github.thebusybiscuit.slimefun4.utils.InfiniteBlockGenerator;
 import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
@@ -53,8 +56,10 @@ public class MinerAndroid extends ProgrammableAndroid {
     private final ItemSetting<Boolean> firesEvent = new ItemSetting<>("trigger-event-for-generators", false);
     private final ItemSetting<Boolean> applyOptimizations = new ItemSetting<>("reduced-block-updates", true);
 
+    @ParametersAreNonnullByDefault
     public MinerAndroid(Category category, int tier, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(category, tier, item, recipeType, recipe);
+        addItemSetting(firesEvent);
     }
 
     @Override
@@ -80,16 +85,9 @@ public class MinerAndroid extends ProgrammableAndroid {
                 }
 
                 // We only want to break non-Slimefun blocks
-                String blockId = BlockStorage.checkID(block);
-                if (blockId == null) {
-                    for (ItemStack drop : drops) {
-                        if (menu.fits(drop, getOutputSlots())) {
-                            menu.pushItem(drop, getOutputSlots());
-                        }
-                    }
-
+                if (!BlockStorage.hasBlockInfo(block)) {
                     block.getWorld().playEffect(block.getLocation(), Effect.STEP_SOUND, block.getType());
-                    block.setType(Material.AIR);
+                    breakBlock(menu, drops, block);
                 }
             }
         }
@@ -112,17 +110,9 @@ public class MinerAndroid extends ProgrammableAndroid {
                 }
 
                 // We only want to break non-Slimefun blocks
-                SlimefunItem blockId = BlockStorage.check(block);
-                if (blockId == null) {
-                    for (ItemStack drop : drops) {
-                        if (menu.fits(drop, getOutputSlots())) {
-                            menu.pushItem(drop, getOutputSlots());
-                        }
-                    }
-
+                if (!BlockStorage.hasBlockInfo(block)) {
                     block.getWorld().playEffect(block.getLocation(), Effect.STEP_SOUND, block.getType());
-
-                    block.setType(Material.AIR);
+                    breakBlock(menu, drops, block);
                     move(b, face, block);
                 }
             } else {

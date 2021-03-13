@@ -11,7 +11,9 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.thebusybiscuit.cscorelib2.item.CustomItem;
+import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.core.networks.cargo.CargoNet;
+import io.github.thebusybiscuit.slimefun4.implementation.handlers.SimpleBlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
@@ -51,12 +53,15 @@ abstract class AbstractFilterNode extends AbstractCargoNode {
     private BlockBreakHandler onBreak() {
         return new SimpleBlockBreakHandler() {
 
-            if (inv != null) {
-                inv.dropItems(b.getLocation(), SLOTS);
-            }
+            @Override
+            public void onBlockBreak(@Nonnull Block b) {
+                BlockMenu inv = BlockStorage.getInventory(b);
 
-            return true;
-        });
+                if (inv != null) {
+                    inv.dropItems(b.getLocation(), SLOTS);
+                }
+            }
+        };
     }
 
     @Nonnull
@@ -77,7 +82,6 @@ abstract class AbstractFilterNode extends AbstractCargoNode {
             preset.addItem(i, new CustomItem(Material.CYAN_STAINED_GLASS_PANE, " "), ChestMenuUtils.getEmptyClickHandler());
         }
 
-        preset.addItem(2, new CustomItem(Material.PAPER, "&3物品", "", "&b放入黑名单/白名单", "&b对应的物品"), ChestMenuUtils.getEmptyClickHandler());
     }
 
     @Override
@@ -86,14 +90,12 @@ abstract class AbstractFilterNode extends AbstractCargoNode {
         String filterType = BlockStorage.getLocationInfo(loc, FILTER_TYPE);
 
         if (!BlockStorage.hasBlockInfo(b) || filterType == null || filterType.equals("whitelist")) {
-            menu.replaceExistingItem(15, new CustomItem(Material.WHITE_WOOL, "&7模式: &r白名单", "", "&e> 点击切换为黑名单模式"));
             menu.addMenuClickHandler(15, (p, slot, item, action) -> {
                 BlockStorage.addBlockInfo(b, FILTER_TYPE, "blacklist");
                 updateBlockMenu(menu, b);
                 return false;
             });
         } else {
-            menu.replaceExistingItem(15, new CustomItem(Material.BLACK_WOOL, "&7模式: &8黑名单", "", "&e> 点击切换为白名单模式"));
             menu.addMenuClickHandler(15, (p, slot, item, action) -> {
                 BlockStorage.addBlockInfo(b, FILTER_TYPE, "whitelist");
                 updateBlockMenu(menu, b);
@@ -104,14 +106,12 @@ abstract class AbstractFilterNode extends AbstractCargoNode {
         String lore = BlockStorage.getLocationInfo(b.getLocation(), FILTER_LORE);
 
         if (!BlockStorage.hasBlockInfo(b) || lore == null || lore.equals(String.valueOf(true))) {
-            menu.replaceExistingItem(25, new CustomItem(Material.MAP, "&7匹配描述: &2\u2714", "", "&e> 点击开关是否匹配描述"));
             menu.addMenuClickHandler(25, (p, slot, item, action) -> {
                 BlockStorage.addBlockInfo(b, FILTER_LORE, String.valueOf(false));
                 updateBlockMenu(menu, b);
                 return false;
             });
         } else {
-            menu.replaceExistingItem(25, new CustomItem(Material.MAP, "&7匹配描述: &4\u2718", "", "&e> 点击开关是否匹配描述"));
             menu.addMenuClickHandler(25, (p, slot, item, action) -> {
                 BlockStorage.addBlockInfo(b, FILTER_LORE, String.valueOf(true));
                 updateBlockMenu(menu, b);
