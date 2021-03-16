@@ -21,16 +21,15 @@ import org.bukkit.util.Vector;
 import io.github.thebusybiscuit.cscorelib2.chat.ChatColors;
 import io.github.thebusybiscuit.cscorelib2.inventory.ItemUtils;
 import io.github.thebusybiscuit.cscorelib2.item.CustomItem;
-import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockDispenseHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
-import io.github.thebusybiscuit.slimefun4.implementation.handlers.SimpleBlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
 import io.github.thebusybiscuit.slimefun4.implementation.listeners.AncientAltarListener;
 import io.github.thebusybiscuit.slimefun4.implementation.tasks.AncientAltarTask;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 
 /**
@@ -48,34 +47,27 @@ import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
  */
 public class AncientPedestal extends SimpleSlimefunItem<BlockDispenseHandler> {
 
-    public static final String ITEM_PREFIX = ChatColors.color("&dALTAR &3Probe - &e");
+    public static final String ITEM_PREFIX = ChatColors.color("&d祭坛 &3物品 - &e");
 
     @ParametersAreNonnullByDefault
     public AncientPedestal(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, ItemStack recipeOutput) {
         super(category, item, recipeType, recipe, recipeOutput);
 
-        addItemHandler(onBreak());
-    }
+        SlimefunItem.registerBlockHandler(getId(), (p, b, tool, reason) -> {
+            Optional<Item> entity = getPlacedItem(b);
 
-    @Nonnull
-    private BlockBreakHandler onBreak() {
-        return new SimpleBlockBreakHandler() {
+            if (entity.isPresent()) {
+                Item stack = entity.get();
 
-            @Override
-            public void onBlockBreak(@Nonnull Block b) {
-                Optional<Item> entity = getPlacedItem(b);
-
-                if (entity.isPresent()) {
-                    Item stack = entity.get();
-
-                    if (stack.isValid()) {
-                        stack.removeMetadata("no_pickup", SlimefunPlugin.instance());
-                        b.getWorld().dropItem(b.getLocation(), getOriginalItemStack(stack));
-                        stack.remove();
-                    }
+                if (stack.isValid()) {
+                    stack.removeMetadata("no_pickup", SlimefunPlugin.instance());
+                    b.getWorld().dropItem(b.getLocation(), getOriginalItemStack(stack));
+                    stack.remove();
                 }
             }
-        };
+
+            return true;
+        });
     }
 
     @Override
