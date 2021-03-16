@@ -52,6 +52,8 @@ public class ReactorAccessPort extends SlimefunItem {
     public ReactorAccessPort(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(category, item, recipeType, recipe);
 
+        addItemHandler(onBreak());
+
         new BlockMenuPreset(getId(), "&2反应堆访问接口") {
 
             @Override

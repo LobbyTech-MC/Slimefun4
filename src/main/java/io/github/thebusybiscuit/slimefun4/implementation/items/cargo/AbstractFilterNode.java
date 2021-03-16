@@ -82,6 +82,7 @@ abstract class AbstractFilterNode extends AbstractCargoNode {
             preset.addItem(i, new CustomItem(Material.CYAN_STAINED_GLASS_PANE, " "), ChestMenuUtils.getEmptyClickHandler());
         }
 
+        preset.addItem(2, new CustomItem(Material.PAPER, "&3放入物品", "", "&b放入匹配", "&b白名单/黑名单的物品"), ChestMenuUtils.getEmptyClickHandler());
     }
 
     @Override
@@ -90,12 +91,14 @@ abstract class AbstractFilterNode extends AbstractCargoNode {
         String filterType = BlockStorage.getLocationInfo(loc, FILTER_TYPE);
 
         if (!BlockStorage.hasBlockInfo(b) || filterType == null || filterType.equals("whitelist")) {
+            menu.replaceExistingItem(15, new CustomItem(Material.WHITE_WOOL, "&7Type: &r白名单", "", "&e> 点击切换至黑名单"));
             menu.addMenuClickHandler(15, (p, slot, item, action) -> {
                 BlockStorage.addBlockInfo(b, FILTER_TYPE, "blacklist");
                 updateBlockMenu(menu, b);
                 return false;
             });
         } else {
+            menu.replaceExistingItem(15, new CustomItem(Material.BLACK_WOOL, "&7Type: &8黑名单", "", "&e> 电击切换至白名单"));
             menu.addMenuClickHandler(15, (p, slot, item, action) -> {
                 BlockStorage.addBlockInfo(b, FILTER_TYPE, "whitelist");
                 updateBlockMenu(menu, b);
@@ -106,12 +109,14 @@ abstract class AbstractFilterNode extends AbstractCargoNode {
         String lore = BlockStorage.getLocationInfo(b.getLocation(), FILTER_LORE);
 
         if (!BlockStorage.hasBlockInfo(b) || lore == null || lore.equals(String.valueOf(true))) {
+            menu.replaceExistingItem(25, new CustomItem(Material.MAP, "&7匹配描述: &2\u2714", "", "&e> 电击开关是否匹配物品描述"));
             menu.addMenuClickHandler(25, (p, slot, item, action) -> {
                 BlockStorage.addBlockInfo(b, FILTER_LORE, String.valueOf(false));
                 updateBlockMenu(menu, b);
                 return false;
             });
         } else {
+            menu.replaceExistingItem(25, new CustomItem(Material.MAP, "&7匹配描述: &4\u2718", "", "&e> 电击开关是否匹配物品描述"));
             menu.addMenuClickHandler(25, (p, slot, item, action) -> {
                 BlockStorage.addBlockInfo(b, FILTER_LORE, String.valueOf(true));
                 updateBlockMenu(menu, b);
