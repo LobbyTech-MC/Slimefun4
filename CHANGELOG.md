@@ -27,8 +27,12 @@
 #### Additions
 
 #### Changes
+* Changed item order in guide for the Villager Rune and Nether Goo (All runes are now grouped together)
 
 #### Fixes
+* Fixed #2862
+* Fixed #2887
+* Fixed items getting deleted when breaking enhanced furnaces
 
 ## Release Candidate 21 (14 Mar 2021)
 https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun4/stable/#21
