@@ -6,11 +6,11 @@ slimefun:
     - 按照展示的结构用方块建造.
     - 它不能被合成.
   enhanced_crafting_table:
-    name: 高级工作台
+    name: 高级合成台
     lore:
     - 如合成表所示
-    - 在增强型工作台中合成.
-    - 一个普通的工作台远远不够!
+    - 在高级合成台中合成.
+    - 一个普通的合成台远远不够!
   armor_forge:
     name: 盔甲锻造台
     lore:
