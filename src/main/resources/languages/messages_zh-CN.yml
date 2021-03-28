@@ -1,13 +1,13 @@
 ---
 commands:
   help: 显示此帮助
-  cheat: 直接拿取 Slimefun 物品
-  give: 给予玩家 Slimefun 物品
-  guide: 获取一本 Slimefun 指南书
+  cheat: 直接拿取粘液科技物品
+  give: 给予玩家粘液科技物品
+  guide: 获取一本粘液科技指南书
   teleporter: 查看其他玩家的公共传送点
-  versions: 显示 Slimefun 运行环境
-  search: 搜索 Slimefun 物品
-  open_guide: 使用命令打开 Slimefun 指南
+  versions: 显示粘液科技运行环境
+  search: 搜索粘液科技物品
+  open_guide: 使用命令打开粘液科技指南
   stats: 查看玩家的统计数据
   research:
     description: 解锁/重置玩家的研究
@@ -24,13 +24,13 @@ commands:
     charge-success: 充电完成!
     not-rechargeable: 这个物品不能充电!
   timings:
-    description: Slimefun 及其附属插件的性能报告
+    description:粘液科技及其附属插件的性能报告
     please-wait: "&e请稍等一会...结果马上就来!"
     verbose-player: "&4该标记不能对玩家使用!"
     unknown-flag: "&4未知标记: &c%flag%"
   reload: 重载配置文件
   transform: 将物品转换为英文物品
-  id: 获取手持物品的 Slimefun ID
+  id: 获取手持物品的粘液科技ID
 guide:
   search:
     message: "&b今天要搜些什么?"
@@ -57,7 +57,7 @@ guide:
       - "&7注意: 物品中的文本"
       - "&7暂时无法修改."
   title:
-    main: Slimefun 指南
+    main:粘液科技指南
     settings: 设置 & 详情
     languages: 选择你想要更改的语言
     credits: Slimefun4 贡献者
@@ -80,14 +80,14 @@ guide:
       - "&7Slimefun 是一个开源的项目"
       - "&7并且由玩家社区维护."
       - "&7在这几年中, 一共有 &e%contributors% &7人"
-      - "&7为 Slimefun 做出了贡献."
+      - "&7为粘液科技做出了贡献."
   pages:
     previous: 上一页
     next: 下一页
   tooltips:
     open-category: 单击打开
     versions-notice: 在反馈问题时这些很重要!
-    wiki: 在官方 Slimefun 维基上查看此物品
+    wiki: 在官方粘液科技维基上查看此物品
     recipes:
       machine: 此机器可用的合成配方
       miner: 此采矿机可以获得的资源
@@ -96,7 +96,7 @@ guide:
       climbing-pick: 你可以攀爬的平面
   back:
     title: 返回
-    guide: 返回 Slimefun 指南
+    guide: 返回粘液科技指南
     settings: 返回设置面板
   locked: 已锁定
   locked-category:
@@ -195,7 +195,7 @@ messages:
     - "&7要总是看着生活中光明的一面!"
     - "&7这一块其实是饼干而不是曲奇"
     - "&7霓虹灯亮起来了!"
-  piglin-barter: "&4你不能使用 Slimefun 的物品和猪灵易物"
+  piglin-barter: "&4你不能使用粘液科技的物品和猪灵易物"
   enchantment-rune:
     fail: "&c你不能附魔这个物品."
     no-enchantment: "&c无法找到此物品可用的附魔属性."
@@ -265,13 +265,13 @@ machines:
     no-permission: "&4你没有权限操作这台工业矿机!"
     finished: "&e你的工业矿机采矿已完成! 总共开采了 %ores% 个矿石!"
 anvil:
-  not-working: "&4你不能在铁砧里使用 Slimefun 的物品"
-  mcmmo-salvaging: "&4你不能分解 Slimefun 物品!"
+  not-working: "&4你不能在铁砧里使用粘液科技的物品"
+  mcmmo-salvaging: "&4你不能分解粘液科技物品!"
 backpack:
   already-open: "&c抱歉, 这个背包已在别处打开了!"
   no-stack: "&c你不能同时手持两个背包"
 workbench:
-  not-enhanced: "&4你不能在普通的工作台上使用 Slimefun 物品"
+  not-enhanced: "&4你不能在普通的工作台上使用粘液科技物品"
 gps:
   deathpoint: "&4死亡点 &7%date%"
   waypoint:
@@ -373,13 +373,13 @@ languages:
   be: 白俄罗斯语
   tl: 他加禄语
 brewing_stand:
-  not-working: "&4你不能在酿造台中使用 Slimefun 物品!"
+  not-working: "&4你不能在酿造台中使用粘液科技物品!"
 villagers:
-  no-trading: "&4你不能用 Slimefun 的物品和村民交易!"
+  no-trading: "&4你不能用粘液科技的物品和村民交易!"
 cartography_table:
-  not-working: "&4你不能在制图台中使用 Slimefun 物品!"
+  not-working: "&4你不能在制图台中使用粘液科技物品!"
 cauldron:
-  no-discoloring: "&4你不能用炼药锅洗去 Slimefun 物品的颜色"
+  no-discoloring: "&4你不能用炼药锅洗去粘液科技物品的颜色"
 miner:
   no-ores: "&e抱歉, 周围找不到矿石了!"
 placeholderapi:
