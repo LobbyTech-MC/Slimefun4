@@ -99,7 +99,7 @@ public class BlockPlacer extends SlimefunItem {
 
             e.setCancelled(true);
 
-            if (facedBlock.isEmpty() && && isAllowed(facedBlock, material) && dispenser.getInventory().getViewers().isEmpty() && dispenser.getBlock().getRelative(BlockFace.DOWN).getType() != Material.HOPPER_MINECART && dispenser.getBlock().getRelative(BlockFace.DOWN).getType() != Material.HOPPER && dispenser.getBlock().getRelative(BlockFace.DOWN).getType() != Material.ACTIVATOR_RAIL ) {
+            if (facedBlock.isEmpty() && isAllowed(facedBlock, material) && dispenser.getInventory().getViewers().isEmpty() && dispenser.getBlock().getRelative(BlockFace.DOWN).getType() != Material.HOPPER_MINECART && dispenser.getBlock().getRelative(BlockFace.DOWN).getType() != Material.HOPPER && dispenser.getBlock().getRelative(BlockFace.DOWN).getType() != Material.ACTIVATOR_RAIL ) {
                 SlimefunItem item = SlimefunItem.getByItem(e.getItem());
 
                 if (item != null) {
