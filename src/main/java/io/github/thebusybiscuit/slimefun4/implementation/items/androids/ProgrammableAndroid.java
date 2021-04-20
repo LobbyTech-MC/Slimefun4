@@ -137,7 +137,8 @@ public class ProgrammableAndroid extends SlimefunItem implements InventoryBlock,
         addItemHandler(onPlace(), onBreak());
     }
 
-    private ItemHandler onPlace() {
+    @Nonnull
+    private BlockPlaceHandler onPlace() {
         return new BlockPlaceHandler(false) {
 
             @Override
