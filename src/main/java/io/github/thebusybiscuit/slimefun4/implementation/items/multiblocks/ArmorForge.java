@@ -21,13 +21,12 @@ import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import io.papermc.lib.PaperLib;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
-import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 
 public class ArmorForge extends AbstractCraftingTable {
 
     public ArmorForge(Category category, SlimefunItemStack item) {
-        super(category, item, new ItemStack[] { null, null, null, null, new ItemStack(Material.ANVIL), null, null, new CustomItem(Material.DISPENSER, "Dispenser (Facing up)"), null }, BlockFace.SELF);
+        super(category, item, new ItemStack[] { null, null, null, null, new ItemStack(Material.ANVIL), null, null, new CustomItem(Material.DISPENSER, "发射器 (口朝上)"), null }, BlockFace.SELF);
     }
 
     @Override
@@ -44,7 +43,7 @@ public class ArmorForge extends AbstractCraftingTable {
                 if (isCraftable(inv, inputs.get(i))) {
                     ItemStack output = RecipeType.getRecipeOutputList(this, inputs.get(i)).clone();
 
-                    if (Slimefun.hasUnlocked(p, output, true)) {
+                    if (SlimefunUtils.canPlayerUseItem(p, output, true)) {
                         craft(p, output, inv, dispenser);
                     }
 
