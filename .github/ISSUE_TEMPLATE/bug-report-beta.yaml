@@ -1,0 +1,119 @@
+name: Bug Report (Beta)
+description: Report a Bug or an Issue with Slimefun 4.
+labels: ['🎯 Needs testing', '🐞 Bug Report']
+
+body:
+- id: description
+  type: textarea
+  validations:
+    required: true
+  attributes:
+    label: '📍 Description'
+    description: |
+      A clear and detailed description of what went wrong.
+      The more information you can provide, the easier we can handle this problem.
+    placeholder: |
+      (example)
+      When trying to do [...], I expected [...] to happen but [...] happened instead.
+      I am pretty sure this is not intended and should be fixed.
+
+- id: reproduction-steps
+  type: textarea
+  validations:
+    required: true
+  attributes:
+    label: '📑 Reproduction Steps'
+    description: |
+      Tell us the exact steps to reproduce this issue, the more detailed the easier we can reproduce it.
+    placeholder: |
+      (example)
+      1. Craft [...]
+      2. Right click with that item on a workbench
+      3. The workbench explodes
+
+- id: expected-behaviour
+  type: textarea
+  validations:
+    required: true
+  attributes:
+    label: '💡 Expected Behavior'
+    description: |
+      What were you expecting to happen?
+      What do you think would have been the correct behaviour?
+    placeholder: |
+      I expected [...] to happen.
+
+- id: media
+  type: textarea
+  attributes:
+    label: '📷 Screenshots / Videos'
+    description: |
+      Videos and Screenshots help illustrate issues the best.
+      If you can capture any footage of the bug happening, it would help us out a lot!
+
+- id: server-log
+  type: input
+  attributes:
+    label: '📜 Server Log'
+    description: |
+      Take a look at your Server Log and upload any error messages from Slimefun
+      to a pasting site (e.g. https://pastebin.com/)
+      If you are unsure about it, post your full log, you can find it under /logs/latest.log
+    placeholder: https://pastebin.com/...
+
+- id: error-reports
+  type: input
+  attributes:
+    label: '📂 `/error-reports/` folder'
+    description: |
+      Check the folder `/plugins/Slimefun/error-reports/` and upload any files inside that folder
+      to a pasting site (e.g. https://pastebin.com/)
+    placeholder: https://pastebin.com/...
+
+- id: server-software
+  type: dropdown
+  validations:
+    required: true
+  attributes:
+    label: '💻 Server Software'
+    description: 'Please select the software your Server is running on'
+    options:
+      - Spigot
+      - Paper
+      - Tuinity
+      - Purpur
+      - Other
+
+- id: minecraft-version
+  type: dropdown
+  validations:
+    required: true
+  attributes:
+    label: '🎮 Minecraft Version'
+    description: 'Please select the Minecraft version of the server'
+    options:
+      #- 1.17.x
+      - 1.16.x
+      - 1.15.x
+      - 1.14.x
+      - (Older versions are not supported)
+
+- id: slimefun-version
+  type: textarea
+  validations:
+    required: true
+  attributes:
+    label: '⭐ Slimefun version'
+    description: |
+      **"latest" is not a version number, we need the exact version.**
+      We recommend running "/sf versions" and uploading a screenshot of that.
+      Make sure that the screenshot covers the entire output of that command.
+      If your issue is related to other plugins, make sure to include the versions of these plugins too!
+    placeholder: Slimefun version [...]
+
+- type: markdown
+  attributes:
+    value: |
+      ## ❤️ Thank you for submitting a bug report!
+      If anyone who sees this has some additional info which can help reproduce or track down this issue,
+      please comment down below. Any help is appreciated!

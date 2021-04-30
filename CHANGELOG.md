@@ -32,10 +32,14 @@
 * Added Tier 2 Auto-Enchanter
 * Added Tier 2 Auto-Disenchanter
 * (API) Added Category#setTier() to modify a category's position in the guide
+* Added the ability to disable auto (dis)enchanting with a lore - `use-ignored-lores` & `ignored-lores` in Items.yml
 
 #### Changes
 * Renamed "Solar Panel" to "Photovoltaic Cell" to avoid confusions with solar generators
 * Photovoltaic Cells can no longer be placed
+* Batteries can no longer be placed
+* Tin Cans can no longer be placed
+* Magical Glass can no longer be placed
 * (API) Removed deprecated "SlimefunBlockHandler"
 * Removed Automated Crafting Chamber
 
@@ -43,6 +47,9 @@
 * Fixed #2987
 * Fixed #2989
 * Fixed #2977
+* Fixed #2999
+* Fixed #2593
+* Fixed #2937
 
 ## Release Candidate 22 (18 Apr 2021)
 https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun4/stable/#22
