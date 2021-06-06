@@ -685,7 +685,7 @@ public class ProgrammableAndroid extends SlimefunItem implements InventoryBlock,
 
         if ("false".equals(data.getString("paused"))) {
             BlockMenu menu = BlockStorage.getInventory(b);
-            
+
             String fuelData = data.getString("fuel");
             float fuel = fuelData == null ? 0 : Float.parseFloat(fuelData);
 
