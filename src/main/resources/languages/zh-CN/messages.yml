@@ -24,7 +24,7 @@ commands:
     charge-success: 充电完成!
     not-rechargeable: 这个物品不能充电!
   timings:
-    description:粘液科技及其附属插件的性能报告
+    description: 粘液科技及其附属插件的性能报告
     please-wait: '&e请稍等一会...结果马上就来!'
     verbose-player: '&4该标记不能对玩家使用!'
     unknown-flag: '&4未知标记: &c%flag%'
