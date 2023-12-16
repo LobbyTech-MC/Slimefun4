@@ -330,4 +330,8 @@ public class PlayerBackpack extends SlimefunInventoryHolder {
         this.inventory = inv;
         setInventory(inv);
     }
+
+    public void setInventory(Inventory inv) {
+		this.inventory = inv;
+	}
 }
