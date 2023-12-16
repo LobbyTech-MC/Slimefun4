@@ -178,16 +178,16 @@ messages:
   researching-is-disabled: '&c该服务器已禁用研究，所有物品都已解锁！'
   multi-tool:
     mode-change: '&b%device% 的模式已切换为: &9%mode%'
-    not-shears: '&c多功能工具 (Multi Tool) 不能作为剪刀使用!'
+    not-shears: '&c多功能工具不能作为剪刀使用!'
   auto-crafting:
     select-a-recipe: '&7手持你想要合成的物品 &e蹲下并右键 &7此方块.'
     recipe-set: '&a成功设置了此机器的合成配方.'
     recipe-removed: '&e成功从此机器中删除了先前的合成配方. 你可以随时重新设置一个新配方!'
     no-recipes: '&c抱歉, 找不到你手持物品的合成配方.'
-    missing-chest: '&c缺少箱子! 自动合成机 (Auto-Crafter) 需要被放在一个箱子上方.'
+    missing-chest: '&c缺少箱子! 自动合成机需要被放在一个箱子上方.'
     select: '选中此合成配方'
-    temporarily-disabled: '&e成功关闭了自动合成机 (Auto-Crafter). 你可以随时重新启动它!'
-    re-enabled: '&e成功重启了自动合成机 (Auto-Crafter)!'
+    temporarily-disabled: '&e成功关闭了自动合成机. 你可以随时重新启动它!'
+    re-enabled: '&e成功重启了自动合成机!'
     recipe-unavailable: |
       &c此物品无法使用. 可能是因为你没有解锁它, 或者物品被服务器禁用了.
       &7如果你还没有解锁该物品, 请先解锁然后再合成.
@@ -317,7 +317,7 @@ machines:
     no-permission: '&4你没有权限操作这台工业矿机!'
     finished: '&e你的工业矿机采矿已完成! 总共开采了 %ores% 个矿石!'
   TABLE_SAW:
-    no-slimefun-item: '&c你不能在台锯 (Table Saw) 上使用粘液科技物品!'
+    no-slimefun-item: '&c你不能在台锯上使用粘液科技物品!'
 anvil:
   not-working: '&4你不能在铁砧里使用粘液科技的物品'
   mcmmo-salvaging: '&4你不能分解粘液科技物品!'

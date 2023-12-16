@@ -9,4 +9,10 @@ import org.bukkit.inventory.InventoryHolder;
 public class SlimefunInventoryHolder implements InventoryHolder {
     @Setter
     protected Inventory inventory;
+
+	@Override
+	public Inventory getInventory() {
+		// TODO Auto-generated method stub
+		return inventory;
+	}
 }
