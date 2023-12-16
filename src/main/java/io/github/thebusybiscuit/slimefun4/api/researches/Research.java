@@ -102,8 +102,10 @@ public class Research implements Keyed {
         this.id = id;
         this.name = defaultName;
         this.levelCost = defaultCost;
+        double randomCostRate = 0.6 + Math.random()*0.6; // [0.6 , 1.2) 之间随机数
         // By default, we use a fixed rate to convert currency cost from level directly
-        this.currencyCost = defaultCost * Slimefun.getConfigManager().getResearchCurrencyCostConvertRate();
+        double dCurrencyCost = randomCostRate * (double)defaultCost * Slimefun.getConfigManager().getResearchCurrencyCostConvertRate();
+        this.currencyCost = (double) Math.round(dCurrencyCost * 100) / 100; // 最终金币消耗保留2位
     }
 
     @Override
@@ -373,12 +375,7 @@ public class Research implements Keyed {
         Slimefun.getResearchCfg().setDefaultValue(path + ".enabled", true);
 
         setLevelCost(Slimefun.getResearchCfg().getInt(path + ".cost"));
-
-        if (Slimefun.getConfigManager().isResearchAutoConvert()) {
-            setCurrencyCost(getLevelCost() * Slimefun.getConfigManager().getResearchCurrencyCostConvertRate());
-        } else {
-            setCurrencyCost(Slimefun.getResearchCfg().getInt(path + ".currency-cost"));
-        }
+        setCurrencyCost(Slimefun.getResearchCfg().getDouble(path + ".currency-cost"));
         enabled = true;
 
         Slimefun.getRegistry().getResearches().add(this);
@@ -431,7 +428,7 @@ public class Research implements Keyed {
 
     @Override
     public String toString() {
-        return "Research (" + getKey() + ')';
+        return "解锁 (" + getKey() + ')';
     }
 
     public double getCurrencyCost() {

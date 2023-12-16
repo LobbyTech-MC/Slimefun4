@@ -58,7 +58,7 @@ permissions:
     default: op
   slimefun.command.backpack:
     description: Allows you to do /sf backpack
-    default: op
+    default: true
   slimefun.command.backpack.other:
     description: Allows you retrieve other player's backpack
     default: op
@@ -109,4 +109,10 @@ permissions:
     default: op
   slimefun.debugging:
     description: Allows you to use the debugging tool from Slimefun
+    default: op
+  slimefun.switchguidemode:
+    description: 允许你切换粘液科技向导类型
+    default: op
+  slimefun.settings:
+    description: 允许你打开粘液科技设置
     default: op

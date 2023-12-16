@@ -1,21 +1,21 @@
 ---
 commands:
   help: 显示帮助文本
-  cheat: 通过作弊模式直接拿取 Slimefun 物品
-  give: 给予玩家 Slimefun 物品
-  guide: 获取一本 Slimefun 指南书
+  cheat: 通过作弊模式直接拿取粘液科技物品
+  give: 给予玩家粘液科技物品
+  guide: 获取一本粘液科技指南书
   teleporter: 查看其他玩家的公共传送点
-  versions: 显示 Slimefun 运行环境
-  search: 搜索 Slimefun 物品
-  open_guide: 使用命令打开 Slimefun 指南
+  versions: 显示粘液科技运行环境
+  search: 搜索粘液科技物品
+  open_guide: 使用命令打开粘液科技指南
   stats: 查看玩家的统计数据
   transform: 将物品转换为英文物品
-  id: 获取手持物品的 Slimefun ID
+  id: 获取手持物品的粘液科技物品ID
   banitem:
-    description: 禁用 Slimefun 物品
+    description: 禁用粘液科技物品
     success: '&a禁用成功'
   unbanitem:
-    description: 启用 Slimefun 物品
+    description: 启用粘液科技物品
     success: '&a启用成功'
   research:
     description: 解锁/重置玩家的研究进度
@@ -33,7 +33,7 @@ commands:
     charge-success: 充电完成!
     not-rechargeable: 这个物品不能充电!
   timings:
-    description: Slimefun 及其附属插件的性能报告
+    description: 粘液科技及其附属插件的性能报告
     please-wait: '&e请稍等一会...结果马上就来!'
     verbose-player: '&4该标记不能对玩家使用!'
     unknown-flag: '&4未知标记: &c%flag%'
@@ -44,12 +44,12 @@ commands:
     running: '&7正在调试模式中运行该测试项: &6%test%'
     disabled: '&7已禁用调试模式'
   reload:
-    description: "重载 Slimefun 配置文件"
+    description: "重载粘液科技配置文件"
     success: "&a成功重载配置文件."
     failed: "&c重载配置文件失败! 你可能需要重启服务器以应用更改, 查看后台输出信息了解更多."
   migrate:
     description: "迁移旧数据"
-    confirm: "&c你确定要进行数据迁移吗? 确认请输入 /sf migrate confirm 开始迁移\n迁移过程中请不要让玩家进入服务器操作 Slimefun 相关机器及物品!"
+    confirm: "&c你确定要进行数据迁移吗? 确认请输入 /sf migrate confirm 开始迁移\n迁移过程中请不要让玩家进入服务器操作粘液科技相关机器及物品!"
     started: "&a正在迁移旧数据..."
     success: "&a迁移旧数据 (%migrate_type%) 至数据库成功."
     failed: "&c迁移数据过程中出现了问题, 请查看后台."
@@ -72,7 +72,7 @@ guide:
   tooltips:
     open-itemgroup: '单击打开'
     versions-notice: '在反馈问题时这些很重要!'
-    wiki: '在非官方中文 Slimefun 维基上查看此物品'
+    wiki: '在非官方中文粘液科技维基上查看此物品'
     recipes:
       machine: '此机器可用的合成配方'
       miner: '此采矿机可以获得的资源'
@@ -86,7 +86,7 @@ guide:
     next: '下一页'
   back:
     title: '返回'
-    guide: '返回 Slimefun 指南'
+    guide: '返回粘液科技指南'
     settings: '返回设置面板'
   languages:
     updated: '&a成功修改语言为: &b%lang%'
@@ -95,7 +95,7 @@ guide:
     select-default: '单击选中默认语言'
     change: '单击选择要更改的语言'
     description:
-      - '&7现在你可以修改 Slimefun'
+      - '&7现在你可以修改粘液科技'
       - '&7展示的文本消息的语言了.'
       - '&7注意: 物品中的文本'
       - '&7暂时无法修改.'
@@ -121,12 +121,12 @@ guide:
           - '&7的过程了.'
         click: '&e单击启用解锁研究动画'
   title:
-    main: 'Slimefun 指南'
+    main: '粘液科技指南'
     settings: '设置 & 详情'
     languages: '选择你想要更改的语言'
-    credits: 'Slimefun4 贡献者'
-    wiki: 'Slimefun4 维基'
-    addons: 'Slimefun4 附属插件'
+    credits: '粘液科技贡献者'
+    wiki: '粘液科技维基'
+    addons: '粘液科技附属插件'
     bugs: '问题反馈'
     source: '源代码'
     versions: '安装的版本'
@@ -136,10 +136,10 @@ guide:
     profile-link: '单击访问他们的 Github 个人主页'
     open: '单击查看贡献者名单'
     description:
-      - '&7Slimefun 是一个开源的项目'
+      - '&7粘液科技是一个开源的项目'
       - '&7并且由玩家社区维护.'
       - '&7在这几年中, 一共有 &e%contributors% &7人'
-      - '&7为 Slimefun 做出了贡献.'
+      - '&7为粘液科技做出了贡献.'
     roles:
       developer: '&6开发者'
       wiki: '&3Wiki 编辑者'
@@ -172,9 +172,9 @@ messages:
   disabled-item: '&4&l这个物品已经被禁用了! 你是怎么得到它的?'
   no-tome-yourself: '&c你不能对你自己使用 &4学识巨著 &c...'
   multimeter: '&b已储存的能源: &3%stored% &b/ &3%capacity%'
-  piglin-barter: '&4你不能使用 Slimefun 的物品和猪灵易物'
+  piglin-barter: '&4你不能使用粘液科技的物品和猪灵易物'
   bee-suit-slow-fall: '&e你的蜂翅将会让你安全缓降'
-  deprecated-item: '&4该物品已被弃用，将在不久后从 Slimefun 中移除。'
+  deprecated-item: '&4该物品已被弃用，将在不久后从粘液科技中移除。'
   researching-is-disabled: '&c该服务器已禁用研究，所有物品都已解锁！'
   multi-tool:
     mode-change: '&b%device% 的模式已切换为: &9%mode%'
@@ -317,18 +317,18 @@ machines:
     no-permission: '&4你没有权限操作这台工业矿机!'
     finished: '&e你的工业矿机采矿已完成! 总共开采了 %ores% 个矿石!'
   TABLE_SAW:
-    no-slimefun-item: '&c你不能在台锯 (Table Saw) 上使用 Slimefun 物品!'
+    no-slimefun-item: '&c你不能在台锯 (Table Saw) 上使用粘液科技物品!'
 anvil:
-  not-working: '&4你不能在铁砧里使用 Slimefun 的物品'
-  mcmmo-salvaging: '&4你不能分解 Slimefun 物品!'
+  not-working: '&4你不能在铁砧里使用粘液科技的物品'
+  mcmmo-salvaging: '&4你不能分解粘液科技物品!'
 brewing_stand:
-  not-working: '&4你不能在酿造台中使用 Slimefun 物品!'
+  not-working: '&4你不能在酿造台中使用粘液科技物品!'
 cartography_table:
-  not-working: '&4你不能在制图台中使用 Slimefun 物品!'
+  not-working: '&4你不能在制图台中使用粘液科技物品!'
 smithing_table:
-  not-working: '&4你不能使用 Slimefun 物品作为锻造材料!'
+  not-working: '&4你不能使用粘液科技物品作为锻造材料!'
 villagers:
-  no-trading: '&4你不能用 Slimefun 的物品和村民交易!'
+  no-trading: '&4你不能用粘液科技的物品和村民交易!'
 backpack:
   already-open: '&c抱歉, 这个背包已在别处打开了!'
   no-stack: '&c你不能同时手持两个背包'
@@ -336,9 +336,9 @@ backpack:
   not-backpack-owner: '&c该背包的所有者不在线，你无权使用!'
   not-original-item: '&c输入名字时请不要切换手上的物品!'
 workbench:
-  not-enhanced: '&4你不能在普通的工作台上使用 Slimefun 物品'
+  not-enhanced: '&4你不能在普通的工作台上使用粘液科技物品'
 cauldron:
-  no-discoloring: '&4你不能用炼药锅洗去 Slimefun 物品的颜色'
+  no-discoloring: '&4你不能用炼药锅洗去粘液科技物品的颜色'
 gps:
   deathpoint: '&4死亡点 &7%date%'
   status-online: '在线'

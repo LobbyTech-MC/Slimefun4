@@ -69,13 +69,13 @@ public class SurvivalSlimefunGuide implements SlimefunGuideImplementation {
     private final ItemStack item;
 
     public SurvivalSlimefunGuide() {
-        item = new SlimefunGuideItem(this, "&aSlimefun 指南 &7(箱子界面)");
+        item = new SlimefunGuideItem(this, "&a粘液科技指南");
     }
 
     // fallback
     @Deprecated
     public SurvivalSlimefunGuide(boolean v1, boolean v2) {
-        item = new SlimefunGuideItem(this, "&aSlimefun 指南 &7(箱子界面)");
+        item = new SlimefunGuideItem(this, "&a粘液科技指南");
     }
 
     @Override
@@ -118,9 +118,9 @@ public class SurvivalSlimefunGuide implements SlimefunGuideImplementation {
                 SlimefunAddon addon = group.getAddon();
 
                 if (addon != null) {
-                    addon.getLogger().log(Level.SEVERE, x, () -> "Could not display item group: " + group);
+                    addon.getLogger().log(Level.SEVERE, x, () -> "无法显示这个分类: " + group);
                 } else {
-                    Slimefun.logger().log(Level.SEVERE, x, () -> "Could not display item group: " + group);
+                    Slimefun.logger().log(Level.SEVERE, x, () -> "无法显示这个分类: " + group);
                 }
             }
         }
@@ -313,7 +313,7 @@ public class SurvivalSlimefunGuide implements SlimefunGuideImplementation {
             String lore;
 
             if (VaultIntegration.isEnabled()) {
-                lore = String.format("%.2f", research.getCurrencyCost()) + " 游戏币";
+                lore = String.format("%.2f", research.getCurrencyCost()) + " &e⛁";
             } else {
                 lore = research.getLevelCost() + " 级经验";
             }
@@ -328,8 +328,8 @@ public class SurvivalSlimefunGuide implements SlimefunGuideImplementation {
                             "",
                             "&a> 单击解锁",
                             "",
-                            "&7需要 &b",
-                            lore)));
+                            "&e需要 &6" + lore
+                            )));
             menu.addMenuClickHandler(index, (pl, slot, item, action) -> {
                 research.unlockFromGuide(this, p, profile, sfitem, itemGroup, page);
                 return false;
@@ -664,12 +664,14 @@ public class SurvivalSlimefunGuide implements SlimefunGuideImplementation {
             menu.addItem(i, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
         }
 
+        /*
         // Settings Panel
         menu.addItem(1, ChestMenuUtils.getMenuButton(p));
         menu.addMenuClickHandler(1, (pl, slot, item, action) -> {
             SlimefunGuideSettings.openSettings(pl, pl.getInventory().getItemInMainHand());
             return false;
         });
+        */
 
         // Search feature!
         menu.addItem(7, ChestMenuUtils.getSearchButton(p));
