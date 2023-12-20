@@ -36,7 +36,7 @@ public final class LoreBuilder {
     }
 
     public static @Nonnull String machine(@Nonnull MachineTier tier, @Nonnull MachineType type) {
-        return tier + " " + type;
+        return tier + "" + type;
     }
 
     public static @Nonnull String speed(float speed) {
