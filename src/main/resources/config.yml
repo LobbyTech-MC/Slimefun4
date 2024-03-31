@@ -17,7 +17,7 @@
 #    backup-data - 自动备份数据
 options:
   auto-update: true
-  chat-prefix: '&a&lSlimefun 4 &7> '
+  chat-prefix: '&a&l粘液科技&7> '
   armor-update-interval: 10
   enable-armor-effects: true
   enable-radiation: true
@@ -29,7 +29,7 @@ options:
   legacy-dust-washer: false
   legacy-ore-grinder: true
   language: zh-CN
-  enable-translations: true
+  enable-translations: false
   log-duplicate-block-entries: true
   burn-players-when-radioactive: true
   drop-excess-sf-give-items: false
@@ -50,7 +50,7 @@ researches:
   # 是否在解锁时燃放烟花
   enable-fireworks: true
   # 是否使用游戏币替代使用经验解锁
-  use-money-unlock: false
+  use-money-unlock: true
   # 经验自动转换到游戏币倍率
   currency-cost-convert-rate: 25.0
   # 是否禁用解锁研究时的动画

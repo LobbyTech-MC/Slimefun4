@@ -493,7 +493,7 @@ public class SurvivalSlimefunGuide implements SlimefunGuideImplementation {
                 null,
                 null,
                 null,
-                new CustomItemStack(Material.BARRIER, "&4We are somehow unable to show you this Recipe :/"),
+                new CustomItemStack(Material.BARRIER, "&4无法展示该配方 :/"),
                 null,
                 null,
                 null,
@@ -845,7 +845,7 @@ public class SurvivalSlimefunGuide implements SlimefunGuideImplementation {
     @ParametersAreNonnullByDefault
     private void printErrorMessage(Player p, Throwable x) {
         p.sendMessage(ChatColor.DARK_RED + "服务器发生了一个内部错误. 请联系管理员处理.");
-        Slimefun.logger().log(Level.SEVERE, "在打开指南书里的 Slimefun 物品时发生了意外!", x);
+        Slimefun.logger().log(Level.SEVERE, "在打开指南书里的粘液科技物品时发生了意外!", x);
     }
 
     @ParametersAreNonnullByDefault
