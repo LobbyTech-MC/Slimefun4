@@ -50,7 +50,13 @@ public class SlimefunConfigManager {
     private boolean autoUpdate;
     private double researchCurrencyCostConvertRate;
 
-	public SlimefunConfigManager(@Nonnull Slimefun plugin) {
+    @Getter
+    private boolean researchAutoConvert;
+
+    @Getter
+    private boolean bypassEnvironmentCheck;
+
+    public SlimefunConfigManager(@Nonnull Slimefun plugin) {
         Validate.notNull(plugin, "The Plugin instance cannot be null");
 
         this.plugin = plugin;
@@ -100,6 +106,7 @@ public class SlimefunConfigManager {
             showHiddenItemGroupsInSearch = pluginConfig.getBoolean("guide.show-hidden-item-groups-in-search");
             autoUpdate = pluginConfig.getBoolean("options.auto-update");
             researchCurrencyCostConvertRate = pluginConfig.getDouble("researches.currency-cost-convert-rate");
+            bypassEnvironmentCheck = pluginConfig.getBoolean("options.bypass-environment-check");
 
             // researchesConfig.setDefaultValue("researches.currency-cost-convert-rate", researchCurrencyCostConvertRate);
         } catch (Exception x) {
