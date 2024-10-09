@@ -1,6 +1,7 @@
 before_install:
-  - sdk install java 21.0.1-open
-  - sdk use java 21.0.1-open
+  - sdk install java 21.0.1-zulu
+  - sdk use java 21.0.1-zulu
 
-jdk:
-  - openjdk21
+install:
+  - chmod 777 ./mvnw
+  - ./mvnw -s .mvn/settings.xml install -DskipTests
