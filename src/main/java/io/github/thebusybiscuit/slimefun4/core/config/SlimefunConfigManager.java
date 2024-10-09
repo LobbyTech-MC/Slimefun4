@@ -6,6 +6,8 @@ import io.github.thebusybiscuit.slimefun4.api.items.ItemState;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.researches.Research;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.function.Supplier;
 import java.util.logging.Level;
@@ -280,4 +282,8 @@ public class SlimefunConfigManager {
     public double getResearchCurrencyCostConvertRate() {
         return researchCurrencyCostConvertRate;
     }
+
+	public boolean isBypassEnvironmentCheck() {
+		return bypassEnvironmentCheck;
+	}
 }
