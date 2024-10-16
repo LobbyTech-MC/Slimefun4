@@ -449,14 +449,8 @@
 
         <dependency>
             <groupId>net.guizhanss</groupId>
-            <artifactId>GuizhanLib-common</artifactId>
-            <version>1.6.1</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.guizhanss</groupId>
-            <artifactId>GuizhanLib-updater</artifactId>
-            <version>1.6.1</version>
+            <artifactId>guizhanlib-updater</artifactId>
+            <version>2.1.0</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
