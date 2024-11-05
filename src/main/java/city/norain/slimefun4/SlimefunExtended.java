@@ -79,4 +79,14 @@ public final class SlimefunExtended {
 
         databaseDebugMode = false;
     }
+
+	public static boolean isDatabaseDebugMode() {
+		// TODO Auto-generated method stub
+		return databaseDebugMode;
+	}
+
+	public static MinecraftVersion getMinecraftVersion() {
+		// TODO Auto-generated method stub
+		return minecraftVersion;
+	}
 }

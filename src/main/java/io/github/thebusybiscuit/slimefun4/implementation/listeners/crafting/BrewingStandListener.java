@@ -3,6 +3,9 @@ package io.github.thebusybiscuit.slimefun4.implementation.listeners.crafting;
 import city.norain.slimefun4.compatibillty.VersionedEvent;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+
+import java.lang.reflect.InvocationTargetException;
+
 import javax.annotation.Nonnull;
 import org.bukkit.block.BrewingStand;
 import org.bukkit.entity.Player;
@@ -31,7 +34,7 @@ public class BrewingStandListener implements SlimefunCraftingListener {
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onPreBrew(InventoryClickEvent e) {
+    public void onPreBrew(InventoryClickEvent e) throws IllegalAccessException, InvocationTargetException {
         Inventory clickedInventory = e.getClickedInventory();
         Inventory topInventory = VersionedEvent.getTopInventory(e);
 

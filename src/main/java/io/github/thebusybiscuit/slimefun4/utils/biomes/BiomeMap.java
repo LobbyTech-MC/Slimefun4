@@ -137,7 +137,7 @@ public class BiomeMap<T> implements Keyed {
     }
 
     @ParametersAreNonnullByDefault
-    public static <T> @Nonnull BiomeMap<T> fromJson(
+    public static <T> BiomeMap<T> fromJson(
             NamespacedKey key, String json, BiomeDataConverter<T> valueConverter) throws BiomeMapException {
         // All parameters are validated by the Parser.
         BiomeMapParser<T> parser = new BiomeMapParser<>(key, valueConverter);
@@ -146,7 +146,7 @@ public class BiomeMap<T> implements Keyed {
     }
 
     @ParametersAreNonnullByDefault
-    public static <T> @Nonnull BiomeMap<T> fromJson(
+    public static <T> BiomeMap<T> fromJson(
             NamespacedKey key, String json, BiomeDataConverter<T> valueConverter, boolean isLenient)
             throws BiomeMapException {
         // All parameters are validated by the Parser.
@@ -157,7 +157,7 @@ public class BiomeMap<T> implements Keyed {
     }
 
     @ParametersAreNonnullByDefault
-    public static <T> @Nonnull BiomeMap<T> fromResource(
+    public static <T> BiomeMap<T> fromResource(
             NamespacedKey key, JavaPlugin plugin, String path, BiomeDataConverter<T> valueConverter)
             throws BiomeMapException {
         Validate.notNull(key, "The key shall not be null.");

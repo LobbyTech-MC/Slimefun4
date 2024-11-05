@@ -18,6 +18,8 @@ import io.github.thebusybiscuit.slimefun4.core.services.sounds.SoundEffect;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
 import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
+
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -70,14 +72,20 @@ public class ExplosiveTool extends SimpleSlimefunItem<ToolUseHandler> implements
 
                 List<Block> blocks = findBlocks(b);
 
-                breakBlocks(e, p, tool, b, blocks, drops);
+                try {
+					breakBlocks(e, p, tool, b, blocks, drops);
+				} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+						| InvocationTargetException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
             }
         };
     }
 
     @ParametersAreNonnullByDefault
     private void breakBlocks(
-            BlockBreakEvent e, Player p, ItemStack item, Block b, List<Block> blocks, List<ItemStack> drops) {
+            BlockBreakEvent e, Player p, ItemStack item, Block b, List<Block> blocks, List<ItemStack> drops) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         List<Block> blocksToDestroy = new ArrayList<>();
 
         if (callExplosionEvent.getValue()) {

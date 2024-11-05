@@ -175,4 +175,9 @@ public class SQLProfiler {
 
         return reportFile.getAbsolutePath();
     }
+
+	public boolean isProfiling() {
+		// TODO Auto-generated method stub
+		return isProfiling;
+	}
 }

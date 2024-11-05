@@ -5,6 +5,9 @@ import city.norain.slimefun4.compatibillty.VersionedEvent;
 import io.github.bakedlibs.dough.versions.MinecraftVersion;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+
+import java.lang.reflect.InvocationTargetException;
+
 import javax.annotation.Nonnull;
 import org.bukkit.block.Crafter;
 import org.bukkit.entity.Player;
@@ -23,7 +26,7 @@ public class VanillaCrafterListener implements SlimefunCraftingListener {
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onCrafter(InventoryClickEvent e) {
+    public void onCrafter(InventoryClickEvent e) throws IllegalAccessException, InvocationTargetException {
         Inventory clickedInventory = e.getClickedInventory();
         Inventory topInventory = VersionedEvent.getTopInventory(e);
 

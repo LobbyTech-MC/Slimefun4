@@ -3,6 +3,7 @@ package city.norain.slimefun4.compatibillty;
 import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.logging.Level;
@@ -17,12 +18,12 @@ import org.bukkit.inventory.Inventory;
 
 @UtilityClass
 public class VersionedEvent {
-    private Constructor<BlockExplodeEvent> BLOCK_EXPLODE_EVENT_CONSTRUCTOR;
+    private static Constructor<BlockExplodeEvent> BLOCK_EXPLODE_EVENT_CONSTRUCTOR;
 
-    private Method GET_TOP_INVENTORY;
-    private Method GET_CLICKED_INVENTORY;
+    private static Method GET_TOP_INVENTORY;
+    private static Method GET_CLICKED_INVENTORY;
 
-    public void init() {
+    public static void init() {
         if (Slimefun.getMinecraftVersion().isBefore(MinecraftVersion.MINECRAFT_1_21)) {
             try {
                 BLOCK_EXPLODE_EVENT_CONSTRUCTOR =
@@ -43,7 +44,7 @@ public class VersionedEvent {
     }
 
     @SneakyThrows
-    public BlockExplodeEvent newBlockExplodeEvent(Block block, List<Block> affectedBlock, float yield) {
+    public static BlockExplodeEvent newBlockExplodeEvent(Block block, List<Block> affectedBlock, float yield) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         if (Slimefun.getMinecraftVersion().isAtLeast(MinecraftVersion.MINECRAFT_1_21)) {
             return new BlockExplodeEvent(block, block.getState(), affectedBlock, yield, ExplosionResult.DESTROY);
         } else {
@@ -56,9 +57,11 @@ public class VersionedEvent {
 
     /**
      * See https://www.spigotmc.org/threads/inventoryview-changed-to-interface-backwards-compatibility.651754/
+     * @throws InvocationTargetException 
+     * @throws IllegalAccessException 
      */
     @SneakyThrows
-    public Inventory getTopInventory(InventoryEvent event) {
+    public static Inventory getTopInventory(InventoryEvent event) throws IllegalAccessException, InvocationTargetException {
         if (Slimefun.getMinecraftVersion().isAtLeast(MinecraftVersion.MINECRAFT_1_21)) {
             return event.getView().getTopInventory();
         } else {
@@ -71,7 +74,7 @@ public class VersionedEvent {
     }
 
     @SneakyThrows
-    public Inventory getClickedInventory(InventoryClickEvent event) {
+    public static Inventory getClickedInventory(InventoryClickEvent event) throws IllegalAccessException, InvocationTargetException {
         if (Slimefun.getMinecraftVersion().isAtLeast(MinecraftVersion.MINECRAFT_1_21)) {
             return event.getClickedInventory();
         } else {

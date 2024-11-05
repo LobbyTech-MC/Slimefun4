@@ -213,4 +213,9 @@ public class BlockStorageMigrator implements IMigrator {
             }
         }
     }
+
+	public static BlockStorageMigrator getInstance() {
+		// TODO Auto-generated method stub
+		return instance;
+	}
 }

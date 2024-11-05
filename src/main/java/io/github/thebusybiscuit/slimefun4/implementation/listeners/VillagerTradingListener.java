@@ -5,6 +5,9 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.implementation.items.VanillaItem;
 import io.github.thebusybiscuit.slimefun4.implementation.items.misc.SyntheticEmerald;
+
+import java.lang.reflect.InvocationTargetException;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import org.bukkit.entity.Player;
@@ -30,7 +33,7 @@ public class VillagerTradingListener implements Listener {
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onPreTrade(InventoryClickEvent e) {
+    public void onPreTrade(InventoryClickEvent e) throws IllegalAccessException, InvocationTargetException {
         Inventory clickedInventory = VersionedEvent.getClickedInventory(e);
         Inventory topInventory = VersionedEvent.getTopInventory(e);
 
