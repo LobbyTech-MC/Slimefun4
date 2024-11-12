@@ -1,8 +1,5 @@
 package me.mrCookieSlime.CSCoreLibPlugin.general.Inventory;
 
-import city.norain.slimefun4.holder.SlimefunInventoryHolder;
-import io.github.bakedlibs.dough.items.CustomItemStack;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,13 +7,18 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArraySet;
+
 import javax.annotation.Nonnull;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+import city.norain.slimefun4.holder.SlimefunInventoryHolder;
+import io.github.bakedlibs.dough.items.CustomItemStack;
 
 /**
  * An old remnant of CS-CoreLib.
@@ -287,7 +289,7 @@ public class ChestMenu extends SlimefunInventoryHolder {
      */
     public void replaceExistingItem(int slot, ItemStack item) {
         setup();
-        this.inventory.setItem(slot, item);
+        this.inventory.setItem(slot, new CustomItemStack(item));
     }
 
     /**
