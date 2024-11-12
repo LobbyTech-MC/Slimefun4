@@ -1,6 +1,7 @@
 package me.mrCookieSlime.CSCoreLibPlugin.general.Inventory;
 
 import city.norain.slimefun4.holder.SlimefunInventoryHolder;
+import io.github.bakedlibs.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -131,6 +132,10 @@ public class ChestMenu extends SlimefunInventoryHolder {
         // do shallow copy due to Paper ItemStack system change
         // See also: https://github.com/PaperMC/Paper/pull/10852
         ItemStack actual = item;
+        if (item != null) {
+    		actual = new CustomItemStack(item, item.getAmount());
+    	}
+        /*
         if (item instanceof SlimefunItemStack) {
             ItemStack clone = new ItemStack(item.getType(), item.getAmount());
 
@@ -140,6 +145,7 @@ public class ChestMenu extends SlimefunInventoryHolder {
 
             actual = clone;
         }
+        */
 
         setSize((int) (Math.max(getSize(), Math.ceil((slot + 1) / 9d) * 9)));
 
