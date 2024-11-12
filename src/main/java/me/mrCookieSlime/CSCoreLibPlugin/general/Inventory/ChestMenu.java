@@ -133,7 +133,7 @@ public class ChestMenu extends SlimefunInventoryHolder {
         // See also: https://github.com/PaperMC/Paper/pull/10852
         ItemStack actual = item;
         if (item != null) {
-    		actual = new CustomItemStack(item, item.getAmount());
+    		actual = new CustomItemStack(item);
     	}
         /*
         if (item instanceof SlimefunItemStack) {
