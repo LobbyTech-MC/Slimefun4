@@ -289,7 +289,12 @@ public class ChestMenu extends SlimefunInventoryHolder {
      */
     public void replaceExistingItem(int slot, ItemStack item) {
         setup();
-        this.inventory.setItem(slot, new CustomItemStack(item));
+        if (item != null) {
+        	this.inventory.setItem(slot, new CustomItemStack(item));
+        } else {
+        	this.inventory.setItem(slot, item);
+        }
+        
     }
 
     /**
