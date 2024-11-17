@@ -23,6 +23,7 @@ softdepend:
 
 # We hook into these plugins too, but they depend on Slimefun.
 loadBefore:
+  - PlayerPoints
   - ChestTerminal
   - SlimeGlue
 
