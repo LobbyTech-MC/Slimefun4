@@ -1,10 +1,9 @@
 package io.github.thebusybiscuit.slimefun4.api.events;
 
-import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
-import io.github.bakedlibs.dough.data.TriStateOptional;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import java.util.Optional;
+
 import javax.annotation.Nonnull;
+
 import org.apache.commons.lang.Validate;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -16,6 +15,11 @@ import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
+
+import io.github.bakedlibs.dough.data.TriStateOptional;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 
 /**
  * The {@link PlayerRightClickEvent} is our custom version of the {@link PlayerInteractEvent}.

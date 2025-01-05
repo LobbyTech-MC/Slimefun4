@@ -1,11 +1,13 @@
 package io.github.thebusybiscuit.slimefun4.implementation.settings;
 
+import javax.annotation.Nonnull;
+
+import org.bukkit.Material;
+
 import io.github.thebusybiscuit.slimefun4.api.events.ClimbingPickLaunchEvent;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemSetting;
 import io.github.thebusybiscuit.slimefun4.api.items.settings.DoubleRangeSetting;
 import io.github.thebusybiscuit.slimefun4.implementation.items.tools.ClimbingPick;
-import javax.annotation.Nonnull;
-import org.bukkit.Material;
 
 /**
  * This is an {@link ItemSetting} that manages the efficiency of climbing

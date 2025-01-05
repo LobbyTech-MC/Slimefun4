@@ -23,11 +23,6 @@ import static com.xzavier0722.mc.plugin.slimefun4.storage.adapter.sqlcommon.SqlC
 import static com.xzavier0722.mc.plugin.slimefun4.storage.adapter.sqlcommon.SqlConstants.TABLE_NAME_PLAYER_PROFILE;
 import static com.xzavier0722.mc.plugin.slimefun4.storage.adapter.sqlcommon.SqlConstants.TABLE_NAME_PLAYER_RESEARCH;
 
-import com.xzavier0722.mc.plugin.slimefun4.storage.common.DataScope;
-import com.xzavier0722.mc.plugin.slimefun4.storage.common.FieldKey;
-import com.xzavier0722.mc.plugin.slimefun4.storage.common.FieldMapper;
-import com.xzavier0722.mc.plugin.slimefun4.storage.common.RecordSet;
-import io.github.bakedlibs.dough.collections.Pair;
 import java.sql.Connection;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -37,6 +32,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+
+import com.xzavier0722.mc.plugin.slimefun4.storage.common.DataScope;
+import com.xzavier0722.mc.plugin.slimefun4.storage.common.FieldKey;
+import com.xzavier0722.mc.plugin.slimefun4.storage.common.FieldMapper;
+import com.xzavier0722.mc.plugin.slimefun4.storage.common.RecordSet;
+
+import io.github.bakedlibs.dough.collections.Pair;
 
 public class SqlUtils {
 

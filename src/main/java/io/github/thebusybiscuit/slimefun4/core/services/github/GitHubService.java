@@ -1,8 +1,5 @@
 package io.github.thebusybiscuit.slimefun4.core.services.github;
 
-import io.github.bakedlibs.dough.config.Config;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-import io.github.thebusybiscuit.slimefun4.utils.HeadTexture;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -13,9 +10,15 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
 import org.apache.commons.lang.Validate;
+
+import io.github.bakedlibs.dough.config.Config;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import io.github.thebusybiscuit.slimefun4.utils.HeadTexture;
 
 /**
  * This Service is responsible for grabbing every {@link Contributor} to this project

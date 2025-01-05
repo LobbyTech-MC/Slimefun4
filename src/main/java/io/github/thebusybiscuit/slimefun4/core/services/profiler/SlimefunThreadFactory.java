@@ -1,6 +1,7 @@
 package io.github.thebusybiscuit.slimefun4.core.services.profiler;
 
 import java.util.concurrent.ThreadFactory;
+
 import javax.annotation.Nonnull;
 
 /**

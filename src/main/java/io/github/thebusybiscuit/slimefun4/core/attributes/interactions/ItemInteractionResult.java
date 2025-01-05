@@ -1,11 +1,14 @@
 package io.github.thebusybiscuit.slimefun4.core.attributes.interactions;
 
-import io.github.thebusybiscuit.slimefun4.core.attributes.ExternallyInteractable;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.annotation.Nonnull;
+
 import org.bukkit.inventory.ItemStack;
+
+import io.github.thebusybiscuit.slimefun4.core.attributes.ExternallyInteractable;
 
 /**
  * This class represents the result of an interaction on an {@link ExternallyInteractable} item.

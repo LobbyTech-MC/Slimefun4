@@ -1,8 +1,10 @@
 package io.github.thebusybiscuit.slimefun4.api.exceptions;
 
-import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
 import javax.annotation.ParametersAreNonnullByDefault;
+
 import org.bukkit.NamespacedKey;
+
+import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
 
 /**
  * An {@link TagMisconfigurationException} is thrown whenever a {@link SlimefunTag}

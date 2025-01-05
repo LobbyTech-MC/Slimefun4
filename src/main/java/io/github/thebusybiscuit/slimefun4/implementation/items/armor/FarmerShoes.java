@@ -1,13 +1,15 @@
 package io.github.thebusybiscuit.slimefun4.implementation.items.armor;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
+import org.bukkit.block.data.type.Farmland;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
-import javax.annotation.ParametersAreNonnullByDefault;
-import org.bukkit.block.data.type.Farmland;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 /**
  * The {@link FarmerShoes} are just a simple pair of boots which allows a {@link Player} to walk

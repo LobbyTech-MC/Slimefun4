@@ -1,10 +1,8 @@
 package io.github.thebusybiscuit.slimefun4.api.events;
 
-import io.github.thebusybiscuit.slimefun4.api.geo.GEOResource;
-import io.github.thebusybiscuit.slimefun4.api.geo.ResourceManager;
-import io.github.thebusybiscuit.slimefun4.implementation.items.geo.GEOScanner;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
+
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -12,6 +10,10 @@ import org.bukkit.World.Environment;
 import org.bukkit.block.Biome;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
+
+import io.github.thebusybiscuit.slimefun4.api.geo.GEOResource;
+import io.github.thebusybiscuit.slimefun4.api.geo.ResourceManager;
+import io.github.thebusybiscuit.slimefun4.implementation.items.geo.GEOScanner;
 
 /**
  * This {@link Event} is fired whenever a {@link GEOResource} is being freshly generated.

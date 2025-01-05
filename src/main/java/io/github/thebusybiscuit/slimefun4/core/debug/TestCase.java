@@ -1,6 +1,7 @@
 package io.github.thebusybiscuit.slimefun4.core.debug;
 
 import java.util.Locale;
+
 import javax.annotation.Nonnull;
 
 /**

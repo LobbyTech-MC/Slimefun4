@@ -1,9 +1,10 @@
 package io.github.thebusybiscuit.slimefun4.core.handlers;
 
-import io.github.thebusybiscuit.slimefun4.api.items.ItemHandler;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import org.bukkit.event.Event;
 import org.bukkit.event.Listener;
+
+import io.github.thebusybiscuit.slimefun4.api.items.ItemHandler;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 
 /**
  * A {@link GlobalItemHandler} is a special type of {@link ItemHandler}

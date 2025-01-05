@@ -1,13 +1,15 @@
 package com.xzavier0722.mc.plugin.slimefun4.storage.common;
 
-import io.github.bakedlibs.dough.collections.Pair;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
+
+import io.github.bakedlibs.dough.collections.Pair;
 
 public class RecordKey extends ScopeKey {
     private final Set<FieldKey> fields;

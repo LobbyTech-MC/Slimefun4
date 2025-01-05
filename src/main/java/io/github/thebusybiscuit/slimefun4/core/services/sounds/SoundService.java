@@ -1,13 +1,16 @@
 package io.github.thebusybiscuit.slimefun4.core.services.sounds;
 
-import com.google.common.base.Preconditions;
-import io.github.bakedlibs.dough.config.Config;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.logging.Level;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
+import com.google.common.base.Preconditions;
+
+import io.github.bakedlibs.dough.config.Config;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 
 /**
  * The {@link SoundService} is responsible for our sound management.

@@ -1,7 +1,8 @@
 package me.mrCookieSlime.Slimefun.api;
 
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import org.bukkit.entity.Player;
+
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 
 /**
  * Provides a few static convenience methods.

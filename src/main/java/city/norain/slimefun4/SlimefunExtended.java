@@ -1,12 +1,14 @@
 package city.norain.slimefun4;
 
+import java.util.logging.Level;
+
+import javax.annotation.Nonnull;
+
 import city.norain.slimefun4.compatibillty.VersionedEvent;
 import city.norain.slimefun4.listener.SlimefunMigrateListener;
 import io.github.bakedlibs.dough.versions.MinecraftVersion;
 import io.github.bakedlibs.dough.versions.UnknownServerVersionException;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-import java.util.logging.Level;
-import javax.annotation.Nonnull;
 import lombok.Getter;
 
 public final class SlimefunExtended {

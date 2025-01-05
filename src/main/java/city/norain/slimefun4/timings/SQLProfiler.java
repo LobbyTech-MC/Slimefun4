@@ -1,7 +1,5 @@
 package city.norain.slimefun4.timings;
 
-import city.norain.slimefun4.timings.entry.TimingEntry;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -18,9 +16,14 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
+
 import javax.annotation.Nonnull;
-import lombok.Getter;
+
 import org.bukkit.command.CommandSender;
+
+import city.norain.slimefun4.timings.entry.TimingEntry;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import lombok.Getter;
 
 public class SQLProfiler {
     private final ThreadFactory threadFactory = r -> new Thread(r, "Slimefun SQL Profiler");

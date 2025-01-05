@@ -1,14 +1,17 @@
 package io.github.thebusybiscuit.slimefun4.api.player;
 
-import io.github.bakedlibs.dough.common.CommonPatterns;
-import io.github.bakedlibs.dough.data.persistent.PersistentDataAPI;
 import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.concurrent.TimeUnit;
+
 import javax.annotation.Nonnull;
+
 import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
+
+import io.github.bakedlibs.dough.common.CommonPatterns;
+import io.github.bakedlibs.dough.data.persistent.PersistentDataAPI;
 
 /**
  * A very simple API that is meant for adding/getting/clearing custom status effects

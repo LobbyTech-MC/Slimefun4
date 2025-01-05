@@ -1,11 +1,14 @@
 package io.github.thebusybiscuit.slimefun4.core.attributes;
 
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import java.util.Collection;
+
 import javax.annotation.Nonnull;
+
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 
 /**
  * <strong>DO NOT IMPLEMENT THIS INTERFACE</strong>

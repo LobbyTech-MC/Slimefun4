@@ -1,12 +1,14 @@
 package io.github.thebusybiscuit.slimefun4.core.commands.subcommands;
 
-import io.github.thebusybiscuit.slimefun4.core.commands.SlimefunCommand;
-import io.github.thebusybiscuit.slimefun4.core.commands.SubCommand;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+
 import javax.annotation.Nonnull;
+
+import io.github.thebusybiscuit.slimefun4.core.commands.SlimefunCommand;
+import io.github.thebusybiscuit.slimefun4.core.commands.SubCommand;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 
 /**
  * This class holds the implementations of every {@link SubCommand}.

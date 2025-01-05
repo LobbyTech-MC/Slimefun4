@@ -1,8 +1,10 @@
 package io.github.thebusybiscuit.slimefun4.api.exceptions;
 
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import javax.annotation.ParametersAreNonnullByDefault;
+
 import org.bukkit.plugin.Plugin;
+
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 
 /**
  * An {@link UnregisteredItemException} is thrown whenever a {@link Plugin} tried to

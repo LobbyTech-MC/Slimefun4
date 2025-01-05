@@ -1,15 +1,17 @@
 package io.github.thebusybiscuit.slimefun4.api.events;
 
-import io.github.thebusybiscuit.slimefun4.api.gps.GPSNetwork;
-import io.github.thebusybiscuit.slimefun4.api.gps.TeleportationManager;
-import io.github.thebusybiscuit.slimefun4.api.gps.Waypoint;
 import javax.annotation.Nonnull;
+
 import org.apache.commons.lang.Validate;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
+
+import io.github.thebusybiscuit.slimefun4.api.gps.GPSNetwork;
+import io.github.thebusybiscuit.slimefun4.api.gps.TeleportationManager;
+import io.github.thebusybiscuit.slimefun4.api.gps.Waypoint;
 
 /**
  * A {@link WaypointCreateEvent} is called when a {@link Player} creates a new waypoint.

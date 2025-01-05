@@ -1,6 +1,7 @@
 package io.github.thebusybiscuit.slimefun4.implementation.items.elevator;
 
 import javax.annotation.Nonnull;
+
 import org.apache.commons.lang.Validate;
 import org.bukkit.Location;
 import org.bukkit.block.Block;

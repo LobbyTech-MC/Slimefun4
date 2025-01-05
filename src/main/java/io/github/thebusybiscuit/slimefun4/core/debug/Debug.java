@@ -1,11 +1,13 @@
 package io.github.thebusybiscuit.slimefun4.core.debug;
 
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 
 /**
  * This class is responsible for debug logging.

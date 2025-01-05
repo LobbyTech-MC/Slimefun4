@@ -1,10 +1,12 @@
 package io.github.thebusybiscuit.slimefun4.implementation.items.cargo;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
+import org.bukkit.inventory.ItemStack;
+
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
-import javax.annotation.ParametersAreNonnullByDefault;
-import org.bukkit.inventory.ItemStack;
 
 /**
  * The {@link AdvancedCargoOutputNode} is the advanced version of the

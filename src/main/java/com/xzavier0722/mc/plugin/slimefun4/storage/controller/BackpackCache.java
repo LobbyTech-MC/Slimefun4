@@ -1,9 +1,10 @@
 package com.xzavier0722.mc.plugin.slimefun4.storage.controller;
 
-import io.github.thebusybiscuit.slimefun4.api.player.PlayerBackpack;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import io.github.thebusybiscuit.slimefun4.api.player.PlayerBackpack;
 
 class BackpackCache {
     private final Map<String, Map<Integer, PlayerBackpack>> numCache;

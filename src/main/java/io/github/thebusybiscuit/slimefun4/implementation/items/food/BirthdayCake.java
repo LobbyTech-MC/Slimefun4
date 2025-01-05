@@ -1,12 +1,14 @@
 package io.github.thebusybiscuit.slimefun4.implementation.items.food;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
+import org.bukkit.inventory.ItemStack;
+
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;
-import javax.annotation.ParametersAreNonnullByDefault;
-import org.bukkit.inventory.ItemStack;
 
 /**
  * The {@link BirthdayCake} is a seasonal item which only appears in october.

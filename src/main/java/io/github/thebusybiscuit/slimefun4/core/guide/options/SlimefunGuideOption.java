@@ -1,12 +1,15 @@
 package io.github.thebusybiscuit.slimefun4.core.guide.options;
 
-import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
-import io.github.thebusybiscuit.slimefun4.core.guide.SlimefunGuide;
 import java.util.Optional;
+
 import javax.annotation.Nonnull;
+
 import org.bukkit.Keyed;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
+import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
+import io.github.thebusybiscuit.slimefun4.core.guide.SlimefunGuide;
 
 /**
  * This interface represents an option in the {@link SlimefunGuide}.

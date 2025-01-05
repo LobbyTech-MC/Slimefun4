@@ -1,11 +1,14 @@
 package com.xzavier0722.mc.plugin.slimefun4.storage.common;
 
-import com.xzavier0722.mc.plugin.slimefun4.storage.util.DataUtils;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.annotation.ParametersAreNonnullByDefault;
+
 import org.bukkit.inventory.ItemStack;
+
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.DataUtils;
 
 public class RecordSet {
     private final Map<FieldKey, String> data;

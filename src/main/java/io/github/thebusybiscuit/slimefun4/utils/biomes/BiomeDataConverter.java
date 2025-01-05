@@ -1,7 +1,8 @@
 package io.github.thebusybiscuit.slimefun4.utils.biomes;
 
-import com.google.gson.JsonElement;
 import javax.annotation.Nonnull;
+
+import com.google.gson.JsonElement;
 
 /**
  * A simple functional interface for converting a {@link JsonElement} into the desired data type

@@ -1,10 +1,12 @@
 package net.guizhanss.slimefun4.utils;
 
-import io.github.bakedlibs.dough.common.ChatColors;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
+
 import org.bukkit.command.CommandSender;
+
+import io.github.bakedlibs.dough.common.ChatColors;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 
 /**
  * 聊天相关方法

@@ -1,7 +1,8 @@
 package io.github.thebusybiscuit.slimefun4.api.exceptions;
 
-import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import javax.annotation.ParametersAreNonnullByDefault;
+
+import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 
 /**
  * A {@link PrematureCodeException} is thrown when a {@link SlimefunAddon} tried

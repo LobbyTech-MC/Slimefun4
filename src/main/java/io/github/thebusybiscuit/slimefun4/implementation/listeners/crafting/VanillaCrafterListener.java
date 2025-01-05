@@ -1,14 +1,9 @@
 package io.github.thebusybiscuit.slimefun4.implementation.listeners.crafting;
 
-import city.norain.slimefun4.SlimefunExtended;
-import city.norain.slimefun4.compatibillty.VersionedEvent;
-import io.github.bakedlibs.dough.versions.MinecraftVersion;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-
 import java.lang.reflect.InvocationTargetException;
 
 import javax.annotation.Nonnull;
+
 import org.bukkit.block.Crafter;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -18,6 +13,12 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
+
+import city.norain.slimefun4.SlimefunExtended;
+import city.norain.slimefun4.compatibillty.VersionedEvent;
+import io.github.bakedlibs.dough.versions.MinecraftVersion;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 
 public class VanillaCrafterListener implements SlimefunCraftingListener {
     public VanillaCrafterListener(@Nonnull Slimefun plugin) {

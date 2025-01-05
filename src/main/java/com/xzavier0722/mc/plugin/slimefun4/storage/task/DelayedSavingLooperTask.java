@@ -1,9 +1,10 @@
 package com.xzavier0722.mc.plugin.slimefun4.storage.task;
 
-import com.xzavier0722.mc.plugin.slimefun4.storage.common.ScopeKey;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+
+import com.xzavier0722.mc.plugin.slimefun4.storage.common.ScopeKey;
 
 public class DelayedSavingLooperTask implements Runnable {
     private final int forceSavePeriod;

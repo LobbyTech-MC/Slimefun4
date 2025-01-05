@@ -1,6 +1,7 @@
 package io.github.thebusybiscuit.slimefun4.core.services.localization;
 
 import javax.annotation.Nonnull;
+
 import org.apache.commons.lang.Validate;
 
 /**

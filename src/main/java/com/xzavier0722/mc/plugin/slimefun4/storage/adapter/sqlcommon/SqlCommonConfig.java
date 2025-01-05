@@ -1,8 +1,9 @@
 package com.xzavier0722.mc.plugin.slimefun4.storage.adapter.sqlcommon;
 
-import city.norain.slimefun4.SlimefunExtended;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+
+import city.norain.slimefun4.SlimefunExtended;
 
 public abstract class SqlCommonConfig implements ISqlCommonConfig {
     protected final String host;

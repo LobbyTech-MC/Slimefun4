@@ -1,11 +1,13 @@
 package com.xzavier0722.mc.plugin.slimefun4.autocrafter;
 
-import io.github.thebusybiscuit.slimefun4.implementation.items.autocrafters.AbstractAutoCrafter;
 import java.util.Collection;
 import java.util.Map;
 import java.util.function.Predicate;
+
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
+
+import io.github.thebusybiscuit.slimefun4.implementation.items.autocrafters.AbstractAutoCrafter;
 
 /**
  *
