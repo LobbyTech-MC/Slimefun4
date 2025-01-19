@@ -1,10 +1,23 @@
 package io.github.thebusybiscuit.slimefun4.implementation.listeners;
 
+import com.xzavier0722.mc.plugin.slimefun4.storage.callback.IAsyncReadCallback;
+import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunBlockData;
+import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunUniversalData;
+import com.xzavier0722.mc.plugin.slimefun4.storage.controller.attributes.UniversalBlock;
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
+import io.github.thebusybiscuit.slimefun4.api.events.PlayerRightClickEvent;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.core.handlers.BlockUseHandler;
+import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
+import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import java.util.Optional;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
-
+import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
+import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -38,11 +51,9 @@ import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
  *
  * @author TheBusyBiscuit
  * @author Liruxo
- *
  * @see PlayerRightClickEvent
  * @see ItemUseHandler
  * @see BlockUseHandler
- *
  */
 public class SlimefunItemInteractListener implements Listener {
 
@@ -60,10 +71,7 @@ public class SlimefunItemInteractListener implements Listener {
 
             // Fixes #4087 - Prevents players from interacting with a block that is about to be deleted
             // We especially don't want to open inventories as that can cause duplication
-            if (e.getClickedBlock() != null
-                    && StorageCacheUtils.hasBlock(e.getClickedBlock().getLocation())
-                    && StorageCacheUtils.getBlock(e.getClickedBlock().getLocation())
-                            .isPendingRemove()) {
+            if (e.getClickedBlock() != null && StorageCacheUtils.isBlockPendingRemove(e.getClickedBlock())) {
                 e.setCancelled(true);
                 return;
             }
@@ -150,31 +158,62 @@ public class SlimefunItemInteractListener implements Listener {
             if (!p.isSneaking() || event.getItem().getType() == Material.AIR) {
                 event.getInteractEvent().setCancelled(true);
 
-                var blockData = StorageCacheUtils.getBlock(clickedBlock.getLocation());
-                if (blockData == null) {
-                    return;
-                }
+                if (item instanceof UniversalBlock) {
+                    var uniData = StorageCacheUtils.getUniversalBlock(clickedBlock);
 
-                if (blockData.isDataLoaded()) {
-                    openMenu(blockData.getBlockMenu(), clickedBlock, p);
-                } else {
-                    Slimefun.getDatabaseManager()
-                            .getBlockDataController()
-                            .loadBlockDataAsync(blockData, new IAsyncReadCallback<>() {
-                                @Override
-                                public boolean runOnMainThread() {
-                                    return true;
-                                }
+                    if (uniData == null) {
+                        return;
+                    }
 
-                                @Override
-                                public void onResult(SlimefunBlockData result) {
-                                    if (!p.isOnline()) {
-                                        return;
+                    if (uniData.isDataLoaded()) {
+                        openMenu(uniData.getMenu(), clickedBlock, p);
+                    } else {
+                        Slimefun.getDatabaseManager()
+                                .getBlockDataController()
+                                .loadUniversalDataAsync(uniData, new IAsyncReadCallback<>() {
+                                    @Override
+                                    public boolean runOnMainThread() {
+                                        return true;
                                     }
 
-                                    openMenu(result.getBlockMenu(), clickedBlock, p);
-                                }
-                            });
+                                    @Override
+                                    public void onResult(SlimefunUniversalData result) {
+                                        if (!p.isOnline()) {
+                                            return;
+                                        }
+
+                                        openMenu(result.getMenu(), clickedBlock, p);
+                                    }
+                                });
+                    }
+                } else {
+                    var blockData = StorageCacheUtils.getBlock(clickedBlock.getLocation());
+
+                    if (blockData == null) {
+                        return;
+                    }
+
+                    if (blockData.isDataLoaded()) {
+                        openMenu(blockData.getBlockMenu(), clickedBlock, p);
+                    } else {
+                        Slimefun.getDatabaseManager()
+                                .getBlockDataController()
+                                .loadBlockDataAsync(blockData, new IAsyncReadCallback<>() {
+                                    @Override
+                                    public boolean runOnMainThread() {
+                                        return true;
+                                    }
+
+                                    @Override
+                                    public void onResult(SlimefunBlockData result) {
+                                        if (!p.isOnline()) {
+                                            return;
+                                        }
+
+                                        openMenu(result.getBlockMenu(), clickedBlock, p);
+                                    }
+                                });
+                    }
                 }
             }
         } catch (Exception | LinkageError x) {
@@ -182,7 +221,7 @@ public class SlimefunItemInteractListener implements Listener {
         }
     }
 
-    private void openMenu(BlockMenu menu, Block b, Player p) {
+    private void openMenu(DirtyChestMenu menu, Block b, Player p) {
         if (menu != null) {
             if (menu.canOpen(b, p)) {
                 menu.open(p);

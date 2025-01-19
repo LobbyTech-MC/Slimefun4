@@ -1,15 +1,6 @@
 package io.github.thebusybiscuit.slimefun4.implementation.items.medical;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import org.bukkit.Effect;
-import org.bukkit.GameMode;
-import org.bukkit.Material;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
-
+import city.norain.slimefun4.compatibillty.VersionedAttribute;
 import io.github.bakedlibs.dough.items.ItemUtils;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
@@ -17,6 +8,13 @@ import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
 import io.github.thebusybiscuit.slimefun4.utils.compatibility.VersionedPotionEffectType;
+import javax.annotation.ParametersAreNonnullByDefault;
+import org.bukkit.Effect;
+import org.bukkit.GameMode;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
 
 /**
  * A {@link Bandage} or Rag is a medical supply which heals the {@link Player} and extinguishes
@@ -50,7 +48,7 @@ public class Bandage extends SimpleSlimefunItem<ItemUseHandler> {
             // Player is neither burning nor injured
             if (p.getFireTicks() <= 0
                     && p.getHealth()
-                            >= p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) {
+                            >= p.getAttribute(VersionedAttribute.getMaxHealth()).getValue()) {
                 return;
             }
 

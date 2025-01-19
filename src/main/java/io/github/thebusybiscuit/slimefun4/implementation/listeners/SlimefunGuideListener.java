@@ -4,6 +4,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event.Result;
 import org.bukkit.event.EventHandler;
@@ -88,7 +89,15 @@ public class SlimefunGuideListener implements Listener {
         if (SlimefunUtils.isItemSimilar(item, SlimefunGuide.getItem(layout), true, false)) {
 
             if (!Slimefun.getWorldSettingsService().isWorldEnabled(p.getWorld())) {
-                Slimefun.getLocalization().sendMessage(p, "messages.disabled-item", true);
+                Slimefun.getLocalization().sendMessage(p, "messages.disabled-item", true, msg -> {
+                    if (item.hasItemMeta()) {
+                        return msg.replace(
+                                "%item_name%",
+                                ChatColor.stripColor(item.getItemMeta().getDisplayName()));
+                    } else {
+                        return msg;
+                    }
+                });
                 return Result.DENY;
             }
 

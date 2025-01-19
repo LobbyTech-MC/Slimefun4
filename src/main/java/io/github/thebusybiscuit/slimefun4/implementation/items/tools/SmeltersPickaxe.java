@@ -20,6 +20,15 @@ import io.github.thebusybiscuit.slimefun4.core.handlers.ToolUseHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
 import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+import org.bukkit.Effect;
+import org.bukkit.block.Block;
+import org.bukkit.inventory.ItemStack;
 
 /**
  * The {@link SmeltersPickaxe} automatically smelts any ore you mine.
@@ -40,16 +49,21 @@ public class SmeltersPickaxe extends SimpleSlimefunItem<ToolUseHandler> implemen
             Block b = e.getBlock();
 
             if (SlimefunTag.SMELTERS_PICKAXE_BLOCKS.isTagged(b.getType())
-                    && !StorageCacheUtils.hasBlock(b.getLocation())) {
+                    && !StorageCacheUtils.hasSlimefunBlock(b.getLocation())) {
                 Collection<ItemStack> blockDrops = b.getDrops(tool);
-
+                List<ItemStack> itemDrops = new ArrayList<>();
                 for (ItemStack drop : blockDrops) {
                     if (drop != null && !drop.getType().isAir()) {
                         smelt(b, drop, fortune);
-                        drops.add(drop);
+                        itemDrops.add(drop);
                     }
                 }
-
+                // stop blockListener from dropping origin drops
+                e.setDropItems(false);
+                // drop smelted manually
+                for (ItemStack itemDrop : itemDrops) {
+                    b.getWorld().dropItemNaturally(b.getLocation(), itemDrop);
+                }
                 damageItem(e.getPlayer(), tool);
             }
         };

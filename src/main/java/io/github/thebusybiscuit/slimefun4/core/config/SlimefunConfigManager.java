@@ -60,6 +60,9 @@ public class SlimefunConfigManager {
     @Getter
     private boolean bypassEnvironmentCheck;
 
+    @Getter
+    private boolean bypassItemLengthCheck;
+
     public SlimefunConfigManager(@Nonnull Slimefun plugin) {
         Validate.notNull(plugin, "The Plugin instance cannot be null");
 
@@ -111,6 +114,7 @@ public class SlimefunConfigManager {
             autoUpdate = pluginConfig.getBoolean("options.auto-update");
             researchCurrencyCostConvertRate = pluginConfig.getDouble("researches.currency-cost-convert-rate");
             bypassEnvironmentCheck = pluginConfig.getBoolean("options.bypass-environment-check");
+            bypassItemLengthCheck = pluginConfig.getBoolean("options.bypass-item-length-check");
 
             // researchesConfig.setDefaultValue("researches.currency-cost-convert-rate", researchCurrencyCostConvertRate);
         } catch (Exception x) {

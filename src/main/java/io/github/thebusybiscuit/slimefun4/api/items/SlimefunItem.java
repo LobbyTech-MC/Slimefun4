@@ -51,6 +51,15 @@ import io.github.thebusybiscuit.slimefun4.implementation.items.VanillaItem;
 import io.github.thebusybiscuit.slimefun4.implementation.items.electric.machines.enchanting.AutoDisenchanter;
 import io.github.thebusybiscuit.slimefun4.implementation.items.electric.machines.enchanting.AutoEnchanter;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
+import org.apache.commons.lang.Validate;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.entity.Player;
+import org.bukkit.event.world.ChunkLoadEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.permissions.Permission;
 
 /**
  * A {@link SlimefunItem} is a custom item registered by a {@link SlimefunAddon}.
@@ -1159,14 +1168,24 @@ public class SlimefunItem implements Placeable {
         } else if (isDisabled()) {
             // The Item has been disabled in the config
             if (sendMessage) {
-                Slimefun.getLocalization().sendMessage(p, "messages.disabled-item", true);
+                Slimefun.getLocalization()
+                        .sendMessage(
+                                p,
+                                "messages.disabled-item",
+                                true,
+                                msg -> msg.replace("%item_name%", ChatColor.stripColor(getItemName())));
             }
 
             return false;
         } else if (!Slimefun.getWorldSettingsService().isEnabled(p.getWorld(), this)) {
             // The Item was disabled in the current World
             if (sendMessage) {
-                Slimefun.getLocalization().sendMessage(p, "messages.disabled-in-world", true);
+                Slimefun.getLocalization()
+                        .sendMessage(
+                                p,
+                                "messages.disabled-in-world",
+                                true,
+                                msg -> msg.replace("%item_name%", ChatColor.stripColor(getItemName())));
             }
 
             return false;
