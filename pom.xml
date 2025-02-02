@@ -28,7 +28,7 @@
         <maven.settings.file>${project.basedir}/.mvn/settings.xml</maven.settings.file>
 
         <!-- Paper properties -->
-        <paper.version>1.21</paper.version>
+        <paper.version>1.21.1</paper.version>
         <paper.javadocs>https://papermc.io/javadocs</paper.javadocs>
     </properties>
 
@@ -129,7 +129,7 @@
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
-                            <version>1.18.36</version>
+                            <version>1.18.34</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>

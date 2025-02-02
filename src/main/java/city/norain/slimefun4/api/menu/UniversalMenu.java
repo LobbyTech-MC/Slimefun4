@@ -6,6 +6,7 @@ import lombok.Getter;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 /**
@@ -66,7 +67,7 @@ public class UniversalMenu extends DirtyChestMenu {
 
             if (item != null) {
                 l.getWorld().dropItemNaturally(l, item);
-                replaceExistingItem(slot, null);
+                replaceExistingItem(slot, new ItemStack(Material.AIR));
             }
         }
     }

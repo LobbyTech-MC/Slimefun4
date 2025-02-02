@@ -9,6 +9,10 @@ import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import org.bukkit.Location;
 import org.bukkit.inventory.ItemStack;
 
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.LocationUtils;
+
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+
 @ToString
 public class SlimefunBlockData extends ASlimefunDataContainer {
     private final Location location;
