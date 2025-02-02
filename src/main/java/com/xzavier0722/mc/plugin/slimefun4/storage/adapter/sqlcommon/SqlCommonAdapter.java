@@ -3,7 +3,10 @@ package com.xzavier0722.mc.plugin.slimefun4.storage.adapter.sqlcommon;
 import static com.xzavier0722.mc.plugin.slimefun4.storage.adapter.sqlcommon.SqlConstants.FIELD_TABLE_VERSION;
 import static com.xzavier0722.mc.plugin.slimefun4.storage.adapter.sqlcommon.SqlConstants.TABLE_NAME_TABLE_INFORMATION;
 
-import city.norain.slimefun4.timings.entry.SQLEntry;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+
 import com.xzavier0722.mc.plugin.slimefun4.storage.adapter.IDataSourceAdapter;
 import com.xzavier0722.mc.plugin.slimefun4.storage.common.DataScope;
 import com.xzavier0722.mc.plugin.slimefun4.storage.common.FieldKey;
@@ -14,9 +17,6 @@ import com.zaxxer.hikari.HikariDataSource;
 
 import city.norain.slimefun4.timings.entry.SQLEntry;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.logging.Level;
 
 public abstract class SqlCommonAdapter<T extends ISqlCommonConfig> implements IDataSourceAdapter<T> {
     protected HikariDataSource ds;

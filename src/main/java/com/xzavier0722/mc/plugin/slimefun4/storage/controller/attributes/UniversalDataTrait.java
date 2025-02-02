@@ -1,8 +1,9 @@
 package com.xzavier0722.mc.plugin.slimefun4.storage.controller.attributes;
 
-import city.norain.slimefun4.api.menu.UniversalMenu;
 import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunUniversalBlockData;
 import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunUniversalData;
+
+import city.norain.slimefun4.api.menu.UniversalMenu;
 import lombok.Getter;
 
 /**

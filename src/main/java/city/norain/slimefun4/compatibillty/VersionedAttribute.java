@@ -1,8 +1,9 @@
 package city.norain.slimefun4.compatibillty;
 
+import org.bukkit.attribute.Attribute;
+
 import city.norain.slimefun4.SlimefunExtended;
 import lombok.experimental.UtilityClass;
-import org.bukkit.attribute.Attribute;
 
 @UtilityClass
 public class VersionedAttribute {

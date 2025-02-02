@@ -4,14 +4,15 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import javax.annotation.ParametersAreNullableByDefault;
-import lombok.ToString;
-import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
+
 import org.bukkit.Location;
 import org.bukkit.inventory.ItemStack;
 
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.LocationUtils;
 
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import lombok.ToString;
+import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 
 @ToString
 public class SlimefunBlockData extends ASlimefunDataContainer {

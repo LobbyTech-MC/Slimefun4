@@ -1,7 +1,8 @@
 package city.norain.slimefun4.utils;
 
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import org.bukkit.inventory.ItemStack;
+
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 
 public class StringUtil {
     public static String itemStackToString(ItemStack item) {

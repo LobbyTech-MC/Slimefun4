@@ -1,13 +1,16 @@
 package city.norain.slimefun4.api.menu;
 
 import java.util.UUID;
+
 import javax.annotation.Nonnull;
-import lombok.Getter;
-import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
-import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+
+import lombok.Getter;
+import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
+import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
 
 /**
  * This class represents a universal chest menu

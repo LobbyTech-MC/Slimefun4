@@ -1,10 +1,5 @@
 package com.xzavier0722.mc.plugin.slimefun4.storage.util;
 
-import city.norain.slimefun4.utils.StringUtil;
-import com.xzavier0722.mc.plugin.slimefun4.storage.controller.StorageType;
-import io.github.thebusybiscuit.slimefun4.core.debug.Debug;
-import io.github.thebusybiscuit.slimefun4.core.debug.TestCase;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -17,6 +12,9 @@ import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
+import com.xzavier0722.mc.plugin.slimefun4.storage.controller.StorageType;
+
+import city.norain.slimefun4.utils.StringUtil;
 import io.github.thebusybiscuit.slimefun4.core.debug.Debug;
 import io.github.thebusybiscuit.slimefun4.core.debug.TestCase;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
