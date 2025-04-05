@@ -1,12 +1,5 @@
 package com.xzavier0722.mc.plugin.slimefun4.storage.util;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -23,6 +16,13 @@ import city.norain.slimefun4.utils.TaskUtil;
 import io.github.bakedlibs.dough.blocks.BlockPosition;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.CopyOnWriteArraySet;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 
 /**
@@ -32,7 +32,7 @@ import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
  * {@link com.xzavier0722.mc.plugin.slimefun4.storage.controller.BlockDataController#getBlockData}
  */
 public class StorageCacheUtils {
-    private static final Set<ADataContainer> loadingData = new HashSet<>();
+    private static final Set<ADataContainer> loadingData = new CopyOnWriteArraySet<>();
 
     @ParametersAreNonnullByDefault
     public static boolean hasSlimefunBlock(Location l) {

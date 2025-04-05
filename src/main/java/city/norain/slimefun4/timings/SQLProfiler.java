@@ -1,5 +1,8 @@
 package city.norain.slimefun4.timings;
 
+import city.norain.slimefun4.SlimefunExtended;
+import city.norain.slimefun4.timings.entry.TimingEntry;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -62,6 +65,10 @@ public class SQLProfiler {
 
         long now = System.nanoTime();
         samplingEntries.put(timingEntry, now);
+
+        if (SlimefunExtended.isDatabaseDebugMode()) {
+            Slimefun.logger().log(Level.INFO, "执行 SQL: " + timingEntry.normalize());
+        }
     }
 
     public void finishEntry(TimingEntry timingEntry) {
