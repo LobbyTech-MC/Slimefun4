@@ -10,29 +10,12 @@ import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.implementation.items.misc.OrganicFertilizer;
 import io.github.thebusybiscuit.slimefun4.utils.compatibility.VersionedParticle;
 import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
-import java.util.Arrays;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 
 public abstract class CropGrowthAccelerator extends AbstractGrowthAccelerator {
-
-    // We wanna strip the Slimefun Item id here
-    private static final String[] organicFertilizers = new String[] {
-        "FERTILIZER",
-        "FERTILIZER_WHEAT",
-        "FERTILIZER_CARROT",
-        "FERTILIZER_POTATO",
-        "FERTILIZER_SEEDS",
-        "FERTILIZER_BEETROOT",
-        "FERTILIZER_MELON",
-        "FERTILIZER_APPLE",
-        "FERTILIZER_SWEET_BERRIES",
-        "FERTILIZER_KELP",
-        "FERTILIZER_COCOA",
-        "FERTILIZER_SEAGRASS",
-    };
-
     protected CropGrowthAccelerator(
             ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
@@ -83,7 +66,7 @@ public abstract class CropGrowthAccelerator extends AbstractGrowthAccelerator {
                     continue;
                 }
 
-                if (Arrays.stream(organicFertilizers).anyMatch(id -> id.equals(sfItem.getId()))) {
+                if (sfItem instanceof OrganicFertilizer) {
                     removeCharge(machine.getLocation(), getEnergyConsumption());
                     inv.consumeItem(slot);
 
