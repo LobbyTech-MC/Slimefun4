@@ -59,6 +59,7 @@ public class IntegrationsManager {
     private boolean isClearLagInstalled = false;
     private boolean isItemsAdderInstalled = false;
     private boolean isOrebfuscatorInstalled = false;
+    private boolean isResidenceInstalled = false;
 
     /**
      * This initializes the {@link IntegrationsManager}
@@ -129,6 +130,9 @@ public class IntegrationsManager {
 
         // ItemsAdder Integration (custom blocks)
         load("ItemsAdder", integration -> isItemsAdderInstalled = true);
+        
+     // Residence
+        load("Residence", integration -> isResidenceInstalled = true);
     }
 
     /**
@@ -325,5 +329,9 @@ public class IntegrationsManager {
 
     public boolean isOrebfuscatorInstalled() {
         return isOrebfuscatorInstalled;
+    }
+    
+    public boolean isResidenceInstalled() {
+        return isResidenceInstalled;
     }
 }
