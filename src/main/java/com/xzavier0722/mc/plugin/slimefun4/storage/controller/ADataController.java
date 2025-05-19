@@ -42,6 +42,9 @@ public abstract class ADataController {
         logger = Logger.getLogger("Slimefun-Data-Controller");
     }
 
+    /**
+     * 初始化 {@link ADataController}
+     */
     @OverridingMethodsMustInvokeSuper
     public void init(IDataSourceAdapter<?> dataAdapter, int maxReadThread, int maxWriteThread) {
         this.dataAdapter = dataAdapter;
@@ -52,6 +55,9 @@ public abstract class ADataController {
         callbackExecutor = Executors.newCachedThreadPool(threadFactory);
     }
 
+    /**
+     * 正常关闭 {@link ADataController}
+     */
     @OverridingMethodsMustInvokeSuper
     public void shutdown() {
         if (destroyed) {
