@@ -327,6 +327,7 @@ machines:
     destroyed: '&c你的工业矿机被拆除了.'
     already-running: '&c这个工业矿机正在运行!'
     full-chest: '&c你的工业矿机的箱子已经满了!'
+	chest_full: '&c你的工业矿机的箱子已经满了!'
     no-permission: '&4你没有权限操作这台工业矿机!'
     finished: '&e你的工业矿机采矿已完成! 总共开采了 %ores% 个矿石!'
   TABLE_SAW:
