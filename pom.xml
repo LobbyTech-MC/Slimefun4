@@ -109,7 +109,7 @@
         <defaultGoal>clean package</defaultGoal>
 
         <!-- The name of the final jar -->
-        <finalName>${project.name}-${project.version}</finalName>
+        <finalName>[sf]${project.name}-${project.version}</finalName>
 
         <plugins>
             <plugin>
