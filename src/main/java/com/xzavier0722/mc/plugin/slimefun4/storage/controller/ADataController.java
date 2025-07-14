@@ -1,16 +1,5 @@
 package com.xzavier0722.mc.plugin.slimefun4.storage.controller;
 
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.annotation.OverridingMethodsMustInvokeSuper;
-
 import city.norain.slimefun4.utils.TaskTimer;
 import com.xzavier0722.mc.plugin.slimefun4.storage.adapter.IDataSourceAdapter;
 import com.xzavier0722.mc.plugin.slimefun4.storage.callback.IAsyncReadCallback;
@@ -22,24 +11,48 @@ import com.xzavier0722.mc.plugin.slimefun4.storage.task.DatabaseThreadFactory;
 import com.xzavier0722.mc.plugin.slimefun4.storage.task.QueuedWriteTask;
 
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.OverridingMethodsMustInvokeSuper;
 
 public abstract class ADataController {
-    private final DatabaseThreadFactory threadFactory = new DatabaseThreadFactory();
     private final DataType dataType;
     private final Map<ScopeKey, QueuedWriteTask> scheduledWriteTasks;
     private final ScopedLock lock;
+
     private volatile IDataSourceAdapter<?> dataAdapter;
+    /**
+     * 数据库读取调度器
+     */
     private ExecutorService readExecutor;
+    /**
+     * 数据库写入调度器
+     */
     private ExecutorService writeExecutor;
+    /**
+     * 数据库回调调度器
+     */
     private ExecutorService callbackExecutor;
+    /**
+     * 标记当前控制器是否已被关闭
+     */
     private volatile boolean destroyed = false;
+
     protected final Logger logger;
 
     protected ADataController(DataType dataType) {
         this.dataType = dataType;
         scheduledWriteTasks = new ConcurrentHashMap<>();
         lock = new ScopedLock();
-        logger = Logger.getLogger("Slimefun-Data-Controller");
+        logger = Logger.getLogger("SF-" + dataType.name() + "-Controller");
     }
 
     /**
@@ -50,9 +63,15 @@ public abstract class ADataController {
         this.dataAdapter = dataAdapter;
         dataAdapter.initStorage(dataType);
         dataAdapter.patch();
-        readExecutor = Executors.newFixedThreadPool(maxReadThread, threadFactory);
-        writeExecutor = Executors.newFixedThreadPool(maxWriteThread, threadFactory);
-        callbackExecutor = Executors.newCachedThreadPool(threadFactory);
+        readExecutor = Executors.newFixedThreadPool(maxReadThread, new DatabaseThreadFactory("SF-DB-Read-Thread #"));
+        writeExecutor = Executors.newFixedThreadPool(maxWriteThread, new DatabaseThreadFactory("SF-DB-Write-Thread #"));
+        callbackExecutor = new ThreadPoolExecutor(
+                0,
+                128,
+                10,
+                TimeUnit.SECONDS,
+                new ArrayBlockingQueue<>(128),
+                new DatabaseThreadFactory("SF-DB-CB-Thread #"));
     }
 
     /**

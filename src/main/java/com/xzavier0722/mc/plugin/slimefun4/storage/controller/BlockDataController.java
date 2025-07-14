@@ -301,6 +301,10 @@ public class BlockDataController extends ADataController {
 
         Slimefun.getDatabaseManager().getBlockDataController().saveUniversalData(uniData);
 
+        if (Slimefun.getBlockDataService().isTileEntity(l.getBlock().getType())) {
+            Slimefun.getBlockDataService().updateUniversalDataUUID(l.getBlock(), uniData.getKey());
+        }
+
         return uniData;
     }
 
@@ -925,12 +929,9 @@ public class BlockDataController extends ADataController {
                     // 初始化 上次出现位置
                     var lStr = ubd.getData(UniversalDataTrait.BLOCK.getReservedKey());
 
-                    if (lStr == null || lStr.isBlank()) {
-                        uniData.setIsDataLoaded(false);
-                        throw new IllegalArgumentException(uniData.getKey() + " 缺少 location 数据");
+                    if (lStr != null && !lStr.isBlank()) {
+                        ubd.setLastPresent(LocationUtils.toLocation(lStr));
                     }
-
-                    ubd.setLastPresent(LocationUtils.toLocation(lStr));
 
                     var sfItem = SlimefunItem.getById(ubd.getSfId());
 
@@ -1097,7 +1098,7 @@ public class BlockDataController extends ADataController {
         var menu = universalData.getMenu();
         var universalID = universalData.getUUID();
 
-        var newInv = menu.getContents();
+        var newInv = universalData.getMenuContents();
         List<Pair<ItemStack, Integer>> lastSave;
         if (newInv == null) {
             lastSave = invSnapshots.remove(universalID.toString());

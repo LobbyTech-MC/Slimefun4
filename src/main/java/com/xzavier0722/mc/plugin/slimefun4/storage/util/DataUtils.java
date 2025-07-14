@@ -40,7 +40,7 @@ public class DataUtils {
             }
 
             return itemStr;
-        } catch (IOException e) {
+        } catch (Throwable e) {
             e.printStackTrace();
             return "";
         }
