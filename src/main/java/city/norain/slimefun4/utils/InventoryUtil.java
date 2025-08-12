@@ -1,14 +1,16 @@
 package city.norain.slimefun4.utils;
 
-import io.github.thebusybiscuit.slimefun4.core.debug.Debug;
-import io.github.thebusybiscuit.slimefun4.core.debug.TestCase;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import java.util.LinkedList;
-import lombok.experimental.UtilityClass;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+
+import io.github.thebusybiscuit.slimefun4.core.debug.Debug;
+import io.github.thebusybiscuit.slimefun4.core.debug.TestCase;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class InventoryUtil {

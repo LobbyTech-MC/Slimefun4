@@ -21,3 +21,5 @@ dependency-reduced-pom.xml
 /.git-versioned-pom.xml
 
 *.db
+/.apt_generated/
+/.apt_generated_tests/

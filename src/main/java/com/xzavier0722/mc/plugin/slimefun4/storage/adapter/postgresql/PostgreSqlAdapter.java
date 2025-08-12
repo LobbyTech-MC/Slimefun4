@@ -20,6 +20,7 @@ import static com.xzavier0722.mc.plugin.slimefun4.storage.adapter.sqlcommon.SqlC
 import static com.xzavier0722.mc.plugin.slimefun4.storage.adapter.sqlcommon.SqlConstants.FIELD_UNIVERSAL_UUID;
 import static com.xzavier0722.mc.plugin.slimefun4.storage.adapter.sqlcommon.SqlConstants.METADATA_VERSION;
 
+import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,10 +34,6 @@ import com.xzavier0722.mc.plugin.slimefun4.storage.common.RecordKey;
 import com.xzavier0722.mc.plugin.slimefun4.storage.common.RecordSet;
 
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-import java.text.MessageFormat;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class PostgreSqlAdapter extends SqlCommonAdapter<PostgreSqlConfig> {
     @Override

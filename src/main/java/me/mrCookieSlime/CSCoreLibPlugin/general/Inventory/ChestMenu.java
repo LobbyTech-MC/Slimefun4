@@ -1,10 +1,5 @@
 package me.mrCookieSlime.CSCoreLibPlugin.general.Inventory;
 
-import city.norain.slimefun4.holder.SlimefunInventoryHolder;
-import city.norain.slimefun4.utils.InventoryUtil;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
-import io.github.thebusybiscuit.slimefun4.core.debug.Debug;
-import io.github.thebusybiscuit.slimefun4.core.debug.TestCase;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -26,6 +21,8 @@ import org.bukkit.inventory.ItemStack;
 import city.norain.slimefun4.holder.SlimefunInventoryHolder;
 import city.norain.slimefun4.utils.InventoryUtil;
 import io.github.bakedlibs.dough.items.CustomItemStack;
+import io.github.thebusybiscuit.slimefun4.core.debug.Debug;
+import io.github.thebusybiscuit.slimefun4.core.debug.TestCase;
 import lombok.Getter;
 
 /**

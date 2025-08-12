@@ -1,8 +1,9 @@
 package city.norain.slimefun4.utils;
 
+import org.bukkit.OfflinePlayer;
+
 import city.norain.slimefun4.SlimefunExtended;
 import lombok.experimental.UtilityClass;
-import org.bukkit.OfflinePlayer;
 
 @UtilityClass
 public class PlayerUtil {
