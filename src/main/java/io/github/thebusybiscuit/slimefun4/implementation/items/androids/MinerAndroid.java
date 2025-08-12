@@ -29,14 +29,12 @@ import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.utils.InfiniteBlockGenerator;
 import io.github.thebusybiscuit.slimefun4.utils.compatibility.VersionedParticle;
 import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
-import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
-
 
 /**
  * The {@link MinerAndroid} is a variant of the {@link ProgrammableAndroid} which
  * is able to break blocks.
- * The core functionalities boil down to {@link #dig(Block, BlockMenu, Block)} and
- * {@link #moveAndDig(Block, BlockMenu, BlockFace, Block)}.
+ * The core functionalities boil down to {@link #dig(Block, UniversalMenu, Block)} and
+ * {@link #moveAndDig(Block, UniversalMenu, BlockFace, Block)}.
  * Otherwise the functionality is similar to a regular android.
  * <p>
  * The {@link MinerAndroid} will also fire an {@link AndroidMineEvent} when breaking a {@link Block}.

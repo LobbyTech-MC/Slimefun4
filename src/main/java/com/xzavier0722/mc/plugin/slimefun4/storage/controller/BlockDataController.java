@@ -428,12 +428,13 @@ public class BlockDataController extends ADataController {
 
         if (toRemove instanceof SlimefunUniversalBlockData ubd) {
             ubd.setPendingRemove(true);
-            removeUniversalBlockDirectly(uuid);
 
             var menu = ubd.getMenu();
             if (menu != null) {
                 menu.lock();
             }
+
+            removeUniversalBlockDirectly(uuid);
 
             if (Slimefun.getRegistry().getTickerBlocks().contains(toRemove.getSfId())) {
                 Slimefun.getTickerTask().disableTicker(ubd.getLastPresent().toLocation());
@@ -920,9 +921,9 @@ public class BlockDataController extends ADataController {
                             DataUtils.blockDataDebase64(recordSet.get(FieldKey.DATA_VALUE)),
                             false));
 
-            loadedUniversalData.putIfAbsent(uniData.getUUID(), uniData);
-
             uniData.setIsDataLoaded(true);
+
+            loadedUniversalData.putIfAbsent(uniData.getUUID(), uniData);
 
             if (uniData instanceof SlimefunUniversalBlockData ubd) {
                 if (ubd.hasTrait(UniversalDataTrait.BLOCK)) {
@@ -940,32 +941,34 @@ public class BlockDataController extends ADataController {
                                 .enableTicker(ubd.getLastPresent().toLocation(), ubd.getUUID());
                     }
                 }
+            }
 
-                if (ubd.hasTrait(UniversalDataTrait.INVENTORY)) {
-                    // 加载菜单
-                    var menuPreset = UniversalMenuPreset.getPreset(ubd.getSfId());
-                    if (menuPreset != null) {
-                        var menuKey = new RecordKey(DataScope.UNIVERSAL_INVENTORY);
-                        menuKey.addCondition(FieldKey.UNIVERSAL_UUID, ubd.getKey());
-                        menuKey.addField(FieldKey.INVENTORY_SLOT);
-                        menuKey.addField(FieldKey.INVENTORY_ITEM);
+            if (uniData.hasTrait(UniversalDataTrait.INVENTORY)) {
+                // 加载菜单
+                var menuPreset = UniversalMenuPreset.getPreset(uniData.getSfId());
+                if (menuPreset != null) {
+                    var menuKey = new RecordKey(DataScope.UNIVERSAL_INVENTORY);
+                    menuKey.addCondition(FieldKey.UNIVERSAL_UUID, uniData.getKey());
+                    menuKey.addField(FieldKey.INVENTORY_SLOT);
+                    menuKey.addField(FieldKey.INVENTORY_ITEM);
 
-                        var inv = new ItemStack[54];
+                    var inv = new ItemStack[54];
 
-                        getData(menuKey)
-                                .forEach(recordSet -> inv[recordSet.getInt(FieldKey.INVENTORY_SLOT)] =
-                                        recordSet.getItemStack(FieldKey.INVENTORY_ITEM));
+                    getData(menuKey)
+                            .forEach(recordSet -> inv[recordSet.getInt(FieldKey.INVENTORY_SLOT)] =
+                                    recordSet.getItemStack(FieldKey.INVENTORY_ITEM));
 
-                        var location = ubd.hasTrait(UniversalDataTrait.BLOCK)
-                                ? ubd.getLastPresent().toLocation()
-                                : null;
+                    var location = uniData.hasTrait(UniversalDataTrait.BLOCK)
+                            ? ((SlimefunUniversalBlockData) uniData)
+                                    .getLastPresent()
+                                    .toLocation()
+                            : null;
 
-                        ubd.setMenu(new UniversalMenu(menuPreset, ubd.getUUID(), location, inv));
+                    uniData.setMenu(new UniversalMenu(menuPreset, uniData.getUUID(), location, inv));
 
-                        var content = ubd.getMenuContents();
-                        if (content != null) {
-                            invSnapshots.put(ubd.getKey(), InvStorageUtils.getInvSnapshot(content));
-                        }
+                    var content = uniData.getMenuContents();
+                    if (content != null) {
+                        invSnapshots.put(uniData.getKey(), InvStorageUtils.getInvSnapshot(content));
                     }
                 }
             }
@@ -1095,26 +1098,26 @@ public class BlockDataController extends ADataController {
     }
 
     public void saveUniversalInventory(@Nonnull SlimefunUniversalData universalData) {
-        var menu = universalData.getMenu();
         var universalID = universalData.getUUID();
 
-        var newInv = universalData.getMenuContents();
+        var currentInv = universalData.getMenuContents();
         List<Pair<ItemStack, Integer>> lastSave;
-        if (newInv == null) {
+
+        if (currentInv == null) {
             lastSave = invSnapshots.remove(universalID.toString());
             if (lastSave == null) {
                 return;
             }
         } else {
-            lastSave = invSnapshots.put(universalID.toString(), InvStorageUtils.getInvSnapshot(newInv));
+            lastSave = invSnapshots.put(universalID.toString(), InvStorageUtils.getInvSnapshot(currentInv));
         }
 
-        var changed = InvStorageUtils.getChangedSlots(lastSave, newInv);
+        var changed = InvStorageUtils.getChangedSlots(lastSave, currentInv);
         if (changed.isEmpty()) {
             return;
         }
 
-        changed.forEach(slot -> scheduleDelayedUniversalInvUpdate(universalID, menu, slot));
+        changed.forEach(slot -> scheduleDelayedUniversalInvUpdate(universalData, slot));
     }
 
     public Set<SlimefunChunkData> getAllLoadedChunkData(World world) {
@@ -1181,27 +1184,27 @@ public class BlockDataController extends ADataController {
     /**
      * Save universal inventory by async way
      *
-     * @param uuid Universal Inventory UUID
-     * @param menu Universal menu
+     * @param ubd {@link SlimefunUniversalBlockData}
      * @param slot updated item slot
      */
-    private void scheduleDelayedUniversalInvUpdate(UUID uuid, UniversalMenu menu, int slot) {
-        var scopeKey = new UUIDKey(DataScope.NONE, uuid);
+    private void scheduleDelayedUniversalInvUpdate(SlimefunUniversalData ubd, int slot) {
+        var scopeKey = new UUIDKey(DataScope.NONE, ubd.getKey());
         var reqKey = new RecordKey(DataScope.UNIVERSAL_INVENTORY);
-        reqKey.addCondition(FieldKey.UNIVERSAL_UUID, uuid.toString());
+        reqKey.addCondition(FieldKey.UNIVERSAL_UUID, ubd.getKey());
         reqKey.addCondition(FieldKey.INVENTORY_SLOT, slot + "");
         reqKey.addField(FieldKey.INVENTORY_ITEM);
 
         if (enableDelayedSaving) {
             scheduleDelayedUpdateTask(
                     new LinkedKey(scopeKey, reqKey),
-                    () -> scheduleUniversalInvUpdate(scopeKey, reqKey, uuid, menu.getContents(), slot));
+                    () -> scheduleUniversalInvUpdate(scopeKey, reqKey, ubd.getKey(), ubd.getMenuContents(), slot));
         } else {
-            scheduleUniversalInvUpdate(scopeKey, reqKey, uuid, menu.getContents(), slot);
+            scheduleUniversalInvUpdate(scopeKey, reqKey, ubd.getKey(), ubd.getMenuContents(), slot);
         }
     }
 
-    private void scheduleUniversalInvUpdate(ScopeKey scopeKey, RecordKey reqKey, UUID uuid, ItemStack[] inv, int slot) {
+    private void scheduleUniversalInvUpdate(
+            ScopeKey scopeKey, RecordKey reqKey, String uuid, ItemStack[] inv, int slot) {
         var item = inv != null && slot < inv.length ? inv[slot] : null;
 
         if (item == null) {
@@ -1209,7 +1212,7 @@ public class BlockDataController extends ADataController {
         } else {
             try {
                 var data = new RecordSet();
-                data.put(FieldKey.UNIVERSAL_UUID, uuid.toString());
+                data.put(FieldKey.UNIVERSAL_UUID, uuid);
                 data.put(FieldKey.INVENTORY_SLOT, slot + "");
                 data.put(FieldKey.INVENTORY_ITEM, item);
                 scheduleWriteTask(scopeKey, reqKey, data, true);

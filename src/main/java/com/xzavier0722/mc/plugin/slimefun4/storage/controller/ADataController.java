@@ -23,6 +23,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 
+/**
+ * {@link ADataController} 是 Slimefun 数据库控制器的抽象类，
+ * 提供了对数据源适配器的访问和数据操作的基本方法。
+ * <br/>
+ * 该类提供了对数据库的增删查改操作以及异步读写的支持。
+ */
 public abstract class ADataController {
     private final DataType dataType;
     private final Map<ScopeKey, QueuedWriteTask> scheduledWriteTasks;
@@ -66,8 +72,8 @@ public abstract class ADataController {
         readExecutor = Executors.newFixedThreadPool(maxReadThread, new DatabaseThreadFactory("SF-DB-Read-Thread #"));
         writeExecutor = Executors.newFixedThreadPool(maxWriteThread, new DatabaseThreadFactory("SF-DB-Write-Thread #"));
         callbackExecutor = new ThreadPoolExecutor(
-                0,
-                128,
+                2,
+                Runtime.getRuntime().availableProcessors(),
                 10,
                 TimeUnit.SECONDS,
                 new ArrayBlockingQueue<>(128),

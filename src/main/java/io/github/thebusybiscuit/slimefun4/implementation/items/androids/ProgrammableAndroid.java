@@ -132,8 +132,6 @@ public class ProgrammableAndroid extends SlimefunItem
             public void newInstance(UniversalMenu menu, Block b) {
                 var uniData = StorageCacheUtils.getUniversalBlock(menu.getUuid());
 
-                Objects.requireNonNull(uniData, "Unable to get android's universal data for " + menu.getUuid() + "!");
-
                 menu.replaceExistingItem(
                         15, new CustomItemStack(HeadTexture.SCRIPT_START.getAsItemStack(), "&a启动/继续运行"));
                 menu.addMenuClickHandler(15, (p, slot, item, action) -> {

@@ -11,6 +11,8 @@ import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import net.milkbowl.vault.economy.Economy;
 
 /**
+ * Vault 集成类, 用于处理游戏币相关的操作.
+ *
  * @author StarWishsama
  */
 public class VaultIntegration {
