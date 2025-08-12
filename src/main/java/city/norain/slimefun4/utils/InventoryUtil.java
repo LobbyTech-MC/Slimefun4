@@ -1,5 +1,6 @@
 package city.norain.slimefun4.utils;
 
+import city.norain.slimefun4.compatibillty.CompatibilityUtil;
 import java.util.LinkedList;
 
 import org.bukkit.Bukkit;
@@ -21,7 +22,7 @@ public class InventoryUtil {
             return;
         }
 
-        if (!PlayerUtil.isConnected(p)) {
+        if (!CompatibilityUtil.isConnected(p)) {
             Debug.log(
                     TestCase.INVENTORY,
                     "Tried to open an inventory for a player that is not connected: " + p.getName());

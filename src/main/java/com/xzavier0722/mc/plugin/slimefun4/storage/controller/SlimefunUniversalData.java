@@ -17,7 +17,10 @@ import city.norain.slimefun4.api.menu.UniversalMenu;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
+import org.bukkit.inventory.ItemStack;
 
+@Slf4j
 @Getter
 public class SlimefunUniversalData extends ASlimefunDataContainer {
     @Setter
@@ -31,6 +34,12 @@ public class SlimefunUniversalData extends ASlimefunDataContainer {
     @ParametersAreNonnullByDefault
     SlimefunUniversalData(UUID uuid, String sfId) {
         super(uuid.toString(), sfId);
+    }
+
+    @ParametersAreNonnullByDefault
+    SlimefunUniversalData(UUID uuid, String sfId, Set<UniversalDataTrait> traits) {
+        super(uuid.toString(), sfId);
+        this.traits.addAll(traits);
     }
 
     @ParametersAreNonnullByDefault
@@ -52,6 +61,7 @@ public class SlimefunUniversalData extends ASlimefunDataContainer {
 
         if (!trait.getReservedKey().isEmpty()) {
             setCacheInternal(trait.getReservedKey(), val, true);
+
             Slimefun.getDatabaseManager()
                     .getBlockDataController()
                     .scheduleDelayedUniversalDataUpdate(this, trait.getReservedKey());

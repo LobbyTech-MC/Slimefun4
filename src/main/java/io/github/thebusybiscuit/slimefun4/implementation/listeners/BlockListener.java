@@ -1,5 +1,26 @@
 package io.github.thebusybiscuit.slimefun4.implementation.listeners;
 
+import city.norain.slimefun4.compatibillty.CompatibilityUtil;
+import com.xzavier0722.mc.plugin.slimefun4.storage.callback.IAsyncReadCallback;
+import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunBlockData;
+import com.xzavier0722.mc.plugin.slimefun4.storage.controller.attributes.UniversalBlock;
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
+import io.github.bakedlibs.dough.protection.Interaction;
+import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
+import io.github.thebusybiscuit.slimefun4.api.events.ExplosiveToolBreakBlocksEvent;
+import io.github.thebusybiscuit.slimefun4.api.events.SlimefunBlockBreakEvent;
+import io.github.thebusybiscuit.slimefun4.api.events.SlimefunBlockPlaceEvent;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;
+import io.github.thebusybiscuit.slimefun4.core.attributes.rotations.NotCardinallyRotatable;
+import io.github.thebusybiscuit.slimefun4.core.attributes.rotations.NotDiagonallyRotatable;
+import io.github.thebusybiscuit.slimefun4.core.attributes.rotations.NotRotatable;
+import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
+import io.github.thebusybiscuit.slimefun4.core.handlers.BlockPlaceHandler;
+import io.github.thebusybiscuit.slimefun4.core.handlers.ToolUseHandler;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import io.github.thebusybiscuit.slimefun4.utils.compatibility.VersionedEnchantment;
+import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -120,7 +141,8 @@ public class BlockListener implements Listener {
         if (sfItem != null && !(sfItem instanceof NotPlaceable)) {
             // Fixes #994, should check placed block is equals to item material or not.
             if (item.getType() != e.getBlock().getType()) {
-                if (item.getType() != e.getBlock().getBlockData().getPlacementMaterial()) {
+                if (item.getType()
+                        != CompatibilityUtil.getPlacementMaterial(e.getBlock().getBlockData())) {
                     return;
                 }
             }

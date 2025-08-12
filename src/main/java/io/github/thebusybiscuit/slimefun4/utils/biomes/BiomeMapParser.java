@@ -1,5 +1,14 @@
 package io.github.thebusybiscuit.slimefun4.utils.biomes;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import io.github.bakedlibs.dough.common.CommonPatterns;
+import io.github.thebusybiscuit.slimefun4.api.exceptions.BiomeMapException;
+import io.github.thebusybiscuit.slimefun4.utils.JsonUtils;
+import io.github.thebusybiscuit.slimefun4.utils.PatternUtils;
+import io.github.thebusybiscuit.slimefun4.utils.compatibility.VersionedBiome;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Locale;
@@ -12,11 +21,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import org.apache.commons.lang.Validate;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Biome;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
 
 import io.github.bakedlibs.dough.common.CommonPatterns;
 import io.github.thebusybiscuit.slimefun4.api.exceptions.BiomeMapException;
@@ -172,7 +176,7 @@ public class BiomeMapParser<T> {
                     String formattedValue = CommonPatterns.COLON.split(value)[1].toUpperCase(Locale.ROOT);
 
                     try {
-                        Biome biome = Biome.valueOf(formattedValue);
+                        Biome biome = VersionedBiome.valueOf(formattedValue);
                         biomes.add(biome);
                     } catch (IllegalArgumentException x) {
                         // Lenient Parsers will ignore unknown biomes

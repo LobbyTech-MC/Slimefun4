@@ -208,7 +208,6 @@ public class ProgrammableAndroid extends SlimefunItem
                     }
                 }));
 
-                Slimefun.getBlockDataService().updateUniversalDataUUID(b, universalData.getKey());
                 PlayerHead.setSkin(b, PlayerSkin.fromBase64(texture), true);
             }
         };
@@ -224,22 +223,17 @@ public class ProgrammableAndroid extends SlimefunItem
 
                 var uniData = StorageCacheUtils.getUniversalBlock(b);
 
-                if (uniData != null) {
-                    if (!e.getPlayer().hasPermission("slimefun.android.bypass")
-                            && !e.getPlayer().getUniqueId().toString().equals(uniData.getData("owner"))) {
-                        // The Player is not allowed to break this android
-                        e.setCancelled(true);
-                        return;
-                    }
+                if (!e.getPlayer().hasPermission("slimefun.android.bypass")
+                        && !e.getPlayer().getUniqueId().toString().equals(uniData.getData("owner"))) {
+                    // The Player is not allowed to break this android
+                    e.setCancelled(true);
+                    return;
+                }
 
-                    var menu = uniData.getMenu();
-                    if (menu != null) {
-                        menu.dropItems(b.getLocation(), 43);
-                        menu.dropItems(b.getLocation(), getOutputSlots());
-                    }
-                } else {
-                    throw new IllegalStateException(
-                            "Missing universal id android @" + LocationUtils.locationToString(b.getLocation()));
+                var menu = uniData.getMenu();
+                if (menu != null) {
+                    menu.dropItems(b.getLocation(), 43);
+                    menu.dropItems(b.getLocation(), getOutputSlots());
                 }
             }
         };

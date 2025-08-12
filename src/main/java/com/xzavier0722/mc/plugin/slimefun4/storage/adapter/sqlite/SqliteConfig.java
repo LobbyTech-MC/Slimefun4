@@ -14,13 +14,7 @@ public record SqliteConfig(String path, int maxConnection) implements ISqlCommon
         config.setPoolName("SlimefunHikariPool");
         config.setMaximumPoolSize(maxConnection);
 
-        /* ===================
-         * DATABASE DEBUG MODE
-         * ===================
-         */
-        if (SlimefunExtended.isDatabaseDebugMode()) {
-            config.setLeakDetectionThreshold(5000);
-        }
+        config.setLeakDetectionThreshold(8000);
 
         return new HikariDataSource(config);
     }

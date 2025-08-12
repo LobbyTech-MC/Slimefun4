@@ -1,9 +1,6 @@
 package io.github.thebusybiscuit.slimefun4.integrations;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.World;
-
+import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.WorldEditException;
 import com.sk89q.worldedit.event.extent.EditSessionEvent;
@@ -39,27 +36,29 @@ class WorldEditIntegration {
 
     @Subscribe
     public void wrapForLogging(EditSessionEvent event) {
-        event.setExtent(new AbstractDelegateExtent(event.getExtent()) {
+        if (event.getStage() == EditSession.Stage.BEFORE_HISTORY) {
+            event.setExtent(new AbstractDelegateExtent(event.getExtent()) {
 
-            @Override
-            public <T extends BlockStateHolder<T>> boolean setBlock(BlockVector3 pos, T block)
-                    throws WorldEditException {
-                if (block.getBlockType().getMaterial().isAir()) {
-                    World world = Bukkit.getWorld(event.getWorld().getName());
+                @Override
+                public <T extends BlockStateHolder<T>> boolean setBlock(BlockVector3 pos, T block)
+                        throws WorldEditException {
+                    if (block.getBlockType().getMaterial().isAir()) {
+                        World world = Bukkit.getWorld(event.getWorld().getName());
 
-                    if (world != null) {
-                        Location l = new Location(world, pos.getBlockX(), pos.getBlockY(), pos.getBlockZ());
+                        if (world != null) {
+                            Location l = new Location(world, pos.getBlockX(), pos.getBlockY(), pos.getBlockZ());
 
-                        if (StorageCacheUtils.hasSlimefunBlock(l)) {
-                            Slimefun.getDatabaseManager()
-                                    .getBlockDataController()
-                                    .removeBlock(l);
+                            if (StorageCacheUtils.hasSlimefunBlock(l)) {
+                                Slimefun.getDatabaseManager()
+                                        .getBlockDataController()
+                                        .removeBlock(l);
+                            }
                         }
                     }
-                }
 
-                return getExtent().setBlock(pos, block);
-            }
-        });
+                    return getExtent().setBlock(pos, block);
+                }
+            });
+        }
     }
 }

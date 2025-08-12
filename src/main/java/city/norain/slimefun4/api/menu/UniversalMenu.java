@@ -8,6 +8,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
+import javax.annotation.Nullable;
 import lombok.Getter;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
@@ -24,7 +25,7 @@ public class UniversalMenu extends DirtyChestMenu {
         this(preset, uuid, (Location) null);
     }
 
-    public UniversalMenu(@Nonnull UniversalMenuPreset preset, @Nonnull UUID uuid, Location lastPresent) {
+    public UniversalMenu(@Nonnull UniversalMenuPreset preset, @Nonnull UUID uuid, @Nullable Location lastPresent) {
         super(preset);
         this.uuid = uuid;
 
@@ -33,7 +34,10 @@ public class UniversalMenu extends DirtyChestMenu {
     }
 
     public UniversalMenu(
-            @Nonnull UniversalMenuPreset preset, @Nonnull UUID uuid, Location lastPresent, ItemStack[] contents) {
+            @Nonnull UniversalMenuPreset preset,
+            @Nonnull UUID uuid,
+            @Nullable Location lastPresent,
+            ItemStack[] contents) {
         super(preset);
         this.uuid = uuid;
 
@@ -53,7 +57,7 @@ public class UniversalMenu extends DirtyChestMenu {
         this(preset, uuid, null, contents);
     }
 
-    public void update(@Nonnull Location lastPresent) {
+    public void update(@Nullable Location lastPresent) {
         ((UniversalMenuPreset) preset).clone(this, lastPresent);
     }
 

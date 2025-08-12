@@ -60,13 +60,16 @@ Slimefun 4 可以在[鬼斩构建站](https://builds.guizhanss.com/SlimefunGuguP
 
 |                      | 测试版 (最新更新)                                                                                | "稳定版"                                                                                        |
 |----------------------|-------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
-| **支持的 Minecraft 版本** | :video_game: 1.17.X - 1.21.X                                                              | :video_game: 1.17.X - 1.21.4                                                                 |
+| **支持的 Minecraft 版本** | :video_game: 1.19.X - 1.21.X                                                              | :video_game: 1.16.X - 1.21.4                                                                 |
 | **Java 版本**          | :computer: **Java 17+**                                                                   | :computer: **Java 17+**                                                                      |
 | **自动更新系统**           | :heavy_check_mark:                                                                        | :heavy_check_mark:                                                                           |
 | **频繁更新**             | :heavy_check_mark:                                                                        | :x:                                                                                          |
 | **享有最新内容**           | :heavy_check_mark:                                                                        | :x:                                                                                          |
 | **Bug 反馈**           | :heavy_check_mark:                                                                        | :x:                                                                                          |
 | **下载链接**             | :package: **[下载 最新版](https://builds.guizhanss.com/SlimefunGuguProject/Slimefun4/master)** | :package: **[下载 "稳定版"](https://builds.guizhanss.com/SlimefunGuguProject/Slimefun4/release)** |
+
+
+**请注意：此处支持的 Minecraft 版本不代表最新版的可用范围，可能指的是某个历史版本支持，对于支持的版本标注仅供参考**
 
 **! 建议你使用最新的测试版，可以获得最新的内容更新和 Bug 修复！**
 
