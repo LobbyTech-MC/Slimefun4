@@ -1,12 +1,13 @@
 package city.norain.slimefun4.utils;
 
-import com.xzavier0722.mc.plugin.slimefun4.storage.controller.attributes.UniversalDataTrait;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import java.lang.management.ThreadInfo;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+
 import org.bukkit.inventory.ItemStack;
+
+import com.xzavier0722.mc.plugin.slimefun4.storage.controller.attributes.UniversalDataTrait;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 

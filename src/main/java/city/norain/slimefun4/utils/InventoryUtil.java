@@ -1,6 +1,5 @@
 package city.norain.slimefun4.utils;
 
-import city.norain.slimefun4.compatibillty.CompatibilityUtil;
 import java.util.LinkedList;
 
 import org.bukkit.Bukkit;
@@ -8,6 +7,7 @@ import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
+import city.norain.slimefun4.compatibillty.CompatibilityUtil;
 import io.github.thebusybiscuit.slimefun4.core.debug.Debug;
 import io.github.thebusybiscuit.slimefun4.core.debug.TestCase;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;

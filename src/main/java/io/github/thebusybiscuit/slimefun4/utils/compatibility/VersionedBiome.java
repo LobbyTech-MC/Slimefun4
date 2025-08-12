@@ -1,9 +1,12 @@
 package io.github.thebusybiscuit.slimefun4.utils.compatibility;
 
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import java.lang.reflect.Method;
+
 import javax.annotation.Nonnull;
+
 import org.bukkit.block.Biome;
+
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 
 /**
  * Biome 多版本兼容

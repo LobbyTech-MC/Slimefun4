@@ -4,8 +4,6 @@ import com.xzavier0722.mc.plugin.slimefun4.storage.adapter.sqlcommon.ISqlCommonC
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
-import city.norain.slimefun4.SlimefunExtended;
-
 public record SqliteConfig(String path, int maxConnection) implements ISqlCommonConfig {
     public HikariDataSource createDataSource() {
         var config = new HikariConfig();

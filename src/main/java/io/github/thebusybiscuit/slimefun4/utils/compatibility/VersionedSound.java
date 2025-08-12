@@ -1,10 +1,13 @@
 package io.github.thebusybiscuit.slimefun4.utils.compatibility;
 
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import java.lang.reflect.Method;
+
 import javax.annotation.Nonnull;
+
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
+
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 
 /**
  * Sound 多版本兼容

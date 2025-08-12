@@ -1,8 +1,5 @@
 package io.github.thebusybiscuit.slimefun4.core.services.sounds;
 
-import com.google.common.base.Preconditions;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-import io.github.thebusybiscuit.slimefun4.utils.compatibility.VersionedSound;
 import java.util.logging.Level;
 
 import javax.annotation.Nonnull;
@@ -17,6 +14,7 @@ import org.bukkit.entity.Player;
 import com.google.common.base.Preconditions;
 
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import io.github.thebusybiscuit.slimefun4.utils.compatibility.VersionedSound;
 
 /**
  * This enum holds references to all our sounds.
