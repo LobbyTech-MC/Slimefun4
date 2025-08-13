@@ -1,4 +1,3 @@
----
 sf-cn:
   timings:
     started: '&a性能分析器已启动.'
@@ -60,15 +59,15 @@ commands:
     success: '&a成功重载配置文件.'
     failed: '&c重载配置文件失败! 你可能需要重启服务器以应用更改, 查看后台输出信息了解更多.'
   migrate:
-    description: "迁移旧数据"
+    description: 迁移旧数据
     confirm: "&c你确定要进行数据迁移吗? 确认请输入 /sf migrate confirm 开始迁移\n迁移过程中请不要让玩家进入服务器操作粘液科技相关机器及物品!"
-    started: "&a正在迁移旧数据..."
-    success: "&a迁移旧数据 (%migrate_type%) 至数据库成功."
-    failed: "&c迁移数据过程中出现了问题, 请查看后台."
-    already-migrated: "&a暂无可迁移数据."
-    in-progress: "&a迁移正在进行中..."
+    started: '&a正在迁移旧数据...'
+    success: '&a迁移旧数据 (%migrate_type%) 至数据库成功.'
+    failed: '&c迁移数据过程中出现了问题, 请查看后台.'
+    already-migrated: '&a暂无可迁移数据.'
+    in-progress: '&a迁移正在进行中...'
   blockdata:
-    description: '操作粘液方块数据'
+    description: 操作粘液方块数据
 placeholderapi:
   profile-loading: 加载中...
 guide:
@@ -84,7 +83,7 @@ guide:
     tooltip: '&b单击搜索物品'
     inventory: '正在搜索: %item%'
   tooltips:
-    open-itemgroup: 单击打开
+    open-itemgroup: 点击查看
     versions-notice: 在反馈问题时这些很重要!
     wiki: 在非官方中文粘液科技维基上查看此物品
     recipes:
@@ -159,14 +158,12 @@ guide:
       wiki: '&3Wiki 编辑者'
       resourcepack: '&c材质制作者'
       translator: '&9翻译者'
-
 actionbar:
   radiation: '&6辐射暴露等级：&c%level%&7/&e100'
-
 messages:
-  android-no-permission: "&c你的机器人在某个你没有权限的领地/地皮中无法工作, 机器人已自动暂停运行."
+  android-no-permission: '&c你的机器人在某个你没有权限的领地/地皮中无法工作, 机器人已自动暂停运行.'
   not-researched: '&4你的知识还不足以理解这个物品. &c你需要先解锁 &f"%item%"&f'
-  not-enough-xp: '&4你没有足够的经验来解锁这个研究'
+  not-enough-xp: '&4你没有足够的金币来解锁这个研究'
   unlocked: '&b成功解锁研究 &7"%research%"'
   only-players: '&4这个指令只能在游戏内使用'
   unknown-player: '&4未知玩家: &c%player%'
