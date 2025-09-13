@@ -1155,7 +1155,7 @@ public final class SlimefunItems {
             HALLOWEEN);
 
     /*		锭 		*/
-    public static final SlimefunItemStack COPPER_INGOT = new SlimefunItemStack("COPPER_INGOT", Material.BRICK, "&b纯铜锭");
+    public static final SlimefunItemStack COPPER_INGOT = new SlimefunItemStack("COPPER_INGOT", Material.BRICK, "&b紫铜锭");
     public static final SlimefunItemStack TIN_INGOT = new SlimefunItemStack("TIN_INGOT", Material.IRON_INGOT, "&b锡锭");
     public static final SlimefunItemStack SILVER_INGOT =
             new SlimefunItemStack("SILVER_INGOT", Material.IRON_INGOT, "&b银锭");
