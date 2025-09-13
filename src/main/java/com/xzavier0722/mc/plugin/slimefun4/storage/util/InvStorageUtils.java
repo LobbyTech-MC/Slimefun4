@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import org.bukkit.inventory.ItemStack;
@@ -53,8 +54,8 @@ public class InvStorageUtils {
                 }
                 continue;
             }
-
-            if (!curr.equals(each.getFirstValue()) || curr.getAmount() != each.getSecondValue()) {
+            // fix: #1099 more strict difference check
+            if (curr.getAmount() != each.getSecondValue() || !Objects.equals(curr, each.getFirstValue())) {
                 re.add(i);
             }
         }
@@ -67,7 +68,9 @@ public class InvStorageUtils {
     public static List<Pair<ItemStack, Integer>> getInvSnapshot(ItemStack[] invContents) {
         var re = new ArrayList<Pair<ItemStack, Integer>>(invContents.length);
         for (var each : invContents) {
-            re.add(each == null ? emptyPair : new Pair<>(each, each.getAmount()));
+            // fix: in case some addons directly manipulate origin ItemStack
+            // fix: # 1099 bundles may change their meta internally without a new itemstack instance
+            re.add(each == null ? emptyPair : new Pair<>(each.clone(), each.getAmount()));
         }
 
         return re;

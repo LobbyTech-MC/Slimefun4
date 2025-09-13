@@ -64,16 +64,16 @@ jobs:
           committer_email: ${{ secrets.BOT_EMAIL }}
   call-dev-ci:
     needs: [ spotless ]
-    if: ${{ (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref_name == 'dev' }}
+    if: ${{ needs.spotless.outputs.spotless-status == '0' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref_name == 'dev' }}
     uses: ./.github/workflows/dev-ci.yml
     secrets: inherit
   call-beta-ci:
     needs: [ spotless ]
-    if: ${{ (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref_name == 'master' }}
+    if: ${{ needs.spotless.outputs.spotless-status == '0' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref_name == 'master' }}
     uses: ./.github/workflows/build-ci.yml
     secrets: inherit
   call-pr-checker:
     needs: [ spotless ]
-    if: ${{ github.event_name == 'pull_request' }}
+    if: ${{ needs.spotless.outputs.spotless-status == '0' && github.event_name == 'pull_request' }}
     uses: ./.github/workflows/pr-checker.yml
     secrets: inherit
