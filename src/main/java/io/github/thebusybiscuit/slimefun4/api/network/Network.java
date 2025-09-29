@@ -20,6 +20,16 @@ import io.github.thebusybiscuit.slimefun4.core.debug.TestCase;
 import io.github.thebusybiscuit.slimefun4.core.networks.NetworkManager;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.implementation.listeners.NetworkListener;
+import java.util.Queue;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import org.apache.commons.lang.Validate;
+import org.bukkit.Color;
+import org.bukkit.Location;
+import org.bukkit.Particle;
 
 /**
  * An abstract Network class to manage networks in a stateful way
@@ -42,11 +52,11 @@ public abstract class Network {
      */
     protected Location regulator;
 
-    private final Queue<Location> nodeQueue = new ArrayDeque<>();
-    protected final Set<Location> connectedLocations = new HashSet<>();
-    protected final Set<Location> regulatorNodes = new HashSet<>();
-    protected final Set<Location> connectorNodes = new HashSet<>();
-    protected final Set<Location> terminusNodes = new HashSet<>();
+    private final Queue<Location> nodeQueue = new ConcurrentLinkedQueue<>();
+    protected final Set<Location> connectedLocations = ConcurrentHashMap.newKeySet();
+    protected final Set<Location> regulatorNodes = ConcurrentHashMap.newKeySet();
+    protected final Set<Location> connectorNodes = ConcurrentHashMap.newKeySet();
+    protected final Set<Location> terminusNodes = ConcurrentHashMap.newKeySet();
 
     /**
      * This constructs a new {@link Network} at the given {@link Location}.
@@ -231,7 +241,7 @@ public abstract class Network {
      */
     public void display() {
         if (manager.isVisualizerEnabled()) {
-            Slimefun.runSync(new NetworkVisualizer(this, Color.BLUE));
+            Slimefun.runSync(new NetworkVisualizer(this, Color.BLUE), this.regulator);
         }
     }
 

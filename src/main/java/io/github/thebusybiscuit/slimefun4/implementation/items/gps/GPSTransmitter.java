@@ -99,6 +99,11 @@ public abstract class GPSTransmitter extends SimpleSlimefunItem<BlockTicker>
             public boolean isSynchronized() {
                 return false;
             }
+
+            @Override
+            public boolean isConcurrentSafe() {
+                return true;
+            }
         };
     }
 

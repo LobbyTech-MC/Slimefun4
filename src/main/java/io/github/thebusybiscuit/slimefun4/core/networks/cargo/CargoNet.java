@@ -1,12 +1,13 @@
 package io.github.thebusybiscuit.slimefun4.core.networks.cargo;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.logging.Level;
 
 import javax.annotation.Nonnull;
@@ -46,10 +47,10 @@ public class CargoNet extends AbstractItemNetwork implements HologramOwner {
 
     private static final int RANGE = 5;
 
-    private final Set<Location> inputNodes = new HashSet<>();
-    private final Set<Location> outputNodes = new HashSet<>();
+    private final Set<Location> inputNodes = new CopyOnWriteArraySet<>();
+    private final Set<Location> outputNodes = new CopyOnWriteArraySet<>();
 
-    protected final Map<Location, Integer> roundRobin = new HashMap<>();
+    protected final Map<Location, Integer> roundRobin = new ConcurrentHashMap<>();
     private int tickDelayThreshold = 0;
 
     public static @Nullable CargoNet getNetworkFromLocation(@Nonnull Location l) {
@@ -155,20 +156,22 @@ public class CargoNet extends AbstractItemNetwork implements HologramOwner {
                 display();
             }
 
-            Slimefun.runSync(() -> {
-                if (blockData.isPendingRemove()) {
-                    return;
-                }
-                var event = new CargoTickEvent(inputs, outputs);
-                Bukkit.getPluginManager().callEvent(event);
-                event.getHologramMsg().ifPresent(msg -> updateHologram(b, msg));
-                if (event.isCancelled()) {
-                    return;
-                }
+            Slimefun.runSync(
+                    () -> {
+                        if (blockData.isPendingRemove()) {
+                            return;
+                        }
+                        var event = new CargoTickEvent(inputs, outputs);
+                        Bukkit.getPluginManager().callEvent(event);
+                        event.getHologramMsg().ifPresent(msg -> updateHologram(b, msg));
+                        if (event.isCancelled()) {
+                            return;
+                        }
 
-                Slimefun.getProfiler().scheduleEntries(inputs.size() + 1);
-                new CargoNetworkTask(this, inputs, outputs).run();
-            });
+                        Slimefun.getProfiler().scheduleEntries(inputs.size() + 1);
+                        new CargoNetworkTask(this, inputs, outputs).run();
+                    },
+                    b.getLocation());
         }
     }
 

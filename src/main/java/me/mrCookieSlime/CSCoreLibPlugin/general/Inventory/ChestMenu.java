@@ -10,8 +10,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CopyOnWriteArraySet;
-import java.util.concurrent.atomic.AtomicBoolean;
-
+import java.util.concurrent.locks.ReentrantLock;
 import javax.annotation.Nonnull;
 
 import org.bukkit.Bukkit;
@@ -53,7 +52,7 @@ public class ChestMenu extends SlimefunInventoryHolder {
     private MenuClickHandler playerclick;
 
     private final Set<UUID> viewers = new CopyOnWriteArraySet<>();
-    private final AtomicBoolean lock = new AtomicBoolean(false);
+    private final ReentrantLock lock = new ReentrantLock();
 
     /**
      * Creates a new ChestMenu with the specified
@@ -409,16 +408,16 @@ public class ChestMenu extends SlimefunInventoryHolder {
     }
 
     public boolean locked() {
-        return lock.get();
+        return lock.isLocked();
     }
 
     public void lock() {
-        lock.getAndSet(true);
+        lock.lock();
         InventoryUtil.closeInventory(this.inventory);
     }
 
     public void unlock() {
-        lock.getAndSet(false);
+        lock.unlock();
     }
 
     @FunctionalInterface
