@@ -268,7 +268,7 @@ public class ProgrammableAndroid extends SlimefunItem
     public void preRegister() {
         super.preRegister();
 
-        addItemHandler(new BlockTicker() {
+        addItemHandler(new BlockTicker(true) {
 
             @Override
             public void tick(Block b, SlimefunItem item, SlimefunUniversalData data) {
@@ -279,11 +279,6 @@ public class ProgrammableAndroid extends SlimefunItem
 
             @Override
             public boolean isSynchronized() {
-                return true;
-            }
-
-            @Override
-            public boolean useUniversalData() {
                 return true;
             }
         });
@@ -996,7 +991,7 @@ public class ProgrammableAndroid extends SlimefunItem
         Validate.notNull(b, "The Block cannot be null.");
 
         Optional<UUID> uuid =
-                TaskUtil.runSyncMethod(() -> Slimefun.getBlockDataService().getUniversalDataUUID(b), b.getLocation());
+                TaskUtil.runSyncMethod(() -> Slimefun.getBlockDataService().getUniversalDataUUID(b));
 
         if (uuid.isEmpty()) {
             throw new IllegalStateException("Android missing uuid");
@@ -1057,16 +1052,14 @@ public class ProgrammableAndroid extends SlimefunItem
             Slimefun.getBlockDataService()
                     .updateUniversalDataUUID(to, uniData.getUUID().toString());
 
-            Slimefun.runSync(
-                    () -> {
-                        PlayerSkin skin = PlayerSkin.fromBase64(texture);
-                        Material type = to.getType();
-                        // Ensure that this Block is still a Player Head
-                        if (type == Material.PLAYER_HEAD || type == Material.PLAYER_WALL_HEAD) {
-                            PlayerHead.setSkin(to, skin, true);
-                        }
-                    },
-                    to.getLocation());
+            Slimefun.runSync(() -> {
+                PlayerSkin skin = PlayerSkin.fromBase64(texture);
+                Material type = to.getType();
+                // Ensure that this Block is still a Player Head
+                if (type == Material.PLAYER_HEAD || type == Material.PLAYER_WALL_HEAD) {
+                    PlayerHead.setSkin(to, skin, true);
+                }
+            });
 
             from.setType(Material.AIR);
             uniData.setLastPresent(new BlockPosition(to.getLocation()));

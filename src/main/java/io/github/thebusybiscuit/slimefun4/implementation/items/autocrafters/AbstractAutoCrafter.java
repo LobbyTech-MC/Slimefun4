@@ -60,18 +60,6 @@ import io.github.thebusybiscuit.slimefun4.utils.itemstack.ItemStackWrapper;
 import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
 import io.papermc.lib.PaperLib;
 import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotResult;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Predicate;
-import java.util.logging.Level;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.AContainer;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
@@ -127,7 +115,7 @@ public abstract class AbstractAutoCrafter extends SlimefunItem implements Energy
         recipeStorageKey = new NamespacedKey(Slimefun.instance(), "recipe_key");
         recipeEnabledKey = new NamespacedKey(Slimefun.instance(), "recipe_enabled");
 
-        recipeCache = new ConcurrentHashMap<>();
+        recipeCache = new HashMap<>();
 
         addItemHandler(new BlockTicker() {
 

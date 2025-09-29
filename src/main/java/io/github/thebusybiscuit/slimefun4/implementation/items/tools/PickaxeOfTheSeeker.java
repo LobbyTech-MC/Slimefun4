@@ -71,7 +71,7 @@ public class PickaxeOfTheSeeker extends SimpleSlimefunItem<ItemUseHandler> imple
                         p.getLocation().getZ(),
                         yaw,
                         pitch);
-                Slimefun.getPlatformScheduler().teleportAsync(p, loc);
+                p.teleport(loc);
             }
 
             damageItem(p, e.getItem());

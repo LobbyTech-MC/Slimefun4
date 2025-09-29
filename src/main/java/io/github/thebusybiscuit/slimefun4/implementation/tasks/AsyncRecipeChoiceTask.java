@@ -1,9 +1,5 @@
 package io.github.thebusybiscuit.slimefun4.implementation.tasks;
 
-import com.tcoded.folialib.wrapper.task.WrappedTask;
-import io.github.bakedlibs.dough.collections.LoopIterator;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-import io.github.thebusybiscuit.slimefun4.implementation.guide.SurvivalSlimefunGuide;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.locks.ReadWriteLock;
@@ -12,6 +8,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import javax.annotation.Nonnull;
 
 import org.apache.commons.lang.Validate;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.inventory.Inventory;
@@ -41,7 +38,7 @@ public class AsyncRecipeChoiceTask implements Runnable {
     private final ReadWriteLock lock = new ReentrantReadWriteLock();
 
     private Inventory inventory;
-    private WrappedTask task;
+    private int id;
 
     /**
      * This will start this task for the given {@link Inventory}.
@@ -53,7 +50,9 @@ public class AsyncRecipeChoiceTask implements Runnable {
         Validate.notNull(inv, "Inventory must not be null");
 
         inventory = inv;
-        task = Slimefun.getPlatformScheduler().runTimerAsync(this, 0, UPDATE_INTERVAL);
+        id = Bukkit.getScheduler()
+                .runTaskTimerAsynchronously(Slimefun.instance(), this, 0, UPDATE_INTERVAL)
+                .getTaskId();
     }
 
     public void add(int slot, @Nonnull MaterialChoice choice) {
@@ -113,7 +112,7 @@ public class AsyncRecipeChoiceTask implements Runnable {
     public void run() {
         // Terminate the task when noone is viewing the Inventory
         if (inventory.getViewers().isEmpty()) {
-            Slimefun.getPlatformScheduler().cancelTask(task);
+            Bukkit.getScheduler().cancelTask(id);
             return;
         }
 

@@ -15,7 +15,6 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.items.settings.IntRangeSetting;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
 
 /**
@@ -52,16 +51,13 @@ public class TelepositionScroll extends SimpleSlimefunItem<ItemUseHandler> {
                         yaw = yaw - 360F;
                     }
 
-                    Slimefun.getPlatformScheduler()
-                            .teleportAsync(
-                                    n,
-                                    new Location(
-                                            n.getWorld(),
-                                            n.getLocation().getX(),
-                                            n.getLocation().getY(),
-                                            n.getLocation().getZ(),
-                                            yaw,
-                                            n.getLocation().getPitch()));
+                    n.teleport(new Location(
+                            n.getWorld(),
+                            n.getLocation().getX(),
+                            n.getLocation().getY(),
+                            n.getLocation().getZ(),
+                            yaw,
+                            n.getLocation().getPitch()));
                 }
             }
         };

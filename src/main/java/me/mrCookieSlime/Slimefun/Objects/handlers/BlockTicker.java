@@ -12,13 +12,23 @@ import io.github.thebusybiscuit.slimefun4.api.exceptions.IncompatibleItemHandler
 import io.github.thebusybiscuit.slimefun4.api.items.ItemHandler;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;
-import java.util.Optional;
+import lombok.Getter;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 
 public abstract class BlockTicker implements ItemHandler {
+
+    @Getter
+    private final boolean universal;
+
     protected boolean unique = true;
 
-    public BlockTicker() {}
+    public BlockTicker() {
+        this.universal = false;
+    }
+
+    public BlockTicker(boolean universal) {
+        this.universal = universal;
+    }
 
     /**
      * 刷新当前 ticker 执行状态
@@ -52,24 +62,6 @@ public abstract class BlockTicker implements ItemHandler {
      * @return Whether this task should run on the main server thread
      */
     public abstract boolean isSynchronized();
-
-    /**
-     * 声明当前 {@link BlockTicker} 是否使用了通用数据
-     */
-    public boolean useUniversalData() {
-        return false;
-    }
-
-    /**
-     * 声明当前 {@link BlockTicker} 是否线程安全
-     * </br>
-     * 默认不启用，将这些机器放置到单线程调度器上运行
-     *
-     * @return 是否线程安全
-     */
-    public boolean isConcurrentSafe() {
-        return false;
-    }
 
     /**
      * This method is called every tick for every block

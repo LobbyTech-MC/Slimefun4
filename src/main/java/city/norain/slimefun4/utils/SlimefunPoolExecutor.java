@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.FutureTask;
-import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -30,29 +29,9 @@ public class SlimefunPoolExecutor extends ThreadPoolExecutor {
             @Nonnull TimeUnit unit,
             @Nonnull BlockingQueue<Runnable> workQueue,
             @Nonnull ThreadFactory threadFactory) {
-        this(
-                name,
-                corePoolSize,
-                maximumPoolSize,
-                keepAliveTime,
-                unit,
-                workQueue,
-                threadFactory,
-                new SlimefunRejectedExecutionHandler());
-    }
-
-    public SlimefunPoolExecutor(
-            String name,
-            int corePoolSize,
-            int maximumPoolSize,
-            long keepAliveTime,
-            @Nonnull TimeUnit unit,
-            @Nonnull BlockingQueue<Runnable> workQueue,
-            @Nonnull ThreadFactory threadFactory,
-            @Nonnull RejectedExecutionHandler handler) {
         super(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue, threadFactory);
 
-        setRejectedExecutionHandler(handler);
+        setRejectedExecutionHandler(new SlimefunRejectedExecutionHandler());
 
         this.name = name;
 

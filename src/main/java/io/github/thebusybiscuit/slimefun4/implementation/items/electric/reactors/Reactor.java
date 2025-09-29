@@ -401,15 +401,13 @@ public abstract class Reactor extends AbstractEnergyProvider
         boolean explosion = explosionsQueue.contains(l);
 
         if (explosion) {
-            Slimefun.runSync(
-                    () -> {
-                        ReactorExplodeEvent event = new ReactorExplodeEvent(l, Reactor.this);
-                        Bukkit.getPluginManager().callEvent(event);
+            Slimefun.runSync(() -> {
+                ReactorExplodeEvent event = new ReactorExplodeEvent(l, Reactor.this);
+                Bukkit.getPluginManager().callEvent(event);
 
-                        data.getBlockMenu().close();
-                        removeHologram(l.getBlock());
-                    },
-                    l);
+                data.getBlockMenu().close();
+                removeHologram(l.getBlock());
+            });
 
             explosionsQueue.remove(l);
             processor.endOperation(l);
@@ -419,20 +417,18 @@ public abstract class Reactor extends AbstractEnergyProvider
     }
 
     private void checkForWaterBlocks(Location l) {
-        Slimefun.runSync(
-                () -> {
-                    /*
-                     * We will pick a surrounding block at random and see if this is water.
-                     * If it isn't, then we will make it explode.
-                     */
-                    int index = ThreadLocalRandom.current().nextInt(WATER_BLOCKS.length);
-                    BlockFace randomNeighbour = WATER_BLOCKS[index];
+        Slimefun.runSync(() -> {
+            /*
+             * We will pick a surrounding block at random and see if this is water.
+             * If it isn't, then we will make it explode.
+             */
+            int index = ThreadLocalRandom.current().nextInt(WATER_BLOCKS.length);
+            BlockFace randomNeighbour = WATER_BLOCKS[index];
 
-                    if (l.getBlock().getRelative(randomNeighbour).getType() != Material.WATER) {
-                        explosionsQueue.add(l);
-                    }
-                },
-                l);
+            if (l.getBlock().getRelative(randomNeighbour).getType() != Material.WATER) {
+                explosionsQueue.add(l);
+            }
+        });
     }
 
     private void createByproduct(

@@ -94,7 +94,8 @@ public class IntegrationsManager {
         // Load any soft dependencies
         onServerLoad();
 
-        Slimefun.getPlatformScheduler().runNextTick((task) -> onServerStart());
+        // Load any integrations which aren't dependencies (loadBefore)
+        plugin.getServer().getScheduler().runTask(plugin, this::onServerStart);
     }
 
     /**

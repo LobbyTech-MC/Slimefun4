@@ -72,7 +72,7 @@ public class GitHubService {
         long period = TimeUnit.HOURS.toMillis(1);
         GitHubTask task = new GitHubTask(this);
 
-        Slimefun.getPlatformScheduler().runTimerAsync(task, 30 * 20L, period);
+        plugin.getServer().getScheduler().runTaskTimerAsynchronously(plugin, task, 30 * 20L, period);
     }
 
     /**

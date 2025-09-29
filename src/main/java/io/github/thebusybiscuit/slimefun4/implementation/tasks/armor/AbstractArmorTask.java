@@ -58,7 +58,7 @@ public abstract class AbstractArmorTask implements Runnable {
                             new Object[] {getClass().getSimpleName(), tickInterval});
         }
 
-        plugin.getPlatformScheduler().runTimerAsync(this, 0L, tickInterval);
+        plugin.getServer().getScheduler().runTaskTimerAsynchronously(plugin, this, 0L, tickInterval);
     }
 
     /**

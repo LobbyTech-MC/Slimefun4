@@ -39,8 +39,10 @@ import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
  * @author TheBusyBiscuit
  * @author Kry-Vosa
  * @author SoSeDiK
+ *
  * @see HologramOwner
  * @see HologramsService
+ *
  */
 public class HologramProjector extends SlimefunItem implements HologramOwner {
 
@@ -126,12 +128,10 @@ public class HologramProjector extends SlimefunItem implements HologramOwner {
                     return;
                 }
 
-                Slimefun.getPlatformScheduler().runAtLocation(projector.getLocation(), (task) -> {
-                    ArmorStand hologram = getArmorStand(projector, true);
-                    hologram.setCustomName(ChatColors.color(message));
-                    StorageCacheUtils.setData(projector.getLocation(), "text", hologram.getCustomName());
-                    openEditor(pl, projector);
-                });
+                ArmorStand hologram = getArmorStand(projector, true);
+                hologram.setCustomName(ChatColors.color(message));
+                StorageCacheUtils.setData(projector.getLocation(), "text", hologram.getCustomName());
+                openEditor(pl, projector);
             });
 
             return false;
@@ -155,7 +155,7 @@ public class HologramProjector extends SlimefunItem implements HologramOwner {
             ArmorStand hologram = getArmorStand(projector, true);
             Location l = new Location(
                     projector.getWorld(), projector.getX() + 0.5, projector.getY() + offset, projector.getZ() + 0.5);
-            Slimefun.getPlatformScheduler().teleportAsync(hologram, l);
+            hologram.teleport(l);
 
             blockData.setData(OFFSET_PARAMETER, String.valueOf(offset));
             openEditor(pl, projector);

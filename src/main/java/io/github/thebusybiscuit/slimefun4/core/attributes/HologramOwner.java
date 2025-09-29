@@ -40,7 +40,7 @@ public interface HologramOwner extends ItemAttribute {
     }
 
     default void updateHologram(@Nonnull Block b, @Nonnull String text, Supplier<Boolean> abort) {
-        if (!Slimefun.isFolia() && Bukkit.isPrimaryThread()) {
+        if (Bukkit.isPrimaryThread()) {
             if (abort.get()) {
                 return;
             }
@@ -48,14 +48,12 @@ public interface HologramOwner extends ItemAttribute {
             return;
         }
 
-        Slimefun.runSync(
-                () -> {
-                    if (abort.get()) {
-                        return;
-                    }
-                    updateHologram(b, text);
-                },
-                b.getLocation());
+        Slimefun.runSync(() -> {
+            if (abort.get()) {
+                return;
+            }
+            updateHologram(b, text);
+        });
     }
 
     /**

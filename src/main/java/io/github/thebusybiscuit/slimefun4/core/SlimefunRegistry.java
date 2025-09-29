@@ -254,7 +254,6 @@ public final class SlimefunRegistry {
         return globalItemHandlers.computeIfAbsent(identifier, c -> new HashSet<>());
     }
 
-    @Deprecated
     @Nonnull
     public Map<String, BlockInfoConfig> getChunks() {
         return chunks;

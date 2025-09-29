@@ -15,10 +15,6 @@ import com.xzavier0722.mc.plugin.slimefun4.storage.migrator.PlayerProfileMigrato
 import io.github.thebusybiscuit.slimefun4.core.commands.SlimefunCommand;
 import io.github.thebusybiscuit.slimefun4.core.commands.SubCommand;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-import java.util.logging.Level;
-import javax.annotation.Nonnull;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
 
 public class MigrateCommand extends SubCommand {
     MigrateCommand(Slimefun plugin, SlimefunCommand cmd) {
@@ -37,7 +33,7 @@ public class MigrateCommand extends SubCommand {
             if (args.length > 1 && args[1].equalsIgnoreCase("confirm")) {
                 Slimefun.getLocalization().sendMessage(sender, "commands.migrate.started", true);
 
-                Slimefun.getPlatformScheduler().runAsync((task) -> {
+                Bukkit.getScheduler().runTaskAsynchronously(Slimefun.instance(), () -> {
                     try {
                         var status = PlayerProfileMigrator.getInstance().migrateData();
                         sendMigrateStatus("玩家数据", sender, status);
@@ -47,7 +43,7 @@ public class MigrateCommand extends SubCommand {
                     }
                 });
 
-                Slimefun.getPlatformScheduler().runAsync((task) -> {
+                Bukkit.getScheduler().runTaskAsynchronously(Slimefun.instance(), () -> {
                     try {
                         var status = BlockStorageMigrator.getInstance().migrateData();
                         sendMigrateStatus("方块数据", sender, status);

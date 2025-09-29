@@ -63,25 +63,14 @@ public class TrashCan extends SlimefunItem implements InventoryBlock, NotRotatab
             public void tick(Block b, SlimefunItem item, SlimefunBlockData data) {
                 BlockMenu menu = data.getBlockMenu();
 
-                try {
-                    menu.lock();
-
-                    for (int slot : getInputSlots()) {
-                        menu.replaceExistingItem(slot, null);
-                    }
-                } finally {
-                    menu.unlock();
+                for (int slot : getInputSlots()) {
+                    menu.replaceExistingItem(slot, null);
                 }
             }
 
             @Override
             public boolean isSynchronized() {
                 return false;
-            }
-
-            @Override
-            public boolean isConcurrentSafe() {
-                return true;
             }
         });
     }
