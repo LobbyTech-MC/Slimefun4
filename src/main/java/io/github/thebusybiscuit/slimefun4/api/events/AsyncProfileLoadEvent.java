@@ -5,6 +5,7 @@ import java.util.UUID;
 import javax.annotation.Nonnull;
 
 import org.apache.commons.lang.Validate;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
@@ -30,7 +31,9 @@ public class AsyncProfileLoadEvent extends Event {
     private PlayerProfile profile;
 
     public AsyncProfileLoadEvent(@Nonnull PlayerProfile profile) {
-        super(true);
+        // this event may be called in main-thread by accident, or while migration
+        // we are not sure
+        super(!Bukkit.isPrimaryThread());
 
         Validate.notNull(profile, "The Profile cannot be null");
 
