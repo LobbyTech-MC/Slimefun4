@@ -1,6 +1,15 @@
 package io.github.thebusybiscuit.slimefun4.core.services.github;
 
+import io.github.bakedlibs.dough.skins.PlayerSkin;
+import io.github.bakedlibs.dough.skins.UUIDLookup;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -10,15 +19,14 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.logging.Level;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.net.ssl.HttpsURLConnection;
 
 import org.bukkit.Bukkit;
 
-import io.github.bakedlibs.dough.skins.PlayerSkin;
-import io.github.bakedlibs.dough.skins.UUIDLookup;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 /**
  * This {@link GitHubTask} represents a {@link Runnable} that is run every X minutes.
@@ -142,6 +150,29 @@ class GitHubTask implements Runnable {
         return 0;
     }
 
+    public static String getContent(String link){
+        try {
+            URL url = new URL(link);
+            HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String outputLine = "";
+       
+            String inputLine;
+            while ((inputLine = br.readLine()) != null) {
+                outputLine += inputLine;
+            }
+            br.close();
+            return outputLine;
+   
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+}
+    static private JsonParser parser = new JsonParser();
+    static private String API_PROFILE_LINK = "https://sessionserver.mojang.com/session/minecraft/profile/";
     private @Nullable String pullTexture(@Nonnull Contributor contributor, @Nonnull Map<String, String> skins)
             throws InterruptedException, ExecutionException, TimeoutException {
         Optional<UUID> uuid = contributor.getUniqueId();
@@ -156,8 +187,11 @@ class GitHubTask implements Runnable {
         }
 
         if (uuid.isPresent()) {
-            CompletableFuture<PlayerSkin> future = PlayerSkin.fromPlayerUUID(Slimefun.instance(), uuid.get());
-            Optional<String> skin = Optional.of(future.get().getProfile().getBase64Texture());
+            //CompletableFuture<PlayerSkin> future = PlayerSkin.fromPlayerUUID(Slimefun.instance(), uuid.get());
+            String json = getContent(API_PROFILE_LINK + uuid);
+            JsonObject o = parser.parse(json).getAsJsonObject();
+            //String jsonBase64 = o.get("properties").getAsJsonArray().get(0).getAsJsonObject().get("value").getAsString();
+            Optional<String> skin = Optional.of(o.get("properties").getAsJsonArray().get(0).getAsJsonObject().get("value").getAsString());
             skins.put(contributor.getMinecraftName(), skin.orElse(""));
             return skin.orElse(null);
         } else {
