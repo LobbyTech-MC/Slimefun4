@@ -1,5 +1,6 @@
 package io.github.thebusybiscuit.slimefun4.core.services.github;
 
+import io.github.bakedlibs.dough.skins.CustomGameProfile;
 import io.github.bakedlibs.dough.skins.PlayerSkin;
 import io.github.bakedlibs.dough.skins.UUIDLookup;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
@@ -187,11 +188,10 @@ class GitHubTask implements Runnable {
         }
 
         if (uuid.isPresent()) {
-            //CompletableFuture<PlayerSkin> future = PlayerSkin.fromPlayerUUID(Slimefun.instance(), uuid.get());
-            String json = getContent(API_PROFILE_LINK + uuid);
-            JsonObject o = parser.parse(json).getAsJsonObject();
-            //String jsonBase64 = o.get("properties").getAsJsonArray().get(0).getAsJsonObject().get("value").getAsString();
-            Optional<String> skin = Optional.of(o.get("properties").getAsJsonArray().get(0).getAsJsonObject().get("value").getAsString());
+            CompletableFuture<PlayerSkin> future = PlayerSkin.fromPlayerUUID(Slimefun.instance(), uuid.get());
+            // fix: # 1128 1.21.9 compatibility
+            Optional<String> skin =
+                    Optional.of(CustomGameProfile.getBase64Texture(future.get().getProfile()));
             skins.put(contributor.getMinecraftName(), skin.orElse(""));
             return skin.orElse(null);
         } else {
