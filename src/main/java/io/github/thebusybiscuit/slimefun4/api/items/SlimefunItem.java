@@ -1204,12 +1204,10 @@ public class SlimefunItem implements Placeable {
                  * The Profile is loaded but Player has not unlocked the
                  * required Research to use this SlimefunItem.
                  */
-            	/*
                 if (sendMessage && !(this instanceof VanillaItem)) {
                     Slimefun.getLocalization()
                             .sendMessage(p, "messages.not-researched", true, s -> s.replace("%item%", getItemName()));
                 }
-                */
 
                 return false;
             } else {
