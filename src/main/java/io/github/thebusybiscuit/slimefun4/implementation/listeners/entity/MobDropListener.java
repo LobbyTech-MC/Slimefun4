@@ -11,6 +11,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
@@ -29,6 +31,7 @@ import io.github.thebusybiscuit.slimefun4.implementation.items.misc.BasicCircuit
  * @see RandomMobDrop
  *
  */
+@EnableAsync
 public class MobDropListener implements Listener {
 
     public MobDropListener(@Nonnull Slimefun plugin) {
@@ -36,6 +39,7 @@ public class MobDropListener implements Listener {
     }
 
     @EventHandler
+    @Async
     public void onEntityKill(EntityDeathEvent e) {
         if (e.getEntity().getKiller() != null) {
             Player p = e.getEntity().getKiller();

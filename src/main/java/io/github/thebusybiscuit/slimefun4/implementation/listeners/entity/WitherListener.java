@@ -8,6 +8,8 @@ import org.bukkit.entity.Wither;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.core.attributes.WitherProof;
@@ -23,6 +25,7 @@ import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
  * @see WitherProof
  *
  */
+@EnableAsync
 public class WitherListener implements Listener {
 
     public WitherListener(@Nonnull Slimefun plugin) {
@@ -30,6 +33,7 @@ public class WitherListener implements Listener {
     }
 
     @EventHandler(ignoreCancelled = true)
+    @Async
     public void onWitherDestroy(EntityChangeBlockEvent e) {
         if (e.getEntity().getType() == EntityType.WITHER) {
             var controller = Slimefun.getDatabaseManager().getBlockDataController();

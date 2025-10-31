@@ -26,6 +26,8 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 import com.xzavier0722.mc.plugin.slimefun4.storage.callback.IAsyncReadCallback;
 import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunBlockData;
@@ -61,6 +63,7 @@ import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
  * @see BlockBreakHandler
  * @see ToolUseHandler
  */
+@EnableAsync
 public class BlockListener implements Listener {
 
     private static final BlockFace[] CARDINAL_BLOCKFACES = new BlockFace[] {
@@ -71,6 +74,7 @@ public class BlockListener implements Listener {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
+    @Async
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onBlockPlaceExisting(BlockPlaceEvent e) {
         Block block = e.getBlock();
@@ -106,6 +110,7 @@ public class BlockListener implements Listener {
         }
     }
 
+    @Async
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onExplosiveToolBlockBreak(ExplosiveToolBreakBlocksEvent e) {
         for (Block block : e.getAdditionalBlocks()) {
@@ -113,6 +118,7 @@ public class BlockListener implements Listener {
         }
     }
 
+    @Async
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onBlockPlace(BlockPlaceEvent e) {
         ItemStack item = e.getItemInHand();
@@ -160,6 +166,7 @@ public class BlockListener implements Listener {
         }
     }
 
+    @Async
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onBlockBreak(BlockBreakEvent e) {
         // Simply ignore any events that were faked by other plugins
@@ -241,6 +248,7 @@ public class BlockListener implements Listener {
         }
     }
 
+    @Async
     @ParametersAreNonnullByDefault
     private void callToolHandler(BlockBreakEvent e, ItemStack item, int fortune, List<ItemStack> drops) {
         SlimefunItem tool = SlimefunItem.getByItem(item);
@@ -254,6 +262,7 @@ public class BlockListener implements Listener {
         }
     }
 
+    @Async
     @ParametersAreNonnullByDefault
     private void callBlockHandler(BlockBreakEvent e, ItemStack item, List<ItemStack> drops) {
         var loc = e.getBlock().getLocation();
@@ -271,6 +280,7 @@ public class BlockListener implements Listener {
         }
     }
 
+    @Async
     @ParametersAreNonnullByDefault
     private void dropItems(
             BlockBreakEvent e, ItemStack item, Block block, @Nullable SlimefunItem sfBlock, List<ItemStack> drops) {
@@ -312,6 +322,7 @@ public class BlockListener implements Listener {
      * @param block  The {@link Block} that was broken
      * @param item   The {@link ItemStack} that was used to break the {@link Block}
      */
+    @Async
     @ParametersAreNonnullByDefault
     private void checkForSensitiveBlockAbove(Player player, Block block, ItemStack item) {
         Block blockAbove = block.getRelative(BlockFace.UP);
@@ -364,6 +375,7 @@ public class BlockListener implements Listener {
      * @param block The {@link Block} in question
      * @param count The amount of times this has been recursively called
      */
+    @Async
     @ParametersAreNonnullByDefault
     private void checkForSensitiveBlocks(Block block, Integer count, boolean isDropItems) {
         /**if (count >= Bukkit.getServer().getMaxChainedNeighborUpdates()) {
@@ -398,6 +410,7 @@ public class BlockListener implements Listener {
      * @param block     The {@link Block} the {@link BlockData} would be at
      * @return Whether the {@link BlockData} would be supported at the given {@link Block}
      */
+    @Async
     @ParametersAreNonnullByDefault
     private boolean isSupported(BlockData blockData, Block block) {
         if (Slimefun.getMinecraftVersion().isAtLeast(MinecraftVersion.MINECRAFT_1_19)) {
@@ -408,6 +421,7 @@ public class BlockListener implements Listener {
         }
     }
 
+    @Async
     private int getBonusDropsWithFortune(@Nullable ItemStack item, @Nonnull Block b) {
         int amount = 1;
 
@@ -432,6 +446,7 @@ public class BlockListener implements Listener {
         return amount;
     }
 
+    @Async
     // 美化可旋转类 (如头颅) 物品放置
     private void optimizePlacement(SlimefunItem sfItem, Block block, Location l) {
         if (block.getBlockData() instanceof Rotatable rotatable

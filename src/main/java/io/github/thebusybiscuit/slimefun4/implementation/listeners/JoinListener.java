@@ -7,6 +7,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 import io.github.thebusybiscuit.slimefun4.api.items.HashedArmorpiece;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
@@ -21,6 +23,7 @@ import io.github.thebusybiscuit.slimefun4.implementation.tasks.armor.RadiationTa
  *
  * @author iTwins
  */
+@EnableAsync
 public class JoinListener implements Listener {
 
     public JoinListener(@Nonnull Slimefun plugin) {
@@ -28,6 +31,7 @@ public class JoinListener implements Listener {
     }
 
     @EventHandler
+    @Async
     public void onJoin(@Nonnull PlayerJoinEvent e) {
         final var p = e.getPlayer();
 

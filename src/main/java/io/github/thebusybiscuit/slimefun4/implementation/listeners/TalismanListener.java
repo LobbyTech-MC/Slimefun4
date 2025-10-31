@@ -45,6 +45,8 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.Vector;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 import io.github.bakedlibs.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
@@ -70,6 +72,7 @@ import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
  * @see Talisman
  *
  */
+@EnableAsync
 public class TalismanListener implements Listener {
 
     private final int[] armorSlots = {39, 38, 37, 36};
@@ -78,6 +81,7 @@ public class TalismanListener implements Listener {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
+    @Async
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onDamageGet(EntityDamageEvent e) {
         if (e.getEntity() instanceof Player) {
@@ -116,6 +120,7 @@ public class TalismanListener implements Listener {
         }
     }
 
+    @Async
     private void onProjectileDamage(@Nonnull EntityDamageByEntityEvent e) {
         // "Fixes" #1022 - We just ignore Tridents now.
         if (e.getDamager() instanceof Projectile projectile && !(e.getDamager() instanceof Trident)) {
@@ -135,6 +140,7 @@ public class TalismanListener implements Listener {
      * @param projectile
      *            The {@link Projectile} that hit this {@link Player}
      */
+    @Async
     private void returnProjectile(@Nonnull Player p, @Nonnull Projectile projectile) {
         Vector direction = p.getEyeLocation().getDirection().multiply(2.0);
         Location loc = p.getEyeLocation().add(direction.getX(), direction.getY(), direction.getZ());
@@ -154,6 +160,7 @@ public class TalismanListener implements Listener {
         projectile.remove();
     }
 
+    @Async
     @EventHandler(ignoreCancelled = true)
     public void onKill(EntityDeathEvent e) {
         if (e.getDrops().isEmpty() || e.getEntity().getKiller() == null) {
@@ -193,6 +200,7 @@ public class TalismanListener implements Listener {
         }
     }
 
+    @Async
     @Nonnull
     @ParametersAreNonnullByDefault
     private Collection<ItemStack> getExtraDrops(LivingEntity entity, Collection<ItemStack> drops) {
@@ -254,6 +262,7 @@ public class TalismanListener implements Listener {
         return items;
     }
 
+    @Async
     @EventHandler
     public void onItemBreak(PlayerItemBreakEvent e) {
         if (Talisman.trigger(e, SlimefunItems.TALISMAN_ANVIL)) {
@@ -298,6 +307,7 @@ public class TalismanListener implements Listener {
         }
     }
 
+    @Async
     @EventHandler
     public void onSprint(PlayerToggleSprintEvent e) {
         if (e.isSprinting()) {
@@ -305,6 +315,7 @@ public class TalismanListener implements Listener {
         }
     }
 
+    @Async
     @EventHandler
     public void onEnchant(EnchantItemEvent e) {
         Random random = ThreadLocalRandom.current();
@@ -344,6 +355,7 @@ public class TalismanListener implements Listener {
         }
     }
 
+    @Async
     @EventHandler(ignoreCancelled = true)
     public void onExperienceReceive(PlayerExpChangeEvent e) {
         // Check if the experience change was positive.
@@ -353,6 +365,7 @@ public class TalismanListener implements Listener {
         }
     }
 
+    @Async
     @EventHandler(ignoreCancelled = true)
     public void onBlockDropItems(BlockDropItemEvent e) {
         ItemStack item = e.getPlayer().getInventory().getItemInMainHand();
@@ -376,6 +389,7 @@ public class TalismanListener implements Listener {
         }
     }
 
+    @Async
     private void doubleTalismanDrops(
             BlockDropItemEvent e, SlimefunItemStack talismanItemStack, SlimefunTag tag, Material type, ItemMeta meta) {
         if (tag.isTagged(type)) {
@@ -415,6 +429,7 @@ public class TalismanListener implements Listener {
         }
     }
 
+    @Async
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {
         if (SlimefunTag.CAVEMAN_TALISMAN_TRIGGERS.isTagged(e.getBlock().getType())) {
@@ -422,6 +437,7 @@ public class TalismanListener implements Listener {
         }
     }
 
+    @Async
     private int getAmountWithFortune(@Nonnull Material type, int fortuneLevel) {
         if (fortuneLevel > 0) {
             Random random = ThreadLocalRandom.current();

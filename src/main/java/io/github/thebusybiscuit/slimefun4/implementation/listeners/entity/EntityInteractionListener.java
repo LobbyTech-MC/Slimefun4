@@ -9,6 +9,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 import io.github.thebusybiscuit.slimefun4.api.items.ItemState;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
@@ -24,6 +26,7 @@ import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
  * @see EntityInteractHandler
  *
  */
+@EnableAsync
 public class EntityInteractionListener implements Listener {
 
     public EntityInteractionListener(@Nonnull Slimefun plugin) {
@@ -31,6 +34,7 @@ public class EntityInteractionListener implements Listener {
     }
 
     @EventHandler
+    @Async
     public void onInteractEntity(PlayerInteractEntityEvent e) {
         if (!e.getRightClicked().isValid()) {
             return;

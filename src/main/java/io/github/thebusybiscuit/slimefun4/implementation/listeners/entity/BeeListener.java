@@ -10,6 +10,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 import io.github.bakedlibs.dough.items.ItemUtils;
 import io.github.thebusybiscuit.slimefun4.api.player.PlayerProfile;
@@ -23,6 +25,7 @@ import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
  * @author Linox
  *
  */
+@EnableAsync
 public class BeeListener implements Listener {
 
     public BeeListener(@Nonnull Slimefun plugin) {
@@ -30,6 +33,7 @@ public class BeeListener implements Listener {
     }
 
     @EventHandler
+    @Async
     public void onDamage(EntityDamageByEntityEvent e) {
         if (e.getDamager() instanceof Bee && e.getEntity() instanceof Player) {
             Player p = (Player) e.getEntity();

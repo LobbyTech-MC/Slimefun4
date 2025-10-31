@@ -8,6 +8,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.core.handlers.WeaponUseHandler;
@@ -21,12 +23,14 @@ import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
  * @see WeaponUseHandler
  *
  */
+@EnableAsync
 public class SlimefunItemHitListener implements Listener {
 
     public SlimefunItemHitListener(@Nonnull Slimefun plugin) {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
+    @Async
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onDamage(EntityDamageByEntityEvent e) {
         if (!(e.getDamager() instanceof Player)) {
