@@ -22,6 +22,7 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import io.github.thebusybiscuit.slimefun4.implementation.items.tools.EnableAsync;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import io.github.thebusybiscuit.slimefun4.utils.itemstack.ItemStackWrapper;
@@ -30,7 +31,10 @@ import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 
+@EnableAsync
 public class CrafterSmartPort extends SlimefunItem {
 
     public static final int[] INPUT_SLOTS = {
@@ -44,6 +48,7 @@ public class CrafterSmartPort extends SlimefunItem {
 
         new BlockMenuPreset("CRAFTER_SMART_PORT", "&a合成机智能交互接口") {
             @Override
+            @Async
             public void init() {
                 addItem(6, getCountItem(), (p, slot, item, action) -> false);
 
@@ -68,6 +73,7 @@ public class CrafterSmartPort extends SlimefunItem {
             }
 
             @Override
+            @Async
             public boolean canOpen(@Nonnull Block b, @Nonnull Player p) {
                 return p.hasPermission("slimefun.inventory.bypass")
                         || Slimefun.getProtectionManager()
@@ -75,6 +81,7 @@ public class CrafterSmartPort extends SlimefunItem {
             }
 
             @Override
+            @Async
             public void newInstance(@Nonnull BlockMenu menu, @Nonnull Block b) {
                 // Resume the ingredient count
                 String countStr = StorageCacheUtils.getData(b.getLocation(), "ingredientCount");
@@ -89,6 +96,7 @@ public class CrafterSmartPort extends SlimefunItem {
             }
 
             @Override
+            @Async
             public int[] getSlotsAccessedByItemTransport(DirtyChestMenu menu, ItemTransportFlow flow, ItemStack item) {
                 if (flow == ItemTransportFlow.WITHDRAW) return OUTPUT_SLOTS;
 
@@ -114,6 +122,7 @@ public class CrafterSmartPort extends SlimefunItem {
     }
 
     @Override
+    @Async
     public void preRegister() {
         addItemHandler(new BlockBreakHandler(false, true) {
             @Override
@@ -135,6 +144,7 @@ public class CrafterSmartPort extends SlimefunItem {
         });
     }
 
+    @Async
     private ItemStack getCountItem() {
         ItemStack countItem = new ItemStack(Material.CLOCK);
         ItemMeta im = countItem.getItemMeta();

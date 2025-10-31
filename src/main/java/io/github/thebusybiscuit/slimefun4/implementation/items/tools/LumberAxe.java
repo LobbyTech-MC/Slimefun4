@@ -13,6 +13,7 @@ import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.Orientable;
 import org.bukkit.inventory.ItemStack;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 
@@ -26,6 +27,8 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ToolUseHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * The {@link LumberAxe} is a powerful tool which can chop entire trees.
@@ -35,6 +38,7 @@ import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
  * @author TheBusyBiscuit
  *
  */
+@EnableAsync
 public class LumberAxe extends SlimefunItem implements NotPlaceable {
 
     private static final int MAX_BROKEN = 100;
@@ -48,6 +52,7 @@ public class LumberAxe extends SlimefunItem implements NotPlaceable {
     }
 
     @Nonnull
+    @Async
     private ToolUseHandler onBlockBreak() {
         return (e, tool, fortune, drops) -> {
             if (!e.getPlayer().isSneaking() && Tag.LOGS.isTagged(e.getBlock().getType())) {
@@ -66,6 +71,7 @@ public class LumberAxe extends SlimefunItem implements NotPlaceable {
     }
 
     @Nonnull
+    @Async
     public ItemUseHandler onItemUse() {
         return e -> {
             if (e.getClickedBlock().isPresent() && !e.getPlayer().isSneaking()) {
@@ -92,6 +98,7 @@ public class LumberAxe extends SlimefunItem implements NotPlaceable {
         return Tag.LOGS.isTagged(block.getType()) && !block.getType().name().startsWith("STRIPPED_");
     }
 
+    @Async
     private void stripLog(@Nonnull Block b) {
         // No need for a SoundEffect here, this is supposed to be a vanilla sound.
         b.getWorld().playSound(b.getLocation(), Sound.ITEM_AXE_STRIP, 1, 1);
@@ -103,6 +110,7 @@ public class LumberAxe extends SlimefunItem implements NotPlaceable {
         b.setBlockData(orientable);
     }
 
+    @Async
     private void breakLog(@Nonnull Block b) {
         b.getWorld().playEffect(b.getLocation(), Effect.STEP_SOUND, b.getType());
 
