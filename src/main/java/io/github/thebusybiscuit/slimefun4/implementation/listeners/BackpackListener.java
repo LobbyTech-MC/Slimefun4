@@ -32,6 +32,7 @@ import io.github.thebusybiscuit.slimefun4.core.services.sounds.SoundEffect;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.implementation.items.backpacks.Cooler;
 import io.github.thebusybiscuit.slimefun4.implementation.items.backpacks.SlimefunBackpack;
+import cn.whiteg.chanlang.LangUtils;
 
 /**
  * This {@link Listener} is responsible for all events centered around a {@link SlimefunBackpack}.
@@ -176,23 +177,26 @@ public class BackpackListener implements Listener {
         if (PlayerBackpack.getBackpackUUID(meta).isEmpty()
                 && PlayerBackpack.getBackpackID(meta).isEmpty()) {
             // Create backpack
-            Slimefun.getLocalization().sendMessage(p, "backpack.set-name", true);
-            Slimefun.getChatCatcher().scheduleCatcher(p.getUniqueId(), name -> {
-                var pInv = p.getInventory();
-                if (!item.equals(pInv.getItemInMainHand()) && !item.equals(pInv.getItemInOffHand())) {
-                    Slimefun.getLocalization().sendMessage(p, "backpack.not-original-item", true);
-                    return;
-                }
-                if (item.getAmount() > 1) {
-                    Slimefun.getLocalization().sendMessage(p, "backpack.no-stack", true);
-                    return;
-                }
-                PlayerBackpack.bindItem(
-                        item,
-                        Slimefun.getDatabaseManager()
-                                .getProfileDataController()
-                                .createBackpack(p, name, profile.nextBackpackNum(), size));
-            });
+            //Slimefun.getLocalization().sendMessage(p, "backpack.set-name", true);
+            //Slimefun.getChatCatcher().scheduleCatcher(p.getUniqueId(), name -> {
+        	
+            var pInv = p.getInventory();
+            if (!item.equals(pInv.getItemInMainHand()) && !item.equals(pInv.getItemInOffHand())) {
+                Slimefun.getLocalization().sendMessage(p, "backpack.not-original-item", true);
+                return;
+            }
+            if (item.getAmount() > 1) {
+                Slimefun.getLocalization().sendMessage(p, "backpack.no-stack", true);
+                return;
+            }
+            String name = LangUtils.getItemDisplayName(item);
+			//String name = item.getI18NDisplayName();
+			PlayerBackpack.bindItem(
+                    item,
+                    Slimefun.getDatabaseManager()
+                            .getProfileDataController()
+                            .createBackpack(p, name , profile.nextBackpackNum(), size));
+            //});
         }
 
         /*
