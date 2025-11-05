@@ -14,8 +14,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.EnableAsync;
 
 import io.github.thebusybiscuit.slimefun4.api.events.PlayerRightClickEvent;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
@@ -37,7 +35,6 @@ import io.github.thebusybiscuit.slimefun4.implementation.items.electric.gadgets.
  * @see VanillaAutoCrafter
  * @see EnhancedAutoCrafter
  */
-@EnableAsync
 public class AutoCrafterListener implements Listener {
 
     @ParametersAreNonnullByDefault
@@ -46,7 +43,6 @@ public class AutoCrafterListener implements Listener {
     }
 
     @EventHandler
-    @Async
     public void onInteract(PlayerRightClickEvent e) {
         Optional<Block> clickedBlock = e.getClickedBlock();
 
@@ -99,7 +95,6 @@ public class AutoCrafterListener implements Listener {
     }
 
     @ParametersAreNonnullByDefault
-    @Async
     private boolean hasUnlockedRecipe(Player p, ItemStack item) {
         for (Recipe recipe : Slimefun.getMinecraftRecipeService().getRecipesFor(item)) {
             if (recipe instanceof Keyed keyed && !p.hasDiscoveredRecipe(keyed.getKey())) {

@@ -16,8 +16,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.EnableAsync;
 
 import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunBlockData;
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
@@ -44,7 +42,6 @@ import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
  * @author DNx5
  *
  */
-@EnableAsync
 public class CargoNet extends AbstractItemNetwork implements HologramOwner {
 
     private static final int RANGE = 5;
@@ -61,7 +58,6 @@ public class CargoNet extends AbstractItemNetwork implements HologramOwner {
                 .orElse(null);
     }
 
-    @Async
     public static @Nonnull CargoNet getNetworkFromLocationOrCreate(@Nonnull Location l) {
         Optional<CargoNet> cargoNetwork = Slimefun.getNetworkManager().getNetworkFromLocation(l, CargoNet.class);
 
@@ -95,7 +91,6 @@ public class CargoNet extends AbstractItemNetwork implements HologramOwner {
     }
 
     @Override
-    @Async
     public NetworkComponent classifyLocation(@Nonnull Location l) {
         var data = StorageCacheUtils.getBlock(l);
 
@@ -112,7 +107,6 @@ public class CargoNet extends AbstractItemNetwork implements HologramOwner {
     }
 
     @Override
-    @Async
     public void onClassificationChange(Location l, NetworkComponent from, NetworkComponent to) {
         connectorCache.remove(l);
 
@@ -131,7 +125,6 @@ public class CargoNet extends AbstractItemNetwork implements HologramOwner {
         }
     }
 
-    @Async
     public void tick(@Nonnull Block b, SlimefunBlockData blockData) {
         if (!regulator.equals(b.getLocation())) {
             updateHologram(b, "&4发现附近有多个货运网络调节机", blockData::isPendingRemove);
@@ -179,7 +172,6 @@ public class CargoNet extends AbstractItemNetwork implements HologramOwner {
         }
     }
 
-    @Async
     private @Nonnull Map<Location, Integer> mapInputNodes() {
         Map<Location, Integer> inputs = new HashMap<>();
 
@@ -194,7 +186,6 @@ public class CargoNet extends AbstractItemNetwork implements HologramOwner {
         return inputs;
     }
 
-    @Async
     private @Nonnull Map<Integer, List<Location>> mapOutputNodes() {
         Map<Integer, List<Location>> output = new HashMap<>();
 
@@ -240,7 +231,6 @@ public class CargoNet extends AbstractItemNetwork implements HologramOwner {
      *
      * @return The frequency of the given node
      */
-    @Async
     private static int getFrequency(@Nonnull Location node) {
         var data = StorageCacheUtils.getBlock(node);
         if (data == null) {

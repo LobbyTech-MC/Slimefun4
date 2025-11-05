@@ -13,8 +13,6 @@ import javax.annotation.Nullable;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Location;
 import org.bukkit.Server;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.EnableAsync;
 
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.LocationUtils;
 
@@ -38,7 +36,6 @@ import io.github.thebusybiscuit.slimefun4.implementation.listeners.NetworkListen
  * @see NetworkListener
  *
  */
-@EnableAsync
 public class NetworkManager {
 
     private final int maxNodes;
@@ -119,13 +116,11 @@ public class NetworkManager {
      * @return A {@link List} containing every {@link Network} on the {@link Server}
      */
     @Nonnull
-    @Async
     public List<Network> getNetworkList() {
         return Collections.unmodifiableList(networks);
     }
 
     @Nonnull
-    @Async
     public <T extends Network> Optional<T> getNetworkFromLocation(@Nullable Location l, @Nonnull Class<T> type) {
         if (l == null) {
             return Optional.empty();
@@ -143,7 +138,6 @@ public class NetworkManager {
     }
 
     @Nonnull
-    @Async
     public <T extends Network> List<T> getNetworksFromLocation(@Nullable Location l, @Nonnull Class<T> type) {
         if (l == null) {
             // No networks here, if the location does not even exist
@@ -168,7 +162,6 @@ public class NetworkManager {
      * @param network
      *            The {@link Network} to register
      */
-    @Async
     public void registerNetwork(@Nonnull Network network) {
         Validate.notNull(network, "Cannot register a null Network");
 
@@ -184,7 +177,6 @@ public class NetworkManager {
      * @param network
      *            The {@link Network} to remove
      */
-    @Async
     public void unregisterNetwork(@Nonnull Network network) {
         Validate.notNull(network, "Cannot unregister a null Network");
 
@@ -202,7 +194,6 @@ public class NetworkManager {
      * @param l
      *            The {@link Location} to update
      */
-    @Async
     public void updateAllNetworks(@Nonnull Location l) {
         Validate.notNull(l, "The Location cannot be null");
 

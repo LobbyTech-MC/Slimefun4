@@ -11,8 +11,6 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.EnableAsync;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
@@ -25,7 +23,6 @@ import io.github.thebusybiscuit.slimefun4.implementation.items.VanillaItem;
  * @author TheBusyBiscuit
  *
  */
-@EnableAsync
 public class IronGolemListener implements Listener {
 
     public IronGolemListener(@Nonnull Slimefun plugin) {
@@ -33,7 +30,6 @@ public class IronGolemListener implements Listener {
     }
 
     @EventHandler
-    @Async
     public void onIronGolemHeal(PlayerInteractEntityEvent e) {
         if (e.getRightClicked().getType() == EntityType.IRON_GOLEM) {
             PlayerInventory inv = e.getPlayer().getInventory();

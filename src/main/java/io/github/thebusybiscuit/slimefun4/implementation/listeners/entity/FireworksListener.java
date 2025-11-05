@@ -9,8 +9,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.meta.FireworkMeta;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.EnableAsync;
 
 import io.github.thebusybiscuit.slimefun4.api.researches.Research;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
@@ -22,7 +20,6 @@ import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
  * @author TheBusyBiscuit
  *
  */
-@EnableAsync
 public class FireworksListener implements Listener {
 
     public FireworksListener(@Nonnull Slimefun plugin) {
@@ -30,7 +27,6 @@ public class FireworksListener implements Listener {
     }
 
     @EventHandler
-    @Async
     public void onResearchFireworkDamage(EntityDamageByEntityEvent e) {
         if (e.getDamager() instanceof Firework firework) {
             FireworkMeta meta = firework.getFireworkMeta();

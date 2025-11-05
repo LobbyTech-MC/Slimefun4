@@ -7,8 +7,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.EnableAsync;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
@@ -21,14 +19,12 @@ import io.github.thebusybiscuit.slimefun4.implementation.items.cargo.CargoNode;
  * @author TheBusyBiscuit
  *
  */
-@EnableAsync
 public class CargoNodeListener implements Listener {
 
     public CargoNodeListener(@Nonnull Slimefun plugin) {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
-    @Async
     @EventHandler(ignoreCancelled = true)
     public void onCargoNodePlace(BlockPlaceEvent e) {
         Block b = e.getBlock();
@@ -41,7 +37,6 @@ public class CargoNodeListener implements Listener {
         }
     }
 
-    @Async
     private boolean isCargoNode(@Nonnull ItemStack item) {
         return SlimefunItem.getByItem(item) instanceof CargoNode;
     }

@@ -16,8 +16,6 @@ import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.EnableAsync;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.core.attributes.PiglinBarterDrop;
@@ -33,7 +31,6 @@ import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
  * @author dNiym
  *
  */
-@EnableAsync
 public class PiglinListener implements Listener {
 
     public PiglinListener(@Nonnull Slimefun plugin) {
@@ -41,7 +38,6 @@ public class PiglinListener implements Listener {
     }
 
     @EventHandler
-    @Async
     public void onPickup(EntityPickupItemEvent e) {
         if (e.getEntityType() == EntityType.PIGLIN) {
             ItemStack item = e.getItem().getItemStack();
@@ -54,7 +50,6 @@ public class PiglinListener implements Listener {
     }
 
     @EventHandler
-    @Async
     public void onInteract(PlayerInteractEntityEvent e) {
         if (!e.getRightClicked().isValid() || e.getRightClicked().getType() != EntityType.PIGLIN) {
             return;
@@ -81,7 +76,6 @@ public class PiglinListener implements Listener {
     }
 
     @EventHandler
-    @Async
     public void onPiglinDropItem(EntityDropItemEvent e) {
         if (e.getEntity() instanceof Piglin) {
             Set<ItemStack> drops = Slimefun.getRegistry().getBarteringDrops();

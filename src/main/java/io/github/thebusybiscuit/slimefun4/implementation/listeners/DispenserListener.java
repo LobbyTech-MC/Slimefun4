@@ -11,8 +11,6 @@ import org.bukkit.block.data.Directional;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockDispenseEvent;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.EnableAsync;
 
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 
@@ -31,14 +29,12 @@ import io.papermc.lib.PaperLib;
  * @see BlockDispenseHandler
  *
  */
-@EnableAsync
 public class DispenserListener implements Listener {
 
     public DispenserListener(@Nonnull Slimefun plugin) {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
-    @Async
     @EventHandler
     public void onBlockDispensing(BlockDispenseEvent e) {
         Block b = e.getBlock();

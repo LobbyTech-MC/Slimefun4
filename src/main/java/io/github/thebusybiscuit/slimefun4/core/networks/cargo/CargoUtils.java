@@ -16,8 +16,6 @@ import org.bukkit.inventory.FurnaceInventory;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.EnableAsync;
 
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 import com.xzavier0722.mc.plugin.slimefuncomplib.event.cargo.CargoInsertEvent;
@@ -45,7 +43,6 @@ import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
  * @author DNx5
  *
  */
-@EnableAsync
 final class CargoUtils {
 
     /**
@@ -68,7 +65,6 @@ final class CargoUtils {
      *
      * @return Whether this {@link Block} represents a {@link BlockState} that is an {@link InventoryHolder}
      */
-    @Async
     static boolean hasInventory(@Nullable Block block) {
         if (block == null) {
             // No block, no inventory
@@ -80,7 +76,6 @@ final class CargoUtils {
     }
 
     @Nonnull
-    @Async
     static int[] getInputSlotRange(@Nonnull Inventory inv, @Nullable ItemStack item) {
         if (inv instanceof FurnaceInventory) {
             if (item != null && item.getType().isFuel()) {
@@ -111,7 +106,6 @@ final class CargoUtils {
     }
 
     @Nonnull
-    @Async
     static int[] getOutputSlotRange(@Nonnull Inventory inv) {
         if (inv instanceof FurnaceInventory) {
             // Slot 2-3
@@ -125,7 +119,6 @@ final class CargoUtils {
         }
     }
 
-    @Async
     @Nullable static ItemStack withdraw(
             AbstractItemNetwork network,
             Map<Location, Inventory> inventories,
@@ -180,7 +173,6 @@ final class CargoUtils {
         return null;
     }
 
-    @Async
     @Nullable static ItemStack withdrawFromVanillaInventory(
             AbstractItemNetwork network, Block node, ItemStack template, Inventory inv) {
         ItemStack[] contents = inv.getContents();
@@ -214,7 +206,6 @@ final class CargoUtils {
         return null;
     }
 
-    @Async
     @Nullable static ItemStackAndInteger withdraw(
             AbstractItemNetwork network, Map<Location, Inventory> inventories, Block node, Block target) {
         DirtyChestMenu menu = getChestMenu(target);
@@ -257,7 +248,6 @@ final class CargoUtils {
         return null;
     }
 
-    @Async
     @Nullable private static ItemStackAndInteger withdrawFromVanillaInventory(
             AbstractItemNetwork network, Block node, Inventory inv) {
         ItemStack[] contents = inv.getContents();
@@ -277,7 +267,6 @@ final class CargoUtils {
         return null;
     }
 
-    @Async
     @Nullable static ItemStack insert(
             AbstractItemNetwork network,
             Map<Location, Inventory> inventories,
@@ -359,7 +348,6 @@ final class CargoUtils {
         return stack;
     }
 
-    @Async
     @Nullable private static ItemStack insertIntoVanillaInventory(
             @Nonnull ItemStack stack, @Nonnull ItemStackWrapper wrapper, boolean smartFill, @Nonnull Inventory inv) {
         /*
@@ -413,12 +401,10 @@ final class CargoUtils {
         return stack;
     }
 
-    @Async
     @Nullable static DirtyChestMenu getChestMenu(@Nonnull Block block) {
         return StorageCacheUtils.getMenu(block.getLocation());
     }
 
-    @Async
     static boolean matchesFilter(@Nonnull AbstractItemNetwork network, @Nonnull Block node, @Nullable ItemStack item) {
         if (item == null || item.getType() == Material.AIR) {
             return false;
@@ -440,7 +426,6 @@ final class CargoUtils {
      *
      * @return Whether the given {@link ItemStack} can be smelted or not
      */
-    @Async
     private static boolean isSmeltable(@Nullable ItemStack stack, boolean lazy) {
         if (lazy) {
             return stack != null && Tag.LOGS.isTagged(stack.getType());
@@ -449,7 +434,6 @@ final class CargoUtils {
         }
     }
 
-    @Async
     private static boolean isPotion(@Nullable ItemStack item) {
         if (item != null) {
             Material type = item.getType();
@@ -466,7 +450,6 @@ final class CargoUtils {
      * @return The slots where the {@link ItemFilter} section for a cargo node sits
      */
     @Nonnull
-    @Async
     public static int[] getFilteringSlots() {
         return FILTER_SLOTS;
     }

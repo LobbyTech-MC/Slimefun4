@@ -18,8 +18,6 @@ import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.EnableAsync;
 
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 
@@ -46,7 +44,6 @@ import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
  * @see AbstractItemNetwork
  *
  */
-@EnableAsync
 class CargoNetworkTask implements Runnable {
 
     private final NetworkManager manager;
@@ -66,7 +63,6 @@ class CargoNetworkTask implements Runnable {
     }
 
     @Override
-    @Async
     public void run() {
         long timestamp = System.nanoTime();
 
@@ -100,7 +96,6 @@ class CargoNetworkTask implements Runnable {
     }
 
     @ParametersAreNonnullByDefault
-    @Async
     private void routeItems(
             Location inputNode, Block inputTarget, int frequency, Map<Integer, List<Location>> outputNodes) {
         ItemStackAndInteger slot = CargoUtils.withdraw(network, inventories, inputNode.getBlock(), inputTarget);
@@ -123,7 +118,6 @@ class CargoNetworkTask implements Runnable {
     }
 
     @ParametersAreNonnullByDefault
-    @Async
     private void insertItem(Block inputTarget, int previousSlot, ItemStack item) {
         Inventory inv = inventories.get(inputTarget.getLocation());
 
@@ -156,7 +150,6 @@ class CargoNetworkTask implements Runnable {
     }
 
     @Nullable @ParametersAreNonnullByDefault
-    @Async
     private ItemStack distributeItem(ItemStack stack, Location inputNode, List<Location> outputNodes) {
         ItemStack item = stack;
 
@@ -215,7 +208,6 @@ class CargoNetworkTask implements Runnable {
      * @param outputNodes
      *            A {@link Deque} of {@link Location Locations} of the output nodes
      */
-    @Async
     private void roundRobinSort(int index, Deque<Location> outputNodes) {
         if (index < outputNodes.size()) {
             // Not ideal but actually not bad performance-wise over more elegant alternatives
