@@ -26,6 +26,7 @@ public class CrafterSmartPortParser implements CrafterInteractable {
     }
 
     @Override
+    @Async
     public boolean canOutput(ItemStack item) {
         ItemStackWrapper wrapper = ItemStackWrapper.wrap(item);
 
@@ -48,6 +49,7 @@ public class CrafterSmartPortParser implements CrafterInteractable {
     }
 
     @Override
+    @Async
     public boolean matchRecipe(
             AbstractAutoCrafter crafter,
             Collection<Predicate<ItemStack>> recipe,

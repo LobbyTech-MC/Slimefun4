@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.springframework.scheduling.annotation.Async;
 
 import io.github.thebusybiscuit.slimefun4.implementation.items.autocrafters.AbstractAutoCrafter;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
@@ -31,6 +32,7 @@ public class ChestInventoryParser implements CrafterInteractable {
     }
 
     @Override
+    @Async
     public boolean matchRecipe(
             AbstractAutoCrafter crafter,
             Collection<Predicate<ItemStack>> recipe,
@@ -54,6 +56,7 @@ public class ChestInventoryParser implements CrafterInteractable {
         return inv.addItem(item).isEmpty();
     }
 
+    @Async
     private boolean isFit(ItemStack item) {
         ItemStack[] contents = inv.getContents();
 
