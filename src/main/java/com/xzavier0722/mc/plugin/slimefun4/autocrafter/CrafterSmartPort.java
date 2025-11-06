@@ -12,8 +12,6 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.EnableAsync;
 
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 
@@ -33,7 +31,6 @@ import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
 
-@EnableAsync
 public class CrafterSmartPort extends SlimefunItem {
 
     public static final int[] INPUT_SLOTS = {
@@ -78,7 +75,6 @@ public class CrafterSmartPort extends SlimefunItem {
             }
 
             @Override
-            @Async
             public void newInstance(@Nonnull BlockMenu menu, @Nonnull Block b) {
                 // Resume the ingredient count
                 String countStr = StorageCacheUtils.getData(b.getLocation(), "ingredientCount");
