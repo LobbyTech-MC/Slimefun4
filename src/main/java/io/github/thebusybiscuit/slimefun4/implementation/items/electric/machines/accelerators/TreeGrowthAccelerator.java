@@ -14,12 +14,12 @@ import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 
 import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
+import io.github.thebusybiscuit.slimefun4.implementation.items.misc.OrganicFertilizer;
 import io.github.thebusybiscuit.slimefun4.utils.compatibility.VersionedParticle;
-import io.github.thebusybiscuit.slimefun4.utils.itemstack.ItemStackWrapper;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 
 /**
@@ -36,9 +36,6 @@ public class TreeGrowthAccelerator extends AbstractGrowthAccelerator {
 
     private static final int ENERGY_CONSUMPTION = 24;
     private static final int RADIUS = 9;
-
-    // We wanna strip the Slimefun Item id here
-    private static final ItemStack organicFertilizer = ItemStackWrapper.wrap(SlimefunItems.FERTILIZER);
 
     @ParametersAreNonnullByDefault
     public TreeGrowthAccelerator(
@@ -135,9 +132,6 @@ public class TreeGrowthAccelerator extends AbstractGrowthAccelerator {
     }
 
     protected boolean isFertilizer(@Nullable ItemStack item) {
-        var id = Slimefun.getItemDataService().getItemData(item);
-
-        return id.map(s -> s.startsWith("FERTILIZER") && SlimefunItems.FERTILIZER.getType() == item.getType())
-                .orElse(false);
+        return SlimefunItem.getByItem(item) instanceof OrganicFertilizer;
     }
 }
