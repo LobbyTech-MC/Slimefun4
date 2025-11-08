@@ -9,6 +9,8 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 
@@ -39,6 +41,7 @@ import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
  * @author TheBusyBiscuit
  * @author AlexLander123
  */
+@EnableAsync
 public class ReactorAccessPort extends SlimefunItem {
 
     private static final int INFO_SLOT = 49;
@@ -129,6 +132,7 @@ public class ReactorAccessPort extends SlimefunItem {
     }
 
     @Nonnull
+    @Async
     private BlockBreakHandler onBreak() {
         return new SimpleBlockBreakHandler() {
 
@@ -187,6 +191,7 @@ public class ReactorAccessPort extends SlimefunItem {
         return new int[] {40};
     }
 
+    @Async
     @Nullable private BlockMenu getReactor(@Nonnull Location l) {
         Location location = new Location(l.getWorld(), l.getX(), l.getY() - 3, l.getZ());
         SlimefunItem item = StorageCacheUtils.getSfItem(location);

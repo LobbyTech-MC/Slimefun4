@@ -1,13 +1,5 @@
 package io.github.thebusybiscuit.slimefun4.core.machines;
 
-import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunBlockData;
-import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
-import io.github.bakedlibs.dough.blocks.BlockPosition;
-import io.github.thebusybiscuit.slimefun4.api.events.AsyncMachineOperationFinishEvent;
-import io.github.thebusybiscuit.slimefun4.api.events.AsyncMachineOperationStartEvent;
-import io.github.thebusybiscuit.slimefun4.core.attributes.MachineProcessHolder;
-import io.github.thebusybiscuit.slimefun4.core.attributes.MachineProcessSerializable;
-import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -21,10 +13,17 @@ import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
+
+import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunBlockData;
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 
 import io.github.bakedlibs.dough.blocks.BlockPosition;
 import io.github.thebusybiscuit.slimefun4.api.events.AsyncMachineOperationFinishEvent;
+import io.github.thebusybiscuit.slimefun4.api.events.AsyncMachineOperationStartEvent;
 import io.github.thebusybiscuit.slimefun4.core.attributes.MachineProcessHolder;
+import io.github.thebusybiscuit.slimefun4.core.attributes.MachineProcessSerializable;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 
@@ -40,6 +39,7 @@ import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
  * @see MachineOperation
  * @see MachineProcessHolder
  */
+@EnableAsync
 public class MachineProcessor<T extends MachineOperation> {
 
     private final Map<BlockPosition, T> machines = new ConcurrentHashMap<>();
@@ -140,6 +140,7 @@ public class MachineProcessor<T extends MachineOperation> {
      * @return Whether the {@link MachineOperation} was successfully started. This will return false if another
      *         {@link MachineOperation} has already been started at that {@link BlockPosition} or the StartEvent is cancelled.
      */
+    @Async
     public boolean startOperation(@Nonnull BlockPosition pos, @Nonnull T operation) {
         Validate.notNull(pos, "The BlockPosition must not be null");
         Validate.notNull(operation, "The machine operation cannot be null");
@@ -217,6 +218,7 @@ public class MachineProcessor<T extends MachineOperation> {
      *
      * @return The current {@link MachineOperation} or null.
      */
+    @Async
     @Nullable public T getOperation(@Nonnull BlockPosition pos) {
         Validate.notNull(pos, "The BlockPosition must not be null");
 
@@ -310,6 +312,7 @@ public class MachineProcessor<T extends MachineOperation> {
      * @return Whether the {@link MachineOperation} was successfully ended. This will return false if there was no
      *         {@link MachineOperation} to begin with.
      */
+    @Async
     public boolean endOperation(@Nonnull BlockPosition pos) {
         Validate.notNull(pos, "The BlockPosition cannot be null");
         // remove the serialized data from the blockData
@@ -346,6 +349,7 @@ public class MachineProcessor<T extends MachineOperation> {
         }
     }
 
+    @Async
     public void updateProgressBar(@Nonnull BlockMenu inv, int slot, @Nonnull T operation) {
         Validate.notNull(inv, "The inventory must not be null.");
         Validate.notNull(operation, "The MachineOperation must not be null.");

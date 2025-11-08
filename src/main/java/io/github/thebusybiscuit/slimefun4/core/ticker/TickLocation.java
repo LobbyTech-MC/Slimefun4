@@ -3,11 +3,14 @@ package io.github.thebusybiscuit.slimefun4.core.ticker;
 import java.util.UUID;
 
 import org.bukkit.Location;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 import io.github.bakedlibs.dough.blocks.BlockPosition;
 import lombok.Getter;
 
 @Getter
+@EnableAsync
 public class TickLocation {
     private final BlockPosition position;
     private final UUID uuid;
@@ -22,10 +25,12 @@ public class TickLocation {
         this.uuid = uuid;
     }
 
+    @Async
     public boolean isUniversal() {
         return uuid != null;
     }
 
+    @Async
     public Location getLocation() {
         return position.toLocation();
     }

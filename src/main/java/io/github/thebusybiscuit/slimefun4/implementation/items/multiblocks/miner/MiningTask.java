@@ -21,6 +21,8 @@ import org.bukkit.block.data.type.PistonHead;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 import io.github.bakedlibs.dough.blocks.BlockPosition;
 import io.github.bakedlibs.dough.inventory.InvUtils;
@@ -42,6 +44,7 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineFuel;
  * @see AdvancedIndustrialMiner
  *
  */
+@EnableAsync
 class MiningTask implements Runnable {
 
     private final IndustrialMiner miner;
@@ -118,6 +121,7 @@ class MiningTask implements Runnable {
     /**
      * This method starts the warm-up animation for the {@link IndustrialMiner}.
      */
+    @Async
     private void warmUp() {
         /*
          * This is our warm up animation.
@@ -169,6 +173,7 @@ class MiningTask implements Runnable {
     }
 
     @Override
+    @Async
     public void run() {
         if (!running) {
             // Don't continue if the machine has stopped

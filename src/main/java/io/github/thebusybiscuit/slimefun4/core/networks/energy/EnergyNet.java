@@ -25,6 +25,8 @@ import javax.annotation.Nullable;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * The {@link EnergyNet} is an implementation of {@link Network} that deals with
@@ -39,6 +41,7 @@ import org.bukkit.block.Block;
  * @see EnergyNetComponentType
  *
  */
+@EnableAsync
 public class EnergyNet extends Network implements HologramOwner {
 
     private static final int RANGE = 6;
@@ -89,6 +92,7 @@ public class EnergyNet extends Network implements HologramOwner {
     }
 
     @Override
+    @Async
     public NetworkComponent classifyLocation(@Nonnull Location l) {
         if (regulator.equals(l)) {
             return NetworkComponent.REGULATOR;
@@ -108,6 +112,7 @@ public class EnergyNet extends Network implements HologramOwner {
     }
 
     @Override
+    @Async
     public void onClassificationChange(Location l, NetworkComponent from, NetworkComponent to) {
         if (from == NetworkComponent.TERMINUS) {
             generators.remove(l);
@@ -138,6 +143,7 @@ public class EnergyNet extends Network implements HologramOwner {
         }
     }
 
+    @Async
     public void tick(@Nonnull Block b, SlimefunBlockData blockData) {
         AtomicLong timestamp = new AtomicLong(Slimefun.getProfiler().newEntry());
         try {
@@ -212,6 +218,7 @@ public class EnergyNet extends Network implements HologramOwner {
         }
     }
 
+    @Async
     private void storeRemainingEnergy(long remainingEnergy) {
         for (Map.Entry<Location, EnergyNetComponent> entry : capacitors.entrySet()) {
             Location loc = entry.getKey();
@@ -263,6 +270,7 @@ public class EnergyNet extends Network implements HologramOwner {
         }
     }
 
+    @Async
     private long tickAllGenerators(@Nonnull LongConsumer timings) {
         Set<Location> explodedBlocks = new HashSet<>();
         long supply = 0;
@@ -327,6 +335,7 @@ public class EnergyNet extends Network implements HologramOwner {
         return supply;
     }
 
+    @Async
     private long tickAllCapacitors() {
         long supply = 0;
 
@@ -337,6 +346,7 @@ public class EnergyNet extends Network implements HologramOwner {
         return supply;
     }
 
+    @Async
     private void updateHologram(@Nonnull SlimefunBlockData data, double supply, double demand) {
         if (demand > supply) {
             String netLoss = NumberUtils.getCompactDouble(demand - supply);
@@ -349,6 +359,7 @@ public class EnergyNet extends Network implements HologramOwner {
         }
     }
 
+    @Async
     @Nullable private static EnergyNetComponent getComponent(@Nonnull Location l) {
         SlimefunItem item = StorageCacheUtils.getSfItem(l);
 
@@ -368,6 +379,7 @@ public class EnergyNet extends Network implements HologramOwner {
      *
      * @return The {@link EnergyNet} at that {@link Location}, or {@code null}
      */
+    @Async
     @Nullable public static EnergyNet getNetworkFromLocation(@Nonnull Location l) {
         return Slimefun.getNetworkManager()
                 .getNetworkFromLocation(l, EnergyNet.class)
@@ -384,6 +396,7 @@ public class EnergyNet extends Network implements HologramOwner {
      * @return The {@link EnergyNet} at that {@link Location}, or a new one
      */
     @Nonnull
+    @Async
     public static EnergyNet getNetworkFromLocationOrCreate(@Nonnull Location l) {
         Optional<EnergyNet> energyNetwork = Slimefun.getNetworkManager().getNetworkFromLocation(l, EnergyNet.class);
 
