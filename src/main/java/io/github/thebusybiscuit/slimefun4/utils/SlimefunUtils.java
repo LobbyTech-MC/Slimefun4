@@ -364,10 +364,16 @@ public final class SlimefunUtils {
                 Debug.log(TestCase.CARGO_INPUT_TESTING, "  sfitem is ItemStackWrapper - possible SF Item: {}", sfitem);
 
                 ItemMeta possibleSfItemMeta = sfitem.getItemMeta();
-                String id = Slimefun.getItemDataService().getItemData(itemMeta).orElse(null);
-                String possibleItemId = Slimefun.getItemDataService()
-                        .getItemData(possibleSfItemMeta)
-                        .orElse(null);
+                String id = null;
+                if (itemMeta != null) {
+                	id = Slimefun.getItemDataService().getItemData(itemMeta).orElse(null);
+                }
+                String possibleItemId = null;
+                if (possibleSfItemMeta != null) {
+                	possibleItemId = Slimefun.getItemDataService()
+                            .getItemData(possibleSfItemMeta)
+                            .orElse(null);
+                }
                 // Prioritize SlimefunItem id comparison over ItemMeta comparison
                 if (id != null && possibleItemId != null) {
                     /*
