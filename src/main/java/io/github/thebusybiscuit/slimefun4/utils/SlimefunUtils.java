@@ -479,6 +479,12 @@ public final class SlimefunUtils {
             @Nonnull ItemMeta sfitemMeta,
             boolean checkLore,
             boolean checkCustomModelCheck) {
+    	if (itemMeta == null && sfitemMeta == null) {
+    		return true;
+    	}
+    	if (itemMeta == null || sfitemMeta == null) {
+    		return false;
+    	}
         if (itemMeta.hasDisplayName() != sfitemMeta.hasDisplayName()) {
             Debug.log(TestCase.CARGO_INPUT_TESTING, "  Comparing has display name failed");
             return false;
