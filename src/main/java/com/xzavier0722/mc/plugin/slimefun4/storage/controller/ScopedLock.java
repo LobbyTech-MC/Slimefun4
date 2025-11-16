@@ -24,7 +24,9 @@ class ScopedLock {
             return;
         }
 
-        lock.unlock();
+        if (lock.isLocked()) {
+        	lock.unlock();
+        }
         if (!lock.isLocked()) {
             locks.remove(scopeKey);
         }
