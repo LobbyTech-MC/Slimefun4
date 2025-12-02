@@ -33,7 +33,6 @@ public class SQLProfiler {
         return t;
     });
 
-    @Getter
     private volatile boolean isProfiling = false;
 
     private final Map<TimingEntry, Long> samplingEntries = new HashMap<>();
@@ -199,7 +198,6 @@ public class SQLProfiler {
     }
 
 	public boolean isProfiling() {
-		// TODO Auto-generated method stub
 		return isProfiling;
 	}
 }
