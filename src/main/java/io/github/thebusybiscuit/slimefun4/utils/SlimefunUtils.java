@@ -26,6 +26,8 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 import city.norain.slimefun4.SlimefunExtended;
 import io.github.bakedlibs.dough.common.CommonPatterns;
@@ -58,6 +60,7 @@ import io.github.thebusybiscuit.slimefun4.utils.itemstack.ItemStackWrapper;
  * @author Walshy
  * @author Sfiguz7
  */
+@EnableAsync
 public final class SlimefunUtils {
 
     private static final String NO_PICKUP_METADATA = "no_pickup";
@@ -73,6 +76,7 @@ public final class SlimefunUtils {
      *            The {@link Item} to query
      * @return Whether the {@link Item} is excluded from being picked up
      */
+    @Async
     public static boolean hasNoPickupFlag(@Nonnull Item item) {
         return item.hasMetadata(NO_PICKUP_METADATA);
     }
@@ -86,6 +90,7 @@ public final class SlimefunUtils {
      * @param context
      *            The context in which this {@link Item} was flagged
      */
+    @Async
     public static void markAsNoPickup(@Nonnull Item item, @Nonnull String context) {
         item.setMetadata(NO_PICKUP_METADATA, new FixedMetadataValue(Slimefun.instance(), context));
         /*
@@ -103,6 +108,7 @@ public final class SlimefunUtils {
      *            The {@link ItemStack} to check for
      * @return Whether the given item is soulbound
      */
+    @Async
     public static boolean isSoulbound(@Nullable ItemStack item) {
         return isSoulbound(item, null);
     }
@@ -121,6 +127,7 @@ public final class SlimefunUtils {
      *            If {@code null} then this will not do a world check.
      * @return Whether the given item is soulbound
      */
+    @Async
     public static boolean isSoulbound(@Nullable ItemStack item, @Nullable World world) {
         if (item != null && item.getType() != Material.AIR) {
             ItemMeta meta = item.hasItemMeta() ? item.getItemMeta() : null;
@@ -148,6 +155,7 @@ public final class SlimefunUtils {
         return false;
     }
 
+    @Async
     private static boolean hasSoulboundFlag(@Nullable ItemMeta meta) {
         if (meta != null) {
             PersistentDataContainer container = meta.getPersistentDataContainer();
@@ -173,6 +181,7 @@ public final class SlimefunUtils {
      *
      * @see #isSoulbound(ItemStack)
      */
+    @Async
     public static void setSoulbound(@Nullable ItemStack item, boolean makeSoulbound) {
         if (item == null || item.getType() == Material.AIR) {
             throw new IllegalArgumentException("A soulbound item cannot be null or air!");
@@ -214,6 +223,7 @@ public final class SlimefunUtils {
      *
      * @return Whether this {@link ItemStack} is radioactive or not
      */
+    @Async
     public static boolean isRadioactive(@Nullable ItemStack item) {
         return SlimefunItem.getByItem(item) instanceof Radioactive;
     }
@@ -227,6 +237,7 @@ public final class SlimefunUtils {
      *
      * @return An {@link ItemStack} with this Head texture
      */
+    @Async
     public static @Nonnull ItemStack getCustomHead(@Nonnull String texture) {
         Validate.notNull(texture, "The provided texture is null");
 
@@ -253,6 +264,7 @@ public final class SlimefunUtils {
         return PlayerHead.getItemStack(skin);
     }
 
+    @Async
     public static boolean containsSimilarItem(Inventory inventory, ItemStack item, boolean checkLore) {
         if (inventory == null || item == null) {
             return false;
@@ -276,15 +288,18 @@ public final class SlimefunUtils {
         return false;
     }
 
+    @Async
     public static boolean isItemSimilar(@Nullable ItemStack item, @Nullable ItemStack sfitem, boolean checkLore) {
         return isItemSimilar(item, sfitem, checkLore, true, true, true);
     }
 
+    @Async
     public static boolean isItemSimilar(
             @Nullable ItemStack item, @Nullable ItemStack sfitem, boolean checkLore, boolean checkAmount) {
         return isItemSimilar(item, sfitem, checkLore, checkAmount, true, true);
     }
 
+    @Async
     public static boolean isItemSimilar(
             @Nullable ItemStack item,
             @Nullable ItemStack sfitem,
@@ -294,6 +309,7 @@ public final class SlimefunUtils {
         return isItemSimilar(item, sfitem, checkLore, checkAmount, checkDistinctiveItem, true);
     }
 
+    @Async
     public static boolean isItemSimilar(
             @Nullable ItemStack item,
             @Nullable ItemStack sfitem,
@@ -419,6 +435,7 @@ public final class SlimefunUtils {
         }
     }
 
+    @Async
     private static @Nonnull Optional<DistinctiveItem> getDistinctiveItem(@Nonnull String id) {
         SlimefunItem slimefunItem = SlimefunItem.getById(id);
         if (slimefunItem instanceof DistinctiveItem distinctiveItem) {
@@ -427,11 +444,13 @@ public final class SlimefunUtils {
         return Optional.empty();
     }
 
+    @Async
     private static boolean equalsItemMeta(
             @Nonnull ItemMeta itemMeta, @Nonnull ItemMetaSnapshot itemMetaSnapshot, boolean checkLore) {
         return equalsItemMeta(itemMeta, itemMetaSnapshot, checkLore, false);
     }
 
+    @Async
     private static boolean equalsItemMeta(
             @Nonnull ItemMeta itemMeta,
             @Nonnull ItemMetaSnapshot itemMetaSnapshot,
@@ -470,10 +489,12 @@ public final class SlimefunUtils {
         }
     }
 
+    @Async
     private static boolean equalsItemMeta(@Nonnull ItemMeta itemMeta, @Nonnull ItemMeta sfitemMeta, boolean checkLore) {
         return equalsItemMeta(itemMeta, sfitemMeta, checkLore, true);
     }
 
+    @Async
     private static boolean equalsItemMeta(
             @Nonnull ItemMeta itemMeta,
             @Nonnull ItemMeta sfitemMeta,
@@ -553,6 +574,7 @@ public final class SlimefunUtils {
      *
      * @return Whether the two lores are equal
      */
+    @Async
     public static boolean equalsLore(@Nonnull List<String> lore1, @Nonnull List<String> lore2) {
         Validate.notNull(lore1, "Cannot compare lore that is null!");
         Validate.notNull(lore2, "Cannot compare lore that is null!");
@@ -588,11 +610,13 @@ public final class SlimefunUtils {
         return b == shorterList.size();
     }
 
+    @Async
     private static boolean isLineIgnored(@Nonnull String line) {
         return line.equals(SOULBOUND_LORE);
     }
 
     @Deprecated(forRemoval = true)
+    @Async
     public static void updateCapacitorTexture(@Nonnull Location l, int charge, int capacity) {
         Validate.notNull(l, "Cannot update a texture for null");
         Validate.isTrue(capacity > 0, "Capacity must be greater than zero!");
@@ -619,6 +643,7 @@ public final class SlimefunUtils {
      *
      * @return Whether the {@link Player} is able to use that item.
      */
+    @Async
     public static boolean canPlayerUseItem(@Nonnull Player p, @Nullable ItemStack item, boolean sendMessage) {
         Validate.notNull(p, "The player cannot be null");
 
@@ -650,6 +675,7 @@ public final class SlimefunUtils {
      * @return The dropped {@link Item} (or null if the {@link SlimefunItemSpawnEvent} was cancelled)
      */
     @ParametersAreNonnullByDefault
+    @Async
     public static @Nullable Item spawnItem(
             Location loc, ItemStack item, ItemSpawnReason reason, boolean addRandomOffset, @Nullable Player player) {
         SlimefunItemSpawnEvent event = new SlimefunItemSpawnEvent(player, loc, item, reason);
@@ -685,6 +711,7 @@ public final class SlimefunUtils {
      * @return The dropped {@link Item} (or null if the {@link SlimefunItemSpawnEvent} was cancelled)
      */
     @ParametersAreNonnullByDefault
+    @Async
     public static @Nullable Item spawnItem(
             Location loc, ItemStack item, ItemSpawnReason reason, boolean addRandomOffset) {
         return spawnItem(loc, item, reason, addRandomOffset, null);
@@ -705,6 +732,7 @@ public final class SlimefunUtils {
      * @return The dropped {@link Item} (or null if the {@link SlimefunItemSpawnEvent} was cancelled)
      */
     @ParametersAreNonnullByDefault
+    @Async
     public static @Nullable Item spawnItem(Location loc, ItemStack item, ItemSpawnReason reason) {
         return spawnItem(loc, item, reason, false);
     }
@@ -719,6 +747,7 @@ public final class SlimefunUtils {
      *
      * @return True if the inventory is empty and false otherwise
      */
+    @Async
     public static boolean isInventoryEmpty(@Nonnull Inventory inventory) {
         if (Slimefun.getMinecraftVersion().isAtLeast(MinecraftVersion.MINECRAFT_1_16)) {
             return inventory.isEmpty();
@@ -738,6 +767,7 @@ public final class SlimefunUtils {
      * @param item The item need to check.
      * @return Is the item a kind of Dust
      */
+    @Async
     public static boolean isDust(@Nonnull ItemStack item) {
         SlimefunItem sfItem = SlimefunItem.getByItem(item);
         return sfItem != null && sfItem.getId().endsWith("_DUST");
