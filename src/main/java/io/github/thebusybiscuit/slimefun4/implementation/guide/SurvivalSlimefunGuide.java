@@ -316,7 +316,7 @@ public class SurvivalSlimefunGuide implements SlimefunGuideImplementation {
             String lore;
 
             if (VaultIntegration.isEnabled()) {
-                lore = " &a⛁" + String.format("%.2f", research.getCurrencyCost()) + " &e⛁";
+                lore = " &a" + String.format("%.2f", research.getCurrencyCost()) + " &e⛁";
             } else {
                 lore = research.getLevelCost() + " 级经验";
             }
