@@ -1,9 +1,9 @@
 package me.mrCookieSlime.CSCoreLibPlugin.general.Inventory;
 
 import java.util.logging.Level;
+
 import javax.annotation.Nonnull;
-import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu.AdvancedMenuClickHandler;
-import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu.MenuClickHandler;
+
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

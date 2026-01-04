@@ -23,7 +23,6 @@ import org.bukkit.command.CommandSender;
 import city.norain.slimefun4.SlimefunExtended;
 import city.norain.slimefun4.timings.entry.TimingEntry;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-import lombok.Getter;
 
 public class SQLProfiler {
     private final ExecutorService reportExecutor = Executors.newFixedThreadPool(1, r -> {

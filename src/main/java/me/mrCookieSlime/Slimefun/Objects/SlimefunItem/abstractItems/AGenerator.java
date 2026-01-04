@@ -1,7 +1,23 @@
 package me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
+import org.apache.commons.lang.Validate;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.ItemStack;
+
 import com.xzavier0722.mc.plugin.slimefun4.storage.controller.ASlimefunDataContainer;
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
+
 import io.github.bakedlibs.dough.items.CustomItemStack;
 import io.github.bakedlibs.dough.protection.Interaction;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
@@ -20,23 +36,11 @@ import io.github.thebusybiscuit.slimefun4.implementation.operations.FuelOperatio
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import io.github.thebusybiscuit.slimefun4.utils.itemstack.ItemStackWrapper;
-import java.util.HashMap;
-import java.util.Map;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu.AdvancedMenuClickHandler;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ClickAction;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
-import org.apache.commons.lang.Validate;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.ItemStack;
 
 public abstract class AGenerator extends AbstractEnergyProvider implements MachineProcessHolder<FuelOperation> {
 

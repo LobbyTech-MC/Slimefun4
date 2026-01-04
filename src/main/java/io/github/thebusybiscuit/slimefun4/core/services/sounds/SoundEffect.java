@@ -1,9 +1,5 @@
 package io.github.thebusybiscuit.slimefun4.core.services.sounds;
 
-import city.norain.slimefun4.SlimefunExtended;
-import com.google.common.base.Preconditions;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-import io.github.thebusybiscuit.slimefun4.utils.compatibility.VersionedSound;
 import java.util.Locale;
 import java.util.logging.Level;
 
@@ -20,6 +16,7 @@ import org.bukkit.entity.Player;
 
 import com.google.common.base.Preconditions;
 
+import city.norain.slimefun4.SlimefunExtended;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.utils.compatibility.VersionedSound;
 

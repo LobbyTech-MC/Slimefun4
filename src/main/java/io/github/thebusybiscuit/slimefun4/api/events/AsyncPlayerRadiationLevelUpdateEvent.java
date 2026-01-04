@@ -1,13 +1,15 @@
 package io.github.thebusybiscuit.slimefun4.api.events;
 
 import javax.annotation.Nonnull;
-import lombok.Getter;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 import org.jetbrains.annotations.NotNull;
+
+import lombok.Getter;
 
 /**
  * This {@link Event} is fired while ticking the radiation level of a player, the event will determine how the player's radiation level update

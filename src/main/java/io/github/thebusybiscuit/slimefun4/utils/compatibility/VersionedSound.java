@@ -1,13 +1,14 @@
 package io.github.thebusybiscuit.slimefun4.utils.compatibility;
 
-import com.google.common.base.Preconditions;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import java.lang.reflect.Method;
 import java.util.Locale;
+
 import javax.annotation.Nonnull;
 
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
+
+import com.google.common.base.Preconditions;
 
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 

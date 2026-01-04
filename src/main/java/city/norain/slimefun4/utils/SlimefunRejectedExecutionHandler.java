@@ -1,9 +1,10 @@
 package city.norain.slimefun4.utils;
 
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.logging.Level;
+
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 
 public class SlimefunRejectedExecutionHandler implements RejectedExecutionHandler {
     @Override

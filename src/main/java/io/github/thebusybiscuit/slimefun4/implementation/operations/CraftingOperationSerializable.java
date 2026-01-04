@@ -1,9 +1,10 @@
 package io.github.thebusybiscuit.slimefun4.implementation.operations;
 
-import io.github.bakedlibs.dough.blocks.BlockPosition;
-import io.github.thebusybiscuit.slimefun4.core.attributes.MachineProcessSerializable;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
+
+import io.github.bakedlibs.dough.blocks.BlockPosition;
+import io.github.thebusybiscuit.slimefun4.core.attributes.MachineProcessSerializable;
 
 public interface CraftingOperationSerializable extends MachineProcessSerializable<CraftingOperation> {
 

@@ -1,8 +1,5 @@
 package city.norain.slimefun4.compatibillty;
 
-import city.norain.slimefun4.SlimefunExtended;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
@@ -11,6 +8,10 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.block.data.Ageable;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.type.WallSign;
+
+import city.norain.slimefun4.SlimefunExtended;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import lombok.experimental.UtilityClass;
 
 
 @UtilityClass

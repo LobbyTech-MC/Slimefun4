@@ -7,6 +7,7 @@ import java.util.UUID;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -24,10 +25,6 @@ import io.github.thebusybiscuit.slimefun4.utils.RadiationUtils;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 /**
  * The {@link RadiationTask} handles radioactivity for

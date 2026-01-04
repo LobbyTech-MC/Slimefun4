@@ -1,5 +1,14 @@
 package io.github.thebusybiscuit.slimefun4.api.gps;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -31,16 +40,6 @@ import io.github.thebusybiscuit.slimefun4.implementation.items.teleporter.Telepo
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import io.github.thebusybiscuit.slimefun4.utils.HeadTexture;
 import io.github.thebusybiscuit.slimefun4.utils.NumberUtils;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 
 /**

@@ -1,9 +1,10 @@
 package io.github.thebusybiscuit.slimefun4.core.machines;
 
+import org.bukkit.configuration.ConfigurationSection;
+
 import io.github.bakedlibs.dough.blocks.BlockPosition;
 import io.github.thebusybiscuit.slimefun4.core.attributes.MachineProcessHolder;
 import io.github.thebusybiscuit.slimefun4.implementation.operations.CraftingOperation;
-import org.bukkit.configuration.ConfigurationSection;
 
 /**
  * This represents a {@link MachineOperation} which is handled

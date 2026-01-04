@@ -1,13 +1,46 @@
 package io.github.thebusybiscuit.slimefun4.implementation.items.androids;
 
-import city.norain.slimefun4.api.menu.UniversalMenu;
-import city.norain.slimefun4.api.menu.UniversalMenuPreset;
-import city.norain.slimefun4.utils.TaskUtil;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.function.Predicate;
+import java.util.logging.Level;
+
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+
+import org.apache.commons.lang.Validate;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.Tag;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.block.BlockState;
+import org.bukkit.block.Dispenser;
+import org.bukkit.block.data.Rotatable;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
 import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunUniversalBlockData;
 import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunUniversalData;
 import com.xzavier0722.mc.plugin.slimefun4.storage.controller.attributes.UniversalBlock;
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.LocationUtils;
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
+
+import city.norain.slimefun4.api.menu.UniversalMenu;
+import city.norain.slimefun4.api.menu.UniversalMenuPreset;
+import city.norain.slimefun4.utils.TaskUtil;
 import io.github.bakedlibs.dough.chat.ChatInput;
 import io.github.bakedlibs.dough.common.ChatColors;
 import io.github.bakedlibs.dough.common.CommonPatterns;
@@ -33,16 +66,6 @@ import io.github.thebusybiscuit.slimefun4.utils.HeadTexture;
 import io.github.thebusybiscuit.slimefun4.utils.NumberUtils;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import io.papermc.lib.PaperLib;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
-import java.util.function.Predicate;
-import java.util.logging.Level;
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu.AdvancedMenuClickHandler;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ClickAction;
@@ -50,25 +73,6 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineFuel;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
-import org.apache.commons.lang.Validate;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.Tag;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
-import org.bukkit.block.BlockState;
-import org.bukkit.block.Dispenser;
-import org.bukkit.block.data.Rotatable;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 public class ProgrammableAndroid extends SlimefunItem
         implements InventoryBlock, RecipeDisplayItem, NotDiagonallyRotatable, UniversalBlock {

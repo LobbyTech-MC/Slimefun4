@@ -1,8 +1,16 @@
 package io.github.thebusybiscuit.slimefun4.core.attributes;
 
+import java.util.logging.Level;
+
+import javax.annotation.Nonnull;
+
+import org.apache.commons.lang.Validate;
+import org.bukkit.Location;
+
 import com.xzavier0722.mc.plugin.slimefun4.storage.controller.ASlimefunDataContainer;
 import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunBlockData;
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
+
 import io.github.bakedlibs.dough.blocks.BlockPosition;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNet;
@@ -11,11 +19,7 @@ import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.implementation.items.electric.Capacitor;
 import io.github.thebusybiscuit.slimefun4.utils.NumberUtils;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
-import java.util.logging.Level;
-import javax.annotation.Nonnull;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
-import org.apache.commons.lang.Validate;
-import org.bukkit.Location;
 
 /**
  * This Interface, when attached to a class that inherits from {@link SlimefunItem}, marks

@@ -1,6 +1,5 @@
 package io.github.thebusybiscuit.slimefun4.implementation.listeners;
 
-import com.destroystokyo.paper.MaterialTags;
 import javax.annotation.Nonnull;
 
 import org.bukkit.Material;
@@ -15,6 +14,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockDispenseEvent;
 
+import com.destroystokyo.paper.MaterialTags;
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;

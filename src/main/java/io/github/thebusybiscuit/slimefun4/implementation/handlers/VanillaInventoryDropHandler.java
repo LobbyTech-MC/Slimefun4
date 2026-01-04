@@ -16,7 +16,6 @@ import org.bukkit.inventory.ItemStack;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
-import io.papermc.lib.PaperLib;
 
 /**
  * This is an implementation of {@link BlockBreakHandler} which is suited for any {@link SlimefunItem}

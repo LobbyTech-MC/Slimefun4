@@ -10,7 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.annotation.OverridingMethodsMustInvokeSuper;
-import lombok.extern.slf4j.Slf4j;
 
 import com.xzavier0722.mc.plugin.slimefun4.storage.adapter.IDataSourceAdapter;
 import com.xzavier0722.mc.plugin.slimefun4.storage.callback.IAsyncReadCallback;
@@ -24,6 +23,7 @@ import com.xzavier0722.mc.plugin.slimefun4.storage.task.QueuedWriteTask;
 import city.norain.slimefun4.utils.SlimefunPoolExecutor;
 import city.norain.slimefun4.utils.TaskTimer;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * {@link ADataController} 是 Slimefun 数据库控制器的抽象类，

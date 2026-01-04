@@ -1,9 +1,10 @@
 package io.github.thebusybiscuit.slimefun4.core.networks;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Level;
 
@@ -25,18 +26,6 @@ import io.github.thebusybiscuit.slimefun4.core.debug.TestCase;
 import io.github.thebusybiscuit.slimefun4.core.networks.cargo.CargoNet;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.implementation.listeners.NetworkListener;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.logging.Level;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import org.apache.commons.lang.Validate;
-import org.bukkit.Location;
-import org.bukkit.Server;
 
 /**
  * The {@link NetworkManager} is responsible for holding all instances of {@link Network}

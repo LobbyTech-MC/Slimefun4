@@ -1,5 +1,9 @@
 package io.github.thebusybiscuit.slimefun4.implementation.items.electric.machines.entities;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.block.Block;
@@ -21,9 +25,6 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.implementation.handlers.SimpleBlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.items.misc.OrganicFood;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
