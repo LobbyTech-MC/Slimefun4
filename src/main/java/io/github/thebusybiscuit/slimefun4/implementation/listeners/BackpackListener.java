@@ -177,26 +177,26 @@ public class BackpackListener implements Listener {
         if (PlayerBackpack.getBackpackUUID(meta).isEmpty()
                 && PlayerBackpack.getBackpackID(meta).isEmpty()) {
             // Create backpack
-            //Slimefun.getLocalization().sendMessage(p, "backpack.set-name", true);
-            //Slimefun.getChatCatcher().scheduleCatcher(p.getUniqueId(), name -> {
+            Slimefun.getLocalization().sendMessage(p, "backpack.set-name", true);
+            Slimefun.getChatCatcher().scheduleCatcher(p.getUniqueId(), name -> {
         	
-            var pInv = p.getInventory();
-            if (!item.equals(pInv.getItemInMainHand()) && !item.equals(pInv.getItemInOffHand())) {
-                Slimefun.getLocalization().sendMessage(p, "backpack.not-original-item", true);
-                return;
-            }
-            if (item.getAmount() > 1) {
-                Slimefun.getLocalization().sendMessage(p, "backpack.no-stack", true);
-                return;
-            }
-            String name = LangUtils.getItemDisplayName(item);
-			//String name = item.getI18NDisplayName();
-			PlayerBackpack.bindItem(
+                var pInv = p.getInventory();
+                if (!item.equals(pInv.getItemInMainHand()) && !item.equals(pInv.getItemInOffHand())) {
+                    Slimefun.getLocalization().sendMessage(p, "backpack.not-original-item", true);
+                    return;
+                }
+                if (item.getAmount() > 1) {
+                    Slimefun.getLocalization().sendMessage(p, "backpack.no-stack", true);
+                    return;
+                }
+                //String name = LangUtils.getItemDisplayName(item);
+                //String name = item.getI18NDisplayName();
+                PlayerBackpack.bindItem(
                     item,
                     Slimefun.getDatabaseManager()
-                            .getProfileDataController()
-                            .createBackpack(p, name , profile.nextBackpackNum(), size));
-            //});
+                        .getProfileDataController()
+                        .createBackpack(p, name , profile.nextBackpackNum(), size));
+            });
         }
 
         /*

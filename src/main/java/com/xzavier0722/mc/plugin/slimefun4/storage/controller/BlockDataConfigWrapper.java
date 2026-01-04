@@ -11,6 +11,8 @@ import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.jetbrains.annotations.ApiStatus;
 
+import io.github.bakedlibs.dough.config.Config;
+
 @ApiStatus.Internal
 @Deprecated
 public class BlockDataConfigWrapper extends Config {
