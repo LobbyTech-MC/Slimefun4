@@ -316,7 +316,7 @@ public class SurvivalSlimefunGuide implements SlimefunGuideImplementation {
             String lore;
 
             if (VaultIntegration.isEnabled()) {
-                lore = " &a" + String.format("%.2f", research.getCurrencyCost()) + " &e⛁";
+                lore = " §r§6" + String.format("%.2f", research.getCurrencyCost()) + " §e⛁";
             } else {
                 lore = research.getLevelCost() + " 级经验";
             }
@@ -331,7 +331,7 @@ public class SurvivalSlimefunGuide implements SlimefunGuideImplementation {
                             "",
                             "&a> 单击解锁",
                             "",
-                            "&e需要 &6" + lore
+                            "&e需要花费" + lore
                             )));
             menu.addMenuClickHandler(index, (pl, slot, item, action) -> {
                 research.unlockFromGuide(this, p, profile, sfitem, itemGroup, page);
