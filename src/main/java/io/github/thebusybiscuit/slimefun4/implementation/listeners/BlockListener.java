@@ -1,5 +1,26 @@
 package io.github.thebusybiscuit.slimefun4.implementation.listeners;
 
+import city.norain.slimefun4.compatibillty.CompatibilityUtil;
+import com.xzavier0722.mc.plugin.slimefun4.storage.callback.IAsyncReadCallback;
+import com.xzavier0722.mc.plugin.slimefun4.storage.controller.ASlimefunDataContainer;
+import com.xzavier0722.mc.plugin.slimefun4.storage.controller.attributes.UniversalBlock;
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
+import io.github.bakedlibs.dough.protection.Interaction;
+import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
+import io.github.thebusybiscuit.slimefun4.api.events.ExplosiveToolBreakBlocksEvent;
+import io.github.thebusybiscuit.slimefun4.api.events.SlimefunBlockBreakEvent;
+import io.github.thebusybiscuit.slimefun4.api.events.SlimefunBlockPlaceEvent;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;
+import io.github.thebusybiscuit.slimefun4.core.attributes.rotations.NotCardinallyRotatable;
+import io.github.thebusybiscuit.slimefun4.core.attributes.rotations.NotDiagonallyRotatable;
+import io.github.thebusybiscuit.slimefun4.core.attributes.rotations.NotRotatable;
+import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
+import io.github.thebusybiscuit.slimefun4.core.handlers.BlockPlaceHandler;
+import io.github.thebusybiscuit.slimefun4.core.handlers.ToolUseHandler;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import io.github.thebusybiscuit.slimefun4.utils.compatibility.VersionedEnchantment;
+import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -78,13 +99,13 @@ public class BlockListener implements Listener {
 
         // Fixes #2636 - This will solve the "ghost blocks" issue
         if (e.getBlockReplacedState().getType().isAir()) {
-            var blockData = StorageCacheUtils.getBlock(loc);
+            var blockData = StorageCacheUtils.getDataContainer(loc);
             if (blockData != null && blockData.isPendingRemove()) {
                 e.setCancelled(true);
                 return;
             }
 
-            SlimefunItem sfItem = StorageCacheUtils.getSfItem(loc);
+            SlimefunItem sfItem = StorageCacheUtils.getSlimefunItem(loc);
             if (sfItem != null) {
                 for (ItemStack item : sfItem.getDrops()) {
                     if (item != null && !item.getType().isAir()) {
@@ -174,9 +195,7 @@ public class BlockListener implements Listener {
 
         var heldItem = e.getPlayer().getInventory().getItemInMainHand();
         var block = e.getBlock();
-        var blockData = StorageCacheUtils.getBlock(block.getLocation()) != null
-                ? StorageCacheUtils.getBlock(block.getLocation())
-                : StorageCacheUtils.getUniversalBlock(block);
+        var blockData = StorageCacheUtils.getDataContainer(block.getLocation());
         var sfItem = blockData == null ? null : SlimefunItem.getById(blockData.getSfId());
 
         // If there is a Slimefun Block here, call our BreakEvent and, if cancelled, cancel this event
@@ -257,7 +276,7 @@ public class BlockListener implements Listener {
     @ParametersAreNonnullByDefault
     private void callBlockHandler(BlockBreakEvent e, ItemStack item, List<ItemStack> drops) {
         var loc = e.getBlock().getLocation();
-        SlimefunItem sfItem = StorageCacheUtils.getSfItem(loc);
+        SlimefunItem sfItem = StorageCacheUtils.getSlimefunItem(loc);
 
         if (sfItem != null && !sfItem.useVanillaBlockBreaking()) {
             sfItem.callItemHandler(BlockBreakHandler.class, handler -> handler.onPlayerBreak(e, item, drops));
@@ -318,8 +337,8 @@ public class BlockListener implements Listener {
 
         if (SlimefunTag.SENSITIVE_MATERIALS.isTagged(blockAbove.getType())) {
             var loc = blockAbove.getLocation();
-            var blockData = StorageCacheUtils.getBlock(loc);
-            SlimefunItem sfItem = StorageCacheUtils.getSfItem(loc);
+            var blockData = StorageCacheUtils.getDataContainer(loc);
+            SlimefunItem sfItem = StorageCacheUtils.getSlimefunItem(loc);
 
             if (sfItem != null && !sfItem.useVanillaBlockBreaking()) {
                 /*
@@ -337,14 +356,14 @@ public class BlockListener implements Listener {
                     dropItems(dummyEvent, item, block, sfItem, drops);
                 } else {
                     blockData.setPendingRemove(true);
-                    controller.loadBlockDataAsync(blockData, new IAsyncReadCallback<>() {
+                    controller.loadDataAsync(blockData, new IAsyncReadCallback<>() {
                         @Override
                         public boolean runOnMainThread() {
                             return true;
                         }
 
                         @Override
-                        public void onResult(SlimefunBlockData result) {
+                        public void onResult(ASlimefunDataContainer result) {
                             sfItem.callItemHandler(
                                     BlockBreakHandler.class, handler -> handler.onPlayerBreak(dummyEvent, item, drops));
                             controller.removeBlock(loc);

@@ -1,5 +1,15 @@
 package io.github.thebusybiscuit.slimefun4.implementation.listeners;
 
+import com.xzavier0722.mc.plugin.slimefun4.storage.callback.IAsyncReadCallback;
+import com.xzavier0722.mc.plugin.slimefun4.storage.controller.ASlimefunDataContainer;
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.core.attributes.WitherProof;
+import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
+import io.papermc.lib.PaperLib;
+import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotResult;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -53,7 +63,7 @@ public class BlockPhysicsListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onBlockFall(EntityChangeBlockEvent e) {
-        var blockData = StorageCacheUtils.getBlock(e.getBlock().getLocation());
+        var blockData = StorageCacheUtils.getDataContainer(e.getBlock().getLocation());
         if (blockData == null) {
             return;
         }
@@ -83,14 +93,14 @@ public class BlockPhysicsListener implements Listener {
                                 callHandler(handler, block);
                             } else {
                                 blockData.setPendingRemove(true);
-                                controller.loadBlockDataAsync(blockData, new IAsyncReadCallback<>() {
+                                controller.loadDataAsync(blockData, new IAsyncReadCallback<>() {
                                     @Override
                                     public boolean runOnMainThread() {
                                         return true;
                                     }
 
                                     @Override
-                                    public void onResult(SlimefunBlockData result) {
+                                    public void onResult(ASlimefunDataContainer result) {
                                         callHandler(handler, block);
                                         blockData.setPendingRemove(false);
                                     }

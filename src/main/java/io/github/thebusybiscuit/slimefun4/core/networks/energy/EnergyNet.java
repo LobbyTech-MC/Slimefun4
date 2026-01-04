@@ -167,7 +167,7 @@ public class EnergyNet extends Network implements HologramOwner {
                 for (Map.Entry<Location, EnergyNetComponent> entry : consumers.entrySet()) {
                     Location loc = entry.getKey();
 
-                    var data = StorageCacheUtils.getBlock(loc);
+                    var data = StorageCacheUtils.getDataContainer(loc);
                     if (data == null || data.isPendingRemove()) {
                         continue;
                     }
@@ -223,7 +223,7 @@ public class EnergyNet extends Network implements HologramOwner {
         for (Map.Entry<Location, EnergyNetComponent> entry : capacitors.entrySet()) {
             Location loc = entry.getKey();
 
-            var data = StorageCacheUtils.getBlock(loc);
+            var data = StorageCacheUtils.getDataContainer(loc);
             if (data == null || data.isPendingRemove() || !data.isDataLoaded()) {
                 continue;
             }
@@ -248,7 +248,7 @@ public class EnergyNet extends Network implements HologramOwner {
         for (Map.Entry<Location, EnergyNetProvider> entry : generators.entrySet()) {
             Location loc = entry.getKey();
 
-            var data = StorageCacheUtils.getBlock(loc);
+            var data = StorageCacheUtils.getDataContainer(loc);
             if (data == null || data.isPendingRemove() || !data.isDataLoaded()) {
                 continue;
             }
@@ -282,7 +282,7 @@ public class EnergyNet extends Network implements HologramOwner {
             SlimefunItem item = (SlimefunItem) provider;
 
             try {
-                var data = StorageCacheUtils.getBlock(loc);
+                var data = StorageCacheUtils.getDataContainer(loc);
                 if (data == null || data.isPendingRemove()) {
                     continue;
                 }
@@ -361,7 +361,7 @@ public class EnergyNet extends Network implements HologramOwner {
 
     @Async
     @Nullable private static EnergyNetComponent getComponent(@Nonnull Location l) {
-        SlimefunItem item = StorageCacheUtils.getSfItem(l);
+        SlimefunItem item = StorageCacheUtils.getSlimefunItem(l);
 
         if (item instanceof EnergyNetComponent component) {
             return component;

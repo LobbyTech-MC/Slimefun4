@@ -79,7 +79,7 @@ public class MinerAndroid extends ProgrammableAndroid {
 
         if (!SlimefunTag.UNBREAKABLE_MATERIALS.isTagged(block.getType()) && !drops.isEmpty()) {
             OfflinePlayer owner = Bukkit.getOfflinePlayer(
-                    UUID.fromString(StorageCacheUtils.getUniversalBlock(menu.getUuid(), b.getLocation(), "owner")));
+                    UUID.fromString(StorageCacheUtils.getUniversalBlockData(menu.getUuid(), b.getLocation(), "owner")));
 
             if (Slimefun.getProtectionManager().hasPermission(owner, block.getLocation(), Interaction.BREAK_BLOCK)) {
                 AndroidMineEvent event = new AndroidMineEvent(block, new AndroidInstance(this, b));
@@ -104,7 +104,7 @@ public class MinerAndroid extends ProgrammableAndroid {
 
         if (!SlimefunTag.UNBREAKABLE_MATERIALS.isTagged(block.getType()) && !drops.isEmpty()) {
             OfflinePlayer owner = Bukkit.getOfflinePlayer(
-                    UUID.fromString(StorageCacheUtils.getUniversalBlock(menu.getUuid(), b.getLocation(), "owner")));
+                    UUID.fromString(StorageCacheUtils.getUniversalBlockData(menu.getUuid(), b.getLocation(), "owner")));
 
             if (Slimefun.getProtectionManager().hasPermission(owner, block.getLocation(), Interaction.BREAK_BLOCK)) {
                 AndroidMineEvent event = new AndroidMineEvent(block, new AndroidInstance(this, b));
@@ -139,11 +139,15 @@ public class MinerAndroid extends ProgrammableAndroid {
         // Push our drops to the inventory
         for (ItemStack drop : drops) {
             menu.pushItem(drop, getOutputSlots());
+        }
 
-            if (block instanceof Container container) {
-                for (ItemStack content : container.getInventory().getContents()) {
-                    block.getWorld().dropItemNaturally(block.getLocation(), content);
+        if (block.getState() instanceof Container container) {
+            for (ItemStack content : container.getInventory().getContents()) {
+                if (content == null || content.getType().isAir()) {
+                    continue;
                 }
+
+                block.getWorld().dropItemNaturally(block.getLocation(), content);
             }
         }
 

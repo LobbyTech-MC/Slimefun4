@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.bakedlibs.dough.common.ChatColors;
+import io.github.thebusybiscuit.slimefun4.api.events.AsyncPlayerRadiationLevelUpdateEvent;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.player.PlayerProfile;
 import io.github.thebusybiscuit.slimefun4.core.attributes.ProtectionType;
@@ -23,6 +24,10 @@ import io.github.thebusybiscuit.slimefun4.utils.RadiationUtils;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 /**
  * The {@link RadiationTask} handles radioactivity for
@@ -60,15 +65,19 @@ public class RadiationTask extends AbstractArmorTask {
                 }
             }
             int exposureLevelBefore = RadiationUtils.getExposure(p);
-
-            if (exposureTotal > 0) {
+            int deltaLevel = exposureTotal > 0 ? exposureTotal : (exposureLevelBefore > 0 ? -1 : 0);
+            AsyncPlayerRadiationLevelUpdateEvent updateEvent =
+                    new AsyncPlayerRadiationLevelUpdateEvent(p, exposureLevelBefore, deltaLevel, false);
+            Bukkit.getPluginManager().callEvent(updateEvent);
+            deltaLevel = updateEvent.getDeltaLevel();
+            if (deltaLevel > 0) {
                 if (exposureLevelBefore == 0) {
                     Slimefun.getLocalization().sendMessage(p, "messages.radiation");
                 }
 
-                RadiationUtils.addExposure(p, exposureTotal);
-            } else if (exposureLevelBefore > 0) {
-                RadiationUtils.removeExposure(p, 1);
+                RadiationUtils.addExposure(p, deltaLevel);
+            } else if (exposureLevelBefore > 0 && deltaLevel < 0) {
+                RadiationUtils.removeExposure(p, -deltaLevel);
             }
 
             int exposureLevelAfter = RadiationUtils.getExposure(p);
@@ -90,7 +99,17 @@ public class RadiationTask extends AbstractArmorTask {
                 p.spigot().sendMessage(ChatMessageType.ACTION_BAR, components);
             }
         } else {
-            RadiationUtils.removeExposure(p, 1);
+            int exposureLevelBefore = RadiationUtils.getExposure(p);
+            int deltaLevel = -1;
+            AsyncPlayerRadiationLevelUpdateEvent updateEvent =
+                    new AsyncPlayerRadiationLevelUpdateEvent(p, exposureLevelBefore, deltaLevel, true);
+            Bukkit.getPluginManager().callEvent(updateEvent);
+            deltaLevel = updateEvent.getDeltaLevel();
+            if (deltaLevel > 0) {
+                RadiationUtils.addExposure(p, deltaLevel);
+            } else if (deltaLevel < 0) {
+                RadiationUtils.removeExposure(p, -deltaLevel);
+            }
         }
     }
 

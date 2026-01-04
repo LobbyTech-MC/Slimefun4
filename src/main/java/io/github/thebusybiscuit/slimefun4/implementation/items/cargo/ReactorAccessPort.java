@@ -194,7 +194,7 @@ public class ReactorAccessPort extends SlimefunItem {
     @Async
     @Nullable private BlockMenu getReactor(@Nonnull Location l) {
         Location location = new Location(l.getWorld(), l.getX(), l.getY() - 3, l.getZ());
-        SlimefunItem item = StorageCacheUtils.getSfItem(location);
+        SlimefunItem item = StorageCacheUtils.getSlimefunItem(location);
 
         if (item instanceof Reactor) {
             return StorageCacheUtils.getMenu(location);
