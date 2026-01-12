@@ -16,15 +16,12 @@ import city.norain.slimefun4.utils.EnvUtil;
 import io.github.bakedlibs.dough.versions.MinecraftVersion;
 import io.github.bakedlibs.dough.versions.UnknownServerVersionException;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-import lombok.Getter;
 
 public final class SlimefunExtended {
     private static SlimefunMigrateListener migrateListener = new SlimefunMigrateListener();
 
-    @Getter
     private static boolean databaseDebugMode = false;
 
-    @Getter
     private static MinecraftVersion minecraftVersion;
 
     private static void checkDebug() {
