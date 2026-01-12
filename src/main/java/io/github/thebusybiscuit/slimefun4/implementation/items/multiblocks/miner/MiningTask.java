@@ -44,7 +44,6 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineFuel;
  * @see AdvancedIndustrialMiner
  *
  */
-@EnableAsync
 class MiningTask implements Runnable {
 
     private final IndustrialMiner miner;
@@ -121,7 +120,6 @@ class MiningTask implements Runnable {
     /**
      * This method starts the warm-up animation for the {@link IndustrialMiner}.
      */
-    @Async
     private void warmUp() {
         /*
          * This is our warm up animation.
@@ -173,7 +171,6 @@ class MiningTask implements Runnable {
     }
 
     @Override
-    @Async
     public void run() {
         if (!running) {
             // Don't continue if the machine has stopped
