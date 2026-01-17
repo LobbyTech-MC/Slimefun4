@@ -1,29 +1,9 @@
 package com.xzavier0722.mc.plugin.slimefun4.storage.controller;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Chunk;
-import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitTask;
-
+import city.norain.slimefun4.api.menu.UniversalMenu;
+import city.norain.slimefun4.api.menu.UniversalMenuPreset;
+import city.norain.slimefun4.utils.InventoryUtil;
+import city.norain.slimefun4.utils.StringUtil;
 import com.xzavier0722.mc.plugin.slimefun4.storage.adapter.IDataSourceAdapter;
 import com.xzavier0722.mc.plugin.slimefun4.storage.callback.IAsyncReadCallback;
 import com.xzavier0722.mc.plugin.slimefun4.storage.common.DataScope;
@@ -38,18 +18,34 @@ import com.xzavier0722.mc.plugin.slimefun4.storage.event.SlimefunChunkDataLoadEv
 import com.xzavier0722.mc.plugin.slimefun4.storage.task.DelayedSavingLooperTask;
 import com.xzavier0722.mc.plugin.slimefun4.storage.task.DelayedTask;
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.DataUtils;
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.InvSnapshot;
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.InvStorageUtils;
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.LocationUtils;
-
-import city.norain.slimefun4.api.menu.UniversalMenu;
-import city.norain.slimefun4.api.menu.UniversalMenuPreset;
-import city.norain.slimefun4.utils.InventoryUtil;
-import city.norain.slimefun4.utils.StringUtil;
-import io.github.bakedlibs.dough.collections.Pair;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
+import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitTask;
 
 /**
  * 方块数据控制器
@@ -78,7 +74,7 @@ public class BlockDataController extends ADataController {
     /**
      * 方块物品栏快照
      */
-    private final Map<String, List<Pair<ItemStack, Integer>>> invSnapshots;
+    private final Map<String, InvSnapshot> invSnapshots;
     /**
      * 全局控制器加载数据锁
      *
@@ -1012,7 +1008,7 @@ public class BlockDataController extends ADataController {
 
                     var content = blockData.getMenuContents();
                     if (content != null) {
-                        invSnapshots.put(blockData.getKey(), InvStorageUtils.getInvSnapshot(content));
+                        invSnapshots.put(blockData.getKey(), new InvSnapshot(content));
                     }
                 }
             }
@@ -1117,12 +1113,7 @@ public class BlockDataController extends ADataController {
                         } catch (Exception ex) {
                             inv[slot] = null;
                             Slimefun.logger()
-                                    .log(
-                                            Level.SEVERE,
-                                            "加载目标物品失败, 请检查实际数据 ["
-                                                    + uniData.getKey() + ":"
-                                                    + slot + "]",
-                                            ex);
+                                    .log(Level.SEVERE, "加载目标物品失败, 请检查实际数据 [" + uniData.getKey() + ":" + slot + "]", ex);
                         }
                     }
 
@@ -1139,7 +1130,7 @@ public class BlockDataController extends ADataController {
                     var content = uniData.getMenuContents();
 
                     if (content != null) {
-                        invSnapshots.put(uniData.getKey(), InvStorageUtils.getInvSnapshot(content));
+                        invSnapshots.put(uniData.getKey(), new InvSnapshot(content));
                     }
                 }
             }
@@ -1211,14 +1202,14 @@ public class BlockDataController extends ADataController {
 
     public void saveBlockInventory(SlimefunBlockData blockData) {
         var newInv = blockData.getMenuContents();
-        List<Pair<ItemStack, Integer>> lastSave;
+        InvSnapshot lastSave;
         if (newInv == null) {
             lastSave = invSnapshots.remove(blockData.getKey());
             if (lastSave == null) {
                 return;
             }
         } else {
-            lastSave = invSnapshots.put(blockData.getKey(), InvStorageUtils.getInvSnapshot(newInv));
+            lastSave = invSnapshots.put(blockData.getKey(), new InvSnapshot(newInv));
         }
 
         var changed = InvStorageUtils.getChangedSlots(lastSave, newInv);
@@ -1284,7 +1275,7 @@ public class BlockDataController extends ADataController {
         var universalID = universalData.getUUID();
 
         var currentInv = universalData.getMenuContents();
-        List<Pair<ItemStack, Integer>> lastSave;
+        InvSnapshot lastSave;
 
         if (currentInv == null) {
             lastSave = invSnapshots.remove(universalID.toString());
@@ -1292,7 +1283,7 @@ public class BlockDataController extends ADataController {
                 return;
             }
         } else {
-            lastSave = invSnapshots.put(universalID.toString(), InvStorageUtils.getInvSnapshot(currentInv));
+            lastSave = invSnapshots.put(universalID.toString(), new InvSnapshot(currentInv));
         }
 
         var changed = InvStorageUtils.getChangedSlots(lastSave, currentInv);
@@ -1631,7 +1622,7 @@ public class BlockDataController extends ADataController {
 
                 var content = universalData.getMenuContents();
                 if (content != null) {
-                    invSnapshots.put(universalData.getKey(), InvStorageUtils.getInvSnapshot(content));
+                    invSnapshots.put(universalData.getKey(), new InvSnapshot(content));
                 }
             }
 

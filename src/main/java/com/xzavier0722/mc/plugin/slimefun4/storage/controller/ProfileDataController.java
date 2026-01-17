@@ -1,5 +1,17 @@
 package com.xzavier0722.mc.plugin.slimefun4.storage.controller;
 
+import com.xzavier0722.mc.plugin.slimefun4.storage.callback.IAsyncReadCallback;
+import com.xzavier0722.mc.plugin.slimefun4.storage.common.DataScope;
+import com.xzavier0722.mc.plugin.slimefun4.storage.common.DataType;
+import com.xzavier0722.mc.plugin.slimefun4.storage.common.FieldKey;
+import com.xzavier0722.mc.plugin.slimefun4.storage.common.RecordKey;
+import com.xzavier0722.mc.plugin.slimefun4.storage.common.RecordSet;
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.DataUtils;
+import io.github.thebusybiscuit.slimefun4.api.events.AsyncProfileLoadEvent;
+import io.github.thebusybiscuit.slimefun4.api.player.PlayerBackpack;
+import io.github.thebusybiscuit.slimefun4.api.player.PlayerProfile;
+import io.github.thebusybiscuit.slimefun4.api.researches.Research;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
@@ -10,29 +22,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.inventory.ItemStack;
-
-import com.xzavier0722.mc.plugin.slimefun4.storage.callback.IAsyncReadCallback;
-import com.xzavier0722.mc.plugin.slimefun4.storage.common.DataScope;
-import com.xzavier0722.mc.plugin.slimefun4.storage.common.DataType;
-import com.xzavier0722.mc.plugin.slimefun4.storage.common.FieldKey;
-import com.xzavier0722.mc.plugin.slimefun4.storage.common.RecordKey;
-import com.xzavier0722.mc.plugin.slimefun4.storage.common.RecordSet;
-import com.xzavier0722.mc.plugin.slimefun4.storage.util.DataUtils;
-
-import city.norain.slimefun4.compatibillty.CompatibilityUtil;
-import io.github.thebusybiscuit.slimefun4.api.events.AsyncProfileLoadEvent;
-import io.github.thebusybiscuit.slimefun4.api.player.PlayerBackpack;
-import io.github.thebusybiscuit.slimefun4.api.player.PlayerProfile;
-import io.github.thebusybiscuit.slimefun4.api.researches.Research;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 public class ProfileDataController extends ADataController {
     private final BackpackCache backpackCache;
     private final Map<String, PlayerProfile> profileCache;
@@ -120,6 +115,16 @@ public class ProfileDataController extends ADataController {
         scheduleReadTask(() -> invokeCallback(callback, getProfile(p)));
     }
 
+    public CompletableFuture<PlayerBackpack> getBackpackAsync(OfflinePlayer owner, int num) {
+        checkDestroy();
+        var uuid = owner.getUniqueId().toString();
+        var re = backpackCache.get(uuid, num);
+        if (re != null) {
+            return CompletableFuture.completedFuture(re);
+        }
+        return CompletableFuture.supplyAsync(() -> getBackpack(owner, num), readExecutor);
+    }
+
     @Nullable public PlayerBackpack getBackpack(OfflinePlayer owner, int num) {
         checkDestroy();
         var uuid = owner.getUniqueId().toString();
@@ -155,7 +160,17 @@ public class ProfileDataController extends ADataController {
         return re;
     }
 
+    public CompletableFuture<PlayerBackpack> getBackpackAsync(String uuid) {
+        checkDestroy();
+        var re = backpackCache.get(uuid);
+        if (re != null) {
+            return CompletableFuture.completedFuture(re);
+        }
+        return CompletableFuture.supplyAsync(() -> getBackpack(uuid), readExecutor);
+    }
+
     @Nullable public PlayerBackpack getBackpack(String uuid) {
+        checkDestroy();
         var re = backpackCache.get(uuid);
         if (re != null) {
             return re;
@@ -227,10 +242,12 @@ public class ProfileDataController extends ADataController {
                 .collect(Collectors.toSet());
     }
 
+    @Deprecated
     public void getBackpackAsync(OfflinePlayer owner, int num, IAsyncReadCallback<PlayerBackpack> callback) {
         scheduleReadTask(() -> invokeCallback(callback, getBackpack(owner, num)));
     }
 
+    @Deprecated
     public void getBackpackAsync(String uuid, IAsyncReadCallback<PlayerBackpack> callback) {
         scheduleReadTask(() -> invokeCallback(callback, getBackpack(uuid)));
     }
@@ -331,33 +348,47 @@ public class ProfileDataController extends ADataController {
         scheduleWriteTask(new UUIDKey(DataScope.NONE, uuid), key, getRecordSet(profile), false);
     }
 
-    public void saveBackpackInventory(PlayerBackpack bp, Set<Integer> slots) {
-        var id = bp.getUniqueId().toString();
-        var inv = bp.getInventory();
-        slots.forEach(slot -> {
-            var key = new RecordKey(DataScope.BACKPACK_INVENTORY);
-            key.addCondition(FieldKey.BACKPACK_ID, id);
-            key.addCondition(FieldKey.INVENTORY_SLOT, slot + "");
-            key.addField(FieldKey.INVENTORY_ITEM);
-            var is = inv.getItem(slot);
-            if (is == null) {
-                scheduleDeleteTask(new UUIDKey(DataScope.NONE, bp.getOwner().getUniqueId()), key, false);
-            } else {
-                try {
-                    var data = new RecordSet();
-                    data.put(FieldKey.BACKPACK_ID, id);
-                    data.put(FieldKey.INVENTORY_SLOT, slot + "");
-                    data.put(FieldKey.INVENTORY_ITEM, is);
-                    scheduleWriteTask(new UUIDKey(DataScope.NONE, bp.getOwner().getUniqueId()), key, data, false);
-                } catch (IllegalArgumentException e) {
-                    Slimefun.logger().log(Level.WARNING, e.getMessage());
-                }
-            }
-        });
+    @Deprecated(forRemoval = true)
+    public void saveBackpackInventory(PlayerBackpack bp, Set<Integer> slotsIgnored) {
+        // we decided to compute slots internal, and the argument is ignored to avoid potential data desync
+        saveBackpackInventory(bp);
     }
 
+    public void saveBackpackInventory(@Nonnull PlayerBackpack bp) {
+        // avoid asynchronous save
+        synchronized (bp) {
+            Set<Integer> slots = bp.getSnapshot().getChangedSlots(bp.getInventory());
+            bp.refreshSnapshot();
+            var id = bp.getUniqueId().toString();
+            var inv = bp.getInventory();
+            slots.forEach(slot -> {
+                var key = new RecordKey(DataScope.BACKPACK_INVENTORY);
+                key.addCondition(FieldKey.BACKPACK_ID, id);
+                key.addCondition(FieldKey.INVENTORY_SLOT, slot + "");
+                key.addField(FieldKey.INVENTORY_ITEM);
+                var is = inv.getItem(slot);
+                if (is == null) {
+                    scheduleDeleteTask(new UUIDKey(DataScope.NONE, bp.getOwner().getUniqueId()), key, false);
+                } else {
+                    try {
+                        var data = new RecordSet();
+                        data.put(FieldKey.BACKPACK_ID, id);
+                        data.put(FieldKey.INVENTORY_SLOT, slot + "");
+                        data.put(FieldKey.INVENTORY_ITEM, is);
+                        scheduleWriteTask(
+                                new UUIDKey(DataScope.NONE, bp.getOwner().getUniqueId()), key, data, false);
+                    } catch (IllegalArgumentException e) {
+                        Slimefun.logger().log(Level.WARNING, e.getMessage());
+                    }
+                }
+            });
+        }
+    }
+
+    @Deprecated(forRemoval = true)
     public void saveBackpackInventory(PlayerBackpack bp, Integer... slots) {
-        saveBackpackInventory(bp, Set.of(slots));
+        // we decided to compute slots internal, and the argument is ignored to avoid potential data desync
+        saveBackpackInventory(bp);
     }
 
     public UUID getPlayerUuid(String pName) {
@@ -418,10 +449,6 @@ public class ProfileDataController extends ADataController {
             @Override
             public void run() {
                 if (invalidingBackpackTasks.remove(pUuid) != this) {
-                    return;
-                }
-
-                if (CompatibilityUtil.isConnected(Bukkit.getOfflinePlayer(UUID.fromString(pUuid)))) {
                     return;
                 }
 

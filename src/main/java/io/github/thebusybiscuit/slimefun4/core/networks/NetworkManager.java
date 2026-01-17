@@ -1,24 +1,7 @@
 package io.github.thebusybiscuit.slimefun4.core.networks;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.logging.Level;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import org.apache.commons.lang.Validate;
-import org.bukkit.Location;
-import org.bukkit.Server;
-
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.LocationUtils;
-
 import io.github.bakedlibs.dough.blocks.BlockPosition;
-import io.github.bakedlibs.dough.blocks.ChunkPosition;
 import io.github.bakedlibs.dough.config.Config;
 import io.github.thebusybiscuit.slimefun4.api.network.Network;
 import io.github.thebusybiscuit.slimefun4.core.debug.Debug;
@@ -26,6 +9,17 @@ import io.github.thebusybiscuit.slimefun4.core.debug.TestCase;
 import io.github.thebusybiscuit.slimefun4.core.networks.cargo.CargoNet;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.implementation.listeners.NetworkListener;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.logging.Level;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import org.apache.commons.lang.Validate;
+import org.bukkit.Location;
+import org.bukkit.Server;
 
 /**
  * The {@link NetworkManager} is responsible for holding all instances of {@link Network}
@@ -45,17 +39,14 @@ public class NetworkManager {
     private final boolean deleteExcessItems;
 
     /**
-     * The `networks` stores all registered {@link Network} instances,
-     * organized by their corresponding {@link ChunkPosition}.
-     * <p>
-     * We use a {@link ConcurrentHashMap} to allow for thread-safe
-     * operations on network updates and retrievals.
-     * <p>
-     * For improve retrieval performance, we organize networks by their chunk positions.
-     * This allows us to quickly find networks relevant to a specific location
-     * without iterating all networks.
+     * Fixes #3041
+     *
+     * We use a {@link CopyOnWriteArrayList} here to ensure thread-safety.
+     * This {@link List} is also much more frequently read than being written to.
+     * Therefore a {@link CopyOnWriteArrayList} should be perfect for this, even
+     * if insertions come at a slight cost.
      */
-    private final Map<ChunkPosition, List<Network>> networks = new ConcurrentHashMap<>();
+    private final List<Network> networks = new CopyOnWriteArrayList<>();
 
     /**
      * This creates a new {@link NetworkManager} with the given capacity.
@@ -122,7 +113,7 @@ public class NetworkManager {
      */
     @Nonnull
     public List<Network> getNetworkList() {
-        return networks.values().stream().flatMap(List::stream).toList();
+        return Collections.unmodifiableList(networks);
     }
 
     @Nonnull
@@ -133,16 +124,9 @@ public class NetworkManager {
 
         Validate.notNull(type, "Type must not be null");
 
-        var nearbyChunks = getNearbyChunks(new ChunkPosition(l));
-
-        for (ChunkPosition c : nearbyChunks) {
-            List<Network> networks = this.networks.get(c);
-            if (networks != null) {
-                for (Network network : networks) {
-                    if (type.isInstance(network) && network.connectsTo(l)) {
-                        return Optional.of(type.cast(network));
-                    }
-                }
+        for (Network network : networks) {
+            if (type.isInstance(network) && network.connectsTo(l)) {
+                return Optional.of(type.cast(network));
             }
         }
 
@@ -159,16 +143,9 @@ public class NetworkManager {
         Validate.notNull(type, "Type must not be null");
         List<T> list = new ArrayList<>();
 
-        var nearbyChunks = getNearbyChunks(new ChunkPosition(l));
-
-        for (ChunkPosition c : nearbyChunks) {
-            List<Network> networks = this.networks.get(c);
-            if (networks != null) {
-                for (Network network : networks) {
-                    if (type.isInstance(network) && network.connectsTo(l)) {
-                        list.add(type.cast(network));
-                    }
-                }
+        for (Network network : networks) {
+            if (type.isInstance(network) && network.connectsTo(l)) {
+                list.add(type.cast(network));
             }
         }
 
@@ -187,8 +164,7 @@ public class NetworkManager {
         Debug.log(
                 TestCase.ENERGYNET, "Registering network @ " + LocationUtils.locationToString(network.getRegulator()));
 
-        networks.computeIfAbsent(network.getChunk(), k -> new CopyOnWriteArrayList<>())
-                .add(network);
+        networks.add(network);
     }
 
     /**
@@ -204,10 +180,7 @@ public class NetworkManager {
                 TestCase.ENERGYNET,
                 "Unregistering network @ " + LocationUtils.locationToString(network.getRegulator()));
 
-        networks.computeIfPresent(network.getChunk(), (k, v) -> {
-            v.remove(network);
-            return v.isEmpty() ? null : v;
-        });
+        networks.remove(network);
     }
 
     /**
@@ -241,31 +214,5 @@ public class NetworkManager {
                             x,
                             () -> "An Exception was thrown while causing a networks update @ " + new BlockPosition(l));
         }
-    }
-
-    private ChunkPosition[] getNearbyChunks(ChunkPosition chunk) {
-        ChunkPosition[] chunks = new ChunkPosition[9];
-
-        chunks[0] = chunk;
-
-        int x = chunk.getX();
-        int z = chunk.getZ();
-
-        int index = 1;
-        // 遍历 x 方向偏移 -1 到 1
-        for (int dx = -1; dx <= 1; dx++) {
-            // 遍历 z 方向偏移 -1 到 1
-            for (int dz = -1; dz <= 1; dz++) {
-                // 跳过中心区块自身 (偏移量均为 0 时)
-                if (dx == 0 && dz == 0) {
-                    continue;
-                }
-
-                // 根据偏移量创建新的 ChunkPosition 对象
-                chunks[index++] = new ChunkPosition(chunk.getWorld(), x + dx, z + dz);
-            }
-        }
-
-        return chunks;
     }
 }
