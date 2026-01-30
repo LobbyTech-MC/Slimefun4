@@ -7,6 +7,7 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.core.attributes.WitherProof;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
 import io.papermc.lib.PaperLib;
 import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotResult;
@@ -19,6 +20,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Skull;
 import org.bukkit.block.data.type.Piston;
 import org.bukkit.entity.FallingBlock;
+import org.bukkit.entity.Wither;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -67,14 +69,39 @@ public class BlockPhysicsListener implements Listener {
                 }
             }
 
-            case WITHER, WITHER_SKULL -> {
+            case WITHER -> {
+                // fix issue 1126
+                // the wither break is handled in the WitherListener, then the data is removed there, so it will conflict with this listener
+                var block = e.getBlock();
+                var item = SlimefunItem.getById(blockData.getSfId());
+                var controller = Slimefun.getDatabaseManager().getBlockDataController();
+                if(item != null){
+                    if(item instanceof WitherProof witherProof){
+                        witherProof.onAttackEvent(e);
+                        if(!e.isCancelled()){
+                            return;
+                        }
+                    }
+                    controller.removeBlock(block.getLocation());
+                    block.setType(Material.AIR);
+                    for (var drop : item.getDrops()) {
+                        if (drop != null && !drop.getType().isAir()) {
+                            block.getWorld().dropItemNaturally(block.getLocation(), drop);
+                        }
+                    }
+                }
+            }
+
+            case WITHER_SKULL -> {
                 var block = e.getBlock();
                 var item = SlimefunItem.getById(blockData.getSfId());
 
                 var controller = Slimefun.getDatabaseManager().getBlockDataController();
-                if (item != null
-                        && !(item instanceof WitherProof)
-                        && !item.callItemHandler(BlockBreakHandler.class, handler -> {
+                if(item != null){
+                    if(item instanceof WitherProof witherProof){
+                        witherProof.onAttackEvent(e);
+                    }else{
+                        boolean result = item.callItemHandler(BlockBreakHandler.class, handler -> {
                             if (blockData.isDataLoaded()) {
                                 callHandler(handler, block);
                             } else {
@@ -92,9 +119,17 @@ public class BlockPhysicsListener implements Listener {
                                     }
                                 });
                             }
-                        })) {
-                    controller.removeBlock(block.getLocation());
-                    block.setType(Material.AIR);
+                        });
+                        if(!result){
+                            controller.removeBlock(block.getLocation());
+                            block.setType(Material.AIR);
+                        }
+                    }
+                }
+                if (item != null
+                        && !(item instanceof WitherProof)
+                        && !) {
+
                 }
             }
 
