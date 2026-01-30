@@ -7,6 +7,7 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.WitherProof;
 import javax.annotation.ParametersAreNonnullByDefault;
 import org.bukkit.entity.Wither;
 import org.bukkit.entity.WitherSkull;
+import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.inventory.ItemStack;
 
 /**
@@ -20,6 +21,7 @@ import org.bukkit.inventory.ItemStack;
  *
  */
 public class HardenedGlass extends WitherProofBlock {
+    private final boolean witherProof;
 
     @ParametersAreNonnullByDefault
     public HardenedGlass(
@@ -28,6 +30,25 @@ public class HardenedGlass extends WitherProofBlock {
             RecipeType recipeType,
             ItemStack[] recipe,
             ItemStack recipeOutput) {
+        this(itemGroup, item, recipeType, recipe, recipeOutput, true);
+    }
+
+    public HardenedGlass(
+            ItemGroup itemGroup,
+            SlimefunItemStack item,
+            RecipeType recipeType,
+            ItemStack[] recipe,
+            ItemStack recipeOutput,
+            boolean witherProof) {
         super(itemGroup, item, recipeType, recipe, recipeOutput);
+        this.witherProof = witherProof;
+    }
+
+    @Override
+    public void onAttackEvent(EntityChangeBlockEvent event) {
+        // add check to hardenGlass
+        if (this.witherProof) {
+            super.onAttackEvent(event);
+        }
     }
 }

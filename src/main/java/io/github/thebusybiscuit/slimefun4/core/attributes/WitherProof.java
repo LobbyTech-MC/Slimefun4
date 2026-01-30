@@ -2,6 +2,7 @@ package io.github.thebusybiscuit.slimefun4.core.attributes;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.implementation.items.blocks.WitherProofBlock;
+import java.util.List;
 import javax.annotation.Nonnull;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Wither;
@@ -32,16 +33,25 @@ public interface WitherProof extends ItemAttribute {
     void onAttack(@Nonnull Block block, @Nonnull Wither wither);
 
     /**
-     * This method is called when a {@link Wither} or {@link org.bukkit.entity.WitherSkull} tried to attack the block.
+     * This method is called when a {@link Wither} tried to attack the block.
      * You can use this method to handle the {@link EntityChangeBlockEvent}.
      *
      * @param event
      *            The {@link EntityChangeBlockEvent} which was involved.
      */
     default void onAttackEvent(EntityChangeBlockEvent event) {
-        if(event.getEntity() instanceof Wither wither) {
+        if (event.getEntity() instanceof Wither wither) {
             event.setCancelled(true);
             onAttack(event.getBlock(), wither);
         }
+    }
+    /**
+     * This method is called to check if the block will get destroy in a {@link org.bukkit.event.entity.EntityExplodeEvent}
+     * If return true, the {@link io.github.thebusybiscuit.slimefun4.implementation.listeners.ExplosionsListener} will skip these blocks, otherwise they will ask {@link io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler#isExplosionAllowed(Block)} and handle the explosion by {@link io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler#onExplode(Block, List)}
+     *
+     * @return whether this is explosion proof
+     */
+    default boolean isExplosionProof() {
+        return true;
     }
 }

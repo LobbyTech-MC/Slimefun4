@@ -353,10 +353,11 @@ public final class SlimefunUtils {
                 // issue # 1178 should compare sfid even if the second one isn't a ItemStackWrapper
                 if (sfitem.hasItemMeta()) {
                     ItemMeta possibleSfItemMeta = sfitem.getItemMeta();
-                    String id = Slimefun.getItemDataService().getItemData(itemMeta).orElse(null);
+                    String id =
+                            Slimefun.getItemDataService().getItemData(itemMeta).orElse(null);
                     String possibleItemId = Slimefun.getItemDataService()
-                        .getItemData(possibleSfItemMeta)
-                        .orElse(null);
+                            .getItemData(possibleSfItemMeta)
+                            .orElse(null);
                     // Prioritize SlimefunItem id comparison over ItemMeta comparison
                     if (id != null && possibleItemId != null) {
                         /*

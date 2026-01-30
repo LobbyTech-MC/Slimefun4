@@ -69,7 +69,7 @@ public class BlockListener implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onBlockPlaceExisting(BlockPlaceEvent e) {
-        if(!e.canBuild()){
+        if (!e.canBuild()) {
             return;
         }
         Block block = e.getBlock();
@@ -114,7 +114,7 @@ public class BlockListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onBlockPlace(BlockPlaceEvent e) {
-        if(!e.canBuild()){
+        if (!e.canBuild()) {
             return;
         }
         ItemStack item = e.getItemInHand();
