@@ -21,8 +21,6 @@ import org.bukkit.inventory.ItemStack;
  *
  */
 public class HardenedGlass extends WitherProofBlock {
-    private final boolean witherProof;
-
     @ParametersAreNonnullByDefault
     public HardenedGlass(
             ItemGroup itemGroup,
@@ -30,25 +28,11 @@ public class HardenedGlass extends WitherProofBlock {
             RecipeType recipeType,
             ItemStack[] recipe,
             ItemStack recipeOutput) {
-        this(itemGroup, item, recipeType, recipe, recipeOutput, true);
-    }
-
-    public HardenedGlass(
-            ItemGroup itemGroup,
-            SlimefunItemStack item,
-            RecipeType recipeType,
-            ItemStack[] recipe,
-            ItemStack recipeOutput,
-            boolean witherProof) {
         super(itemGroup, item, recipeType, recipe, recipeOutput);
-        this.witherProof = witherProof;
     }
 
     @Override
     public void onAttackEvent(EntityChangeBlockEvent event) {
-        // add check to hardenGlass
-        if (this.witherProof) {
-            super.onAttackEvent(event);
-        }
+        // the Hardened Glass does not proof wither , so event shouldn't be cancelled
     }
 }

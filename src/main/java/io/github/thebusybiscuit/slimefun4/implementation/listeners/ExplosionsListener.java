@@ -77,7 +77,7 @@ public class ExplosionsListener implements Listener {
             if (item != null) {
                 blocks.remove();
                 // add WitherProof api
-                if (item instanceof WitherProof witherProof && witherProof.isExplosionProof()) {
+                if (item instanceof WitherProof) {
                     continue;
                 } else {
                     Runnable destroyTask = () -> {
@@ -94,10 +94,10 @@ public class ExplosionsListener implements Listener {
     }
 
     private void callBreakHandler(
-            SlimefunItem item, ASlimefunDataContainer blockData, Block block, Runnable destroyCcb) {
+            SlimefunItem item, ASlimefunDataContainer blockData, Block block, Runnable destroyBlockCb) {
         if (!item.callItemHandler(BlockBreakHandler.class, handler -> {
             if (blockData.isDataLoaded()) {
-                handleExplosion(handler, block, item, destroyCcb);
+                handleExplosion(handler, block, item, destroyBlockCb);
             } else {
                 Slimefun.getDatabaseManager()
                         .getBlockDataController()
@@ -109,17 +109,17 @@ public class ExplosionsListener implements Listener {
 
                             @Override
                             public void onResult(ASlimefunDataContainer result) {
-                                handleExplosion(handler, block, item, destroyCcb);
+                                handleExplosion(handler, block, item, destroyBlockCb);
                             }
                         });
             }
         })) {
-            destroyCcb.run();
+            destroyBlockCb.run();
         }
     }
 
     @ParametersAreNonnullByDefault
-    private void handleExplosion(BlockBreakHandler handler, Block block, SlimefunItem item, Runnable destroyCcb) {
+    private void handleExplosion(BlockBreakHandler handler, Block block, SlimefunItem item, Runnable destroyBlockCb) {
         if (handler.isExplosionAllowed(block)) {
             // fix : 1187, machine should drop themselves first, in explosion
             List<ItemStack> drops = new ArrayList<>(item.getDrops());
@@ -131,13 +131,12 @@ public class ExplosionsListener implements Listener {
                 }
             }
 
-            destroyCcb.run();
+            destroyBlockCb.run();
         }
     }
 
     @ParametersAreNonnullByDefault
     private void updateNearbyNetwork(SlimefunItem item, Location loc) {
-        // fix:
         if (!(item instanceof EnergyNetComponent) && !(item instanceof CargoNode)) {
             return;
         }

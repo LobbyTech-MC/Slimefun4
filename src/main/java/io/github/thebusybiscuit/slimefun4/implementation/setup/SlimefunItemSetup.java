@@ -4328,8 +4328,7 @@ public final class SlimefunItemSetup {
                             new ItemStack(Material.GLASS),
                             new ItemStack(Material.GLASS)
                         },
-                        new SlimefunItemStack(SlimefunItems.HARDENED_GLASS, 16),
-                        false)
+                        new SlimefunItemStack(SlimefunItems.HARDENED_GLASS, 16))
                 .register(plugin);
 
         new UnplaceableBlock(
