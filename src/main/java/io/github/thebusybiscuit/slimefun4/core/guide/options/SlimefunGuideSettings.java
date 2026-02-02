@@ -193,13 +193,13 @@ public final class SlimefunGuideSettings {
                         Material.BOOKSHELF,
                         "&3" + locale.getMessage(p, "guide.title.addons"),
                         "",
-                        "&7Slimefun 是一个大型项目，但附属插件的存在",
-                        "&7能让 Slimefun 真正的发光发亮",
+                        "&7粘液科技是一个大型项目，但附属插件的存在",
+                        "&7能让粘液科技真正的发光发亮",
                         "&7看一看它们，也许你要寻找的附属插件就在那里!",
                         "",
                         "&7该服务器已安装附属插件: &b" + Slimefun.getInstalledAddons().size(),
                         "",
-                        "&7\u21E8 &e点击查看 Slimefun4 可用的附属插件"));
+                        "&7\u21E8 &e点击查看粘液科技可用的附属插件"));
         // @formatter:on
 
         menu.addMenuClickHandler(47, (pl, slot, item, action) -> {
