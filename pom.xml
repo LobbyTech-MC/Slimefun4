@@ -16,8 +16,8 @@
     <url>https://github.com/Slimefun/Slimefun4</url>
 
     <properties>
-        <ChanLang-systemPath>C:\Users\11877\Documents\GitHub\Slimefun4\libs\ChanLang.jar</ChanLang-systemPath>
-        <Residence-systemPath>C:\Users\11877\Documents\GitHub\Slimefun4\libs\Residence5.1.7.4.jar</Residence-systemPath>
+        <ChanLang-systemPath>F:\Github\Slimefun4\libs\ChanLang.jar</ChanLang-systemPath>
+        <Residence-systemPath>F:\Github\Slimefun4\libs\Residence5.1.7.4.jar</Residence-systemPath>
         <!-- UTF-8 is our standard encoding for source files -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
