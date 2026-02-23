@@ -1,24 +1,21 @@
 package com.xzavier0722.mc.plugin.slimefun4.storage.migrator;
 
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
+import io.github.bakedlibs.dough.config.Config;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.Map;
 import java.util.logging.Level;
-
+import lombok.Getter;
+import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
-
-import com.google.common.reflect.TypeToken;
-import com.google.gson.Gson;
-
-import io.github.bakedlibs.dough.config.Config;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-import lombok.Getter;
-import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
 
 public class BlockStorageMigrator implements IMigrator {
     @Getter
@@ -217,8 +214,8 @@ public class BlockStorageMigrator implements IMigrator {
         }
     }
 
-	public static BlockStorageMigrator getInstance() {
-		// TODO Auto-generated method stub
-		return instance;
-	}
+    public static BlockStorageMigrator getInstance() {
+        // TODO Auto-generated method stub
+        return instance;
+    }
 }

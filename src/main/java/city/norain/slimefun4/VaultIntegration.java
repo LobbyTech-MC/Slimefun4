@@ -1,14 +1,11 @@
 package city.norain.slimefun4;
 
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import java.util.Objects;
 import java.util.logging.Level;
-
 import javax.annotation.Nonnull;
-
-import org.bukkit.OfflinePlayer;
-
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import net.milkbowl.vault.economy.Economy;
+import org.bukkit.OfflinePlayer;
 
 /**
  * Vault 集成类, 用于处理游戏币相关的操作.

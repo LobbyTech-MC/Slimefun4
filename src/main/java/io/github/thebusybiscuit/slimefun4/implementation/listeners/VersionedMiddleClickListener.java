@@ -1,10 +1,12 @@
 package io.github.thebusybiscuit.slimefun4.implementation.listeners;
 
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import io.papermc.paper.event.player.PlayerPickItemEvent;
 import java.lang.reflect.Method;
 import java.util.logging.Level;
-
 import javax.annotation.Nonnull;
-
 import org.apache.commons.lang.Validate;
 import org.bukkit.GameMode;
 import org.bukkit.block.Block;
@@ -12,12 +14,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
-
-import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
-
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-import io.papermc.paper.event.player.PlayerPickItemEvent;
 
 public class VersionedMiddleClickListener implements Listener {
     Class<? extends PlayerPickItemEvent> pickBlockEventClass;

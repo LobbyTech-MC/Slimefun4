@@ -1,12 +1,11 @@
 package com.xzavier0722.mc.plugin.slimefun4.chat.listener;
 
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 
 public class PlayerChatListener implements Listener {
 

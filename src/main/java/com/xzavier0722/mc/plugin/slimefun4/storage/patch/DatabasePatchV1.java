@@ -2,14 +2,13 @@ package com.xzavier0722.mc.plugin.slimefun4.storage.patch;
 
 import static com.xzavier0722.mc.plugin.slimefun4.storage.adapter.sqlcommon.SqlConstants.FIELD_INVENTORY_ITEM;
 
-import java.sql.SQLException;
-import java.sql.SQLSyntaxErrorException;
-import java.sql.Statement;
-
 import com.xzavier0722.mc.plugin.slimefun4.storage.adapter.mysql.MysqlConfig;
 import com.xzavier0722.mc.plugin.slimefun4.storage.adapter.sqlcommon.ISqlCommonConfig;
 import com.xzavier0722.mc.plugin.slimefun4.storage.adapter.sqlcommon.SqlUtils;
 import com.xzavier0722.mc.plugin.slimefun4.storage.common.DataScope;
+import java.sql.SQLException;
+import java.sql.SQLSyntaxErrorException;
+import java.sql.Statement;
 
 public class DatabasePatchV1 extends DatabasePatch {
     public DatabasePatchV1() {

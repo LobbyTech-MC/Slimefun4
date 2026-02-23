@@ -1,14 +1,11 @@
 package com.xzavier0722.mc.plugin.slimefun4.storage.controller;
 
-import java.util.UUID;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-
 import com.xzavier0722.mc.plugin.slimefun4.storage.controller.attributes.UniversalDataTrait;
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.LocationUtils;
-
 import io.github.bakedlibs.dough.blocks.BlockPosition;
+import java.util.UUID;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 
 public class SlimefunUniversalBlockData extends SlimefunUniversalData {
     private volatile BlockPosition lastPresent;

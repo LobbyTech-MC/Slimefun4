@@ -1,14 +1,12 @@
 package io.github.thebusybiscuit.slimefun4.implementation.operations;
 
+import io.github.thebusybiscuit.slimefun4.core.machines.MachineOperation;
+import io.github.thebusybiscuit.slimefun4.utils.SerializingUtils;
 import javax.annotation.Nonnull;
-
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineRecipe;
 import org.apache.commons.lang.Validate;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
-
-import io.github.thebusybiscuit.slimefun4.core.machines.MachineOperation;
-import io.github.thebusybiscuit.slimefun4.utils.SerializingUtils;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineRecipe;
 
 /**
  * This {@link MachineOperation} represents a crafting process.

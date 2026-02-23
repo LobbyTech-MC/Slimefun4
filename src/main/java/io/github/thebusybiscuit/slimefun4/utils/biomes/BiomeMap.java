@@ -1,5 +1,8 @@
 package io.github.thebusybiscuit.slimefun4.utils.biomes;
 
+import com.google.gson.JsonElement;
+import io.github.thebusybiscuit.slimefun4.api.exceptions.BiomeMapException;
+import io.github.thebusybiscuit.slimefun4.api.geo.GEOResource;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,21 +11,14 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-
 import org.apache.commons.lang.Validate;
 import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Biome;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import com.google.gson.JsonElement;
-
-import io.github.thebusybiscuit.slimefun4.api.exceptions.BiomeMapException;
-import io.github.thebusybiscuit.slimefun4.api.geo.GEOResource;
 
 /**
  * {@link BiomeMap}s are used to map data values to {@link Biome} constants.
@@ -142,8 +138,8 @@ public class BiomeMap<T> implements Keyed {
     }
 
     @ParametersAreNonnullByDefault
-    public static <T> BiomeMap<T> fromJson(
-            NamespacedKey key, String json, BiomeDataConverter<T> valueConverter) throws BiomeMapException {
+    public static <T> BiomeMap<T> fromJson(NamespacedKey key, String json, BiomeDataConverter<T> valueConverter)
+            throws BiomeMapException {
         // All parameters are validated by the Parser.
         BiomeMapParser<T> parser = new BiomeMapParser<>(key, valueConverter);
         parser.read(json);

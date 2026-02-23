@@ -1,8 +1,7 @@
 package com.xzavier0722.mc.plugin.slimefun4.storage.callback;
 
-import java.util.function.Consumer;
-
 import io.github.thebusybiscuit.slimefun4.utils.ThreadUtils;
+import java.util.function.Consumer;
 
 /**
  * This interface is deprecated and related methods will be replaced by methods using {@link java.util.concurrent.CompletableFuture} in the future.

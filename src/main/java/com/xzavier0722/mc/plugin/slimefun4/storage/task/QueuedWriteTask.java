@@ -1,11 +1,10 @@
 package com.xzavier0722.mc.plugin.slimefun4.storage.task;
 
+import com.xzavier0722.mc.plugin.slimefun4.storage.common.RecordKey;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
-
-import com.xzavier0722.mc.plugin.slimefun4.storage.common.RecordKey;
 
 public class QueuedWriteTask implements Runnable {
     private final Queue<RecordKey> queue = new LinkedList<>();

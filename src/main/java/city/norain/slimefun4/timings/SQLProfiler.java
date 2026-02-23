@@ -1,5 +1,8 @@
 package city.norain.slimefun4.timings;
 
+import city.norain.slimefun4.SlimefunExtended;
+import city.norain.slimefun4.timings.entry.TimingEntry;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -15,14 +18,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
-
 import javax.annotation.Nonnull;
-
 import org.bukkit.command.CommandSender;
-
-import city.norain.slimefun4.SlimefunExtended;
-import city.norain.slimefun4.timings.entry.TimingEntry;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 
 public class SQLProfiler {
     private final ExecutorService reportExecutor = Executors.newFixedThreadPool(1, r -> {
@@ -196,7 +193,7 @@ public class SQLProfiler {
         return reportFile.getAbsolutePath();
     }
 
-	public boolean isProfiling() {
-		return isProfiling;
-	}
+    public boolean isProfiling() {
+        return isProfiling;
+    }
 }

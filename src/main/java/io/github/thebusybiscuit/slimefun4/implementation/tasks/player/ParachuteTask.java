@@ -1,7 +1,6 @@
 package io.github.thebusybiscuit.slimefun4.implementation.tasks.player;
 
 import javax.annotation.Nonnull;
-
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 

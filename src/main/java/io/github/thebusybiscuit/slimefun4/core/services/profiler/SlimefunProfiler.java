@@ -1,5 +1,13 @@
 package io.github.thebusybiscuit.slimefun4.core.services.profiler;
 
+import city.norain.slimefun4.utils.SlimefunPoolExecutor;
+import city.norain.slimefun4.utils.StringUtil;
+import com.google.common.util.concurrent.AtomicDouble;
+import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import io.github.thebusybiscuit.slimefun4.implementation.tasks.TickerTask;
+import io.github.thebusybiscuit.slimefun4.utils.NumberUtils;
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadMXBean;
 import java.util.HashMap;
@@ -16,26 +24,14 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Level;
-
 import javax.annotation.Nonnull;
-
+import lombok.Getter;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Server;
 import org.bukkit.block.Block;
 import org.bukkit.scheduler.BukkitScheduler;
-
-import com.google.common.util.concurrent.AtomicDouble;
-
-import city.norain.slimefun4.utils.SlimefunPoolExecutor;
-import city.norain.slimefun4.utils.StringUtil;
-import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-import io.github.thebusybiscuit.slimefun4.implementation.tasks.TickerTask;
-import io.github.thebusybiscuit.slimefun4.utils.NumberUtils;
-import lombok.Getter;
 
 /**
  * The {@link SlimefunProfiler} works closely to the {@link TickerTask} and is

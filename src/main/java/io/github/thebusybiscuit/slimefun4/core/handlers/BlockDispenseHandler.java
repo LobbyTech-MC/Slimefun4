@@ -1,17 +1,15 @@
 package io.github.thebusybiscuit.slimefun4.core.handlers;
 
-import java.util.Optional;
-
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.Dispenser;
-import org.bukkit.event.block.BlockDispenseEvent;
-
 import io.github.thebusybiscuit.slimefun4.api.exceptions.IncompatibleItemHandlerException;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemHandler;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;
 import io.github.thebusybiscuit.slimefun4.implementation.items.blocks.BlockPlacer;
+import java.util.Optional;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.Dispenser;
+import org.bukkit.event.block.BlockDispenseEvent;
 
 /**
  * This {@link ItemHandler} is triggered when the {@link SlimefunItem} it was assigned to

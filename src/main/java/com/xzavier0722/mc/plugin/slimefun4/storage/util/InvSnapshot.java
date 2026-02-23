@@ -1,15 +1,12 @@
 package com.xzavier0722.mc.plugin.slimefun4.storage.util;
 
+import io.github.bakedlibs.dough.collections.Pair;
 import java.util.List;
 import java.util.Set;
-
 import javax.annotation.Nonnull;
-
+import lombok.Getter;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-
-import io.github.bakedlibs.dough.collections.Pair;
-import lombok.Getter;
 
 @Getter
 public class InvSnapshot {

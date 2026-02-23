@@ -1,23 +1,19 @@
 package com.xzavier0722.mc.plugin.slimefun4.storage.util;
 
+import city.norain.slimefun4.utils.StringUtil;
+import com.xzavier0722.mc.plugin.slimefun4.storage.controller.StorageType;
+import io.github.thebusybiscuit.slimefun4.core.debug.Debug;
+import io.github.thebusybiscuit.slimefun4.core.debug.TestCase;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.logging.Level;
-
 import javax.annotation.Nullable;
-
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
-
-import com.xzavier0722.mc.plugin.slimefun4.storage.controller.StorageType;
-
-import city.norain.slimefun4.utils.StringUtil;
-import io.github.thebusybiscuit.slimefun4.core.debug.Debug;
-import io.github.thebusybiscuit.slimefun4.core.debug.TestCase;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 
 public class DataUtils {
     /**

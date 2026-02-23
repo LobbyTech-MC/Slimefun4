@@ -1,16 +1,13 @@
 package io.github.thebusybiscuit.slimefun4.api;
 
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import java.util.logging.Logger;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import org.apache.commons.lang.Validate;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 
 /**
  * This is a very basic interface that will be used to identify

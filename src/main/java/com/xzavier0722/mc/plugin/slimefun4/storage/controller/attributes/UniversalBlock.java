@@ -2,7 +2,6 @@ package com.xzavier0722.mc.plugin.slimefun4.storage.controller.attributes;
 
 import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunUniversalBlockData;
 import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunUniversalData;
-
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 
 /**

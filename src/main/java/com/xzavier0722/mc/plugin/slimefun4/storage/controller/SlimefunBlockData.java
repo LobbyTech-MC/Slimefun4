@@ -1,18 +1,15 @@
 package com.xzavier0722.mc.plugin.slimefun4.storage.controller;
 
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.LocationUtils;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import javax.annotation.ParametersAreNullableByDefault;
-
-import org.bukkit.Location;
-import org.bukkit.inventory.ItemStack;
-
-import com.xzavier0722.mc.plugin.slimefun4.storage.util.LocationUtils;
-
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import lombok.ToString;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
+import org.bukkit.Location;
+import org.bukkit.inventory.ItemStack;
 
 /**
  * {@link SlimefunBlockData} 是 Slimefun 中机器等方块类物品的数据存储容器。

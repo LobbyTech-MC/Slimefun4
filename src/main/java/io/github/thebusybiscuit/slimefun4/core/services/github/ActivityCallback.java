@@ -1,7 +1,6 @@
 package io.github.thebusybiscuit.slimefun4.core.services.github;
 
 import java.time.LocalDateTime;
-
 import javax.annotation.Nonnull;
 
 @FunctionalInterface

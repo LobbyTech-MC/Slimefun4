@@ -1,14 +1,5 @@
 package io.github.thebusybiscuit.slimefun4.implementation.items.medical;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import org.bukkit.Effect;
-import org.bukkit.GameMode;
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
-
 import city.norain.slimefun4.compatibillty.CompatibilityUtil;
 import io.github.bakedlibs.dough.items.ItemUtils;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
@@ -17,6 +8,13 @@ import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
 import io.github.thebusybiscuit.slimefun4.utils.compatibility.VersionedPotionEffectType;
+import javax.annotation.ParametersAreNonnullByDefault;
+import org.bukkit.Effect;
+import org.bukkit.GameMode;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
 
 /**
  * A {@link Bandage} or Rag is a medical supply which heals the {@link Player} and extinguishes

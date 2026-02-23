@@ -1,14 +1,12 @@
 package io.github.thebusybiscuit.slimefun4.core.services.profiler.inspectors;
 
+import io.github.thebusybiscuit.slimefun4.core.services.profiler.PerformanceInspector;
+import io.github.thebusybiscuit.slimefun4.core.services.profiler.SummaryOrderType;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
-
 import org.apache.commons.lang.Validate;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
-
-import io.github.thebusybiscuit.slimefun4.core.services.profiler.PerformanceInspector;
-import io.github.thebusybiscuit.slimefun4.core.services.profiler.SummaryOrderType;
 
 /**
  * This implementation of {@link PerformanceInspector} refers to a {@link CommandSender}

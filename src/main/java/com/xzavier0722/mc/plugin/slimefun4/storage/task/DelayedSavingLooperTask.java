@@ -1,11 +1,9 @@
 package com.xzavier0722.mc.plugin.slimefun4.storage.task;
 
+import com.xzavier0722.mc.plugin.slimefun4.storage.controller.LinkedKey;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
-
-import com.xzavier0722.mc.plugin.slimefun4.storage.controller.LinkedKey;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

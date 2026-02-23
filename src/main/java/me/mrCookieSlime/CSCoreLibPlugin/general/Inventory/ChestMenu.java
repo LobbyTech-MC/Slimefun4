@@ -1,5 +1,8 @@
 package me.mrCookieSlime.CSCoreLibPlugin.general.Inventory;
 
+import city.norain.slimefun4.holder.SlimefunInventoryHolder;
+import city.norain.slimefun4.utils.InventoryUtil;
+import io.github.bakedlibs.dough.items.CustomItemStack;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -8,20 +11,14 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicBoolean;
-
 import javax.annotation.Nonnull;
-
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-
-import city.norain.slimefun4.holder.SlimefunInventoryHolder;
-import city.norain.slimefun4.utils.InventoryUtil;
-import io.github.bakedlibs.dough.items.CustomItemStack;
-import lombok.Getter;
 
 /**
  * An old remnant of CS-CoreLib.
@@ -146,8 +143,8 @@ public class ChestMenu extends SlimefunInventoryHolder {
         // See also: https://github.com/PaperMC/Paper/pull/10852
         ItemStack actual = item;
         if (item != null) {
-    		actual = new CustomItemStack(item);
-    	}
+            actual = new CustomItemStack(item);
+        }
         /*
         if (item instanceof SlimefunItemStack) {
             ItemStack clone = new ItemStack(item.getType(), item.getAmount());
@@ -302,11 +299,10 @@ public class ChestMenu extends SlimefunInventoryHolder {
     public void replaceExistingItem(int slot, ItemStack item) {
         setup();
         if (item != null) {
-        	this.inventory.setItem(slot, new CustomItemStack(item));
+            this.inventory.setItem(slot, new CustomItemStack(item));
         } else {
-        	this.inventory.setItem(slot, item);
+            this.inventory.setItem(slot, item);
         }
-        
     }
 
     /**

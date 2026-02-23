@@ -1,7 +1,6 @@
 package io.github.thebusybiscuit.slimefun4.core.services.profiler;
 
 import javax.annotation.Nonnull;
-
 import org.bukkit.Server;
 
 /**

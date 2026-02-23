@@ -1,19 +1,16 @@
 package com.xzavier0722.mc.plugin.slimefun4.storage.migrator;
 
+import io.github.bakedlibs.dough.config.Config;
+import io.github.thebusybiscuit.slimefun4.api.researches.Research;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.UUID;
 import java.util.logging.Level;
-
 import javax.annotation.Nonnull;
-
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
-
-import io.github.bakedlibs.dough.config.Config;
-import io.github.thebusybiscuit.slimefun4.api.researches.Research;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 
 public class PlayerProfileMigrator implements IMigrator {
     private static final PlayerProfileMigrator instance = new PlayerProfileMigrator();

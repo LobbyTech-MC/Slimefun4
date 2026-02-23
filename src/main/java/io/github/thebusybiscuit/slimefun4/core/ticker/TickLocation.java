@@ -1,13 +1,11 @@
 package io.github.thebusybiscuit.slimefun4.core.ticker;
 
+import io.github.bakedlibs.dough.blocks.BlockPosition;
 import java.util.UUID;
-
+import lombok.Getter;
 import org.bukkit.Location;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
-
-import io.github.bakedlibs.dough.blocks.BlockPosition;
-import lombok.Getter;
 
 @Getter
 @EnableAsync

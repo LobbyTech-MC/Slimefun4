@@ -1,7 +1,6 @@
 package com.xzavier0722.mc.plugin.slimefun4.storage.controller;
 
 import com.xzavier0722.mc.plugin.slimefun4.storage.common.ScopeKey;
-
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,13 +1,11 @@
 package io.github.thebusybiscuit.slimefun4.core.attributes;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import org.bukkit.NamespacedKey;
-import org.bukkit.entity.Player;
-
 import io.github.thebusybiscuit.slimefun4.implementation.items.armor.HazmatArmorPiece;
 import io.github.thebusybiscuit.slimefun4.implementation.items.armor.SlimefunArmorPiece;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import org.bukkit.NamespacedKey;
+import org.bukkit.entity.Player;
 
 /**
  * Implement this interface to a {@link SlimefunArmorPiece} to protect

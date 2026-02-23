@@ -2,14 +2,11 @@ package net.guizhanss.slimefun4.updater;
 
 import java.io.File;
 import java.lang.reflect.Method;
-
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-
-import org.bukkit.plugin.Plugin;
-
 import net.guizhanss.guizhanlib.updater.GuizhanBuildsUpdater;
 import net.guizhanss.guizhanlib.updater.UpdaterConfig;
+import org.bukkit.plugin.Plugin;
 
 /**
  * 自动更新任务.

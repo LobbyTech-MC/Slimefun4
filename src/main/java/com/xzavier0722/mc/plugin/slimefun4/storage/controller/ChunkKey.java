@@ -1,10 +1,9 @@
 package com.xzavier0722.mc.plugin.slimefun4.storage.controller;
 
-import org.bukkit.Chunk;
-
 import com.xzavier0722.mc.plugin.slimefun4.storage.common.DataScope;
 import com.xzavier0722.mc.plugin.slimefun4.storage.common.ScopeKey;
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.LocationUtils;
+import org.bukkit.Chunk;
 
 public class ChunkKey extends ScopeKey {
     private final Chunk chunk;

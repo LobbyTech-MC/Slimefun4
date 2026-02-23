@@ -1,11 +1,9 @@
 package com.xzavier0722.mc.plugin.slimefun4.autocrafter;
 
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.bukkit.block.Block;
-
-import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 
 /**
  *

@@ -1,12 +1,10 @@
 package io.github.thebusybiscuit.slimefun4.api.gps;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import org.bukkit.Material;
-
 import io.github.bakedlibs.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
+import javax.annotation.ParametersAreNonnullByDefault;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
+import org.bukkit.Material;
 
 public class PageHelper {
 

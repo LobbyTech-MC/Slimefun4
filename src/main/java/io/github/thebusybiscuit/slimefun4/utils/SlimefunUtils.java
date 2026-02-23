@@ -1,34 +1,5 @@
 package io.github.thebusybiscuit.slimefun4.utils;
 
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
-import java.util.Optional;
-import java.util.OptionalInt;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import org.apache.commons.lang.Validate;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.World;
-import org.bukkit.entity.Item;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.persistence.PersistentDataType;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.EnableAsync;
-
 import city.norain.slimefun4.SlimefunExtended;
 import io.github.bakedlibs.dough.common.CommonPatterns;
 import io.github.bakedlibs.dough.items.ItemMetaSnapshot;
@@ -50,6 +21,32 @@ import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.implementation.items.altar.AncientPedestal;
 import io.github.thebusybiscuit.slimefun4.implementation.tasks.CapacitorTextureUpdateTask;
 import io.github.thebusybiscuit.slimefun4.utils.itemstack.ItemStackWrapper;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
+import java.util.Optional;
+import java.util.OptionalInt;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import org.apache.commons.lang.Validate;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.World;
+import org.bukkit.entity.Item;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * This utility class holds method that are directly linked to Slimefun.
@@ -381,11 +378,11 @@ public final class SlimefunUtils {
                 ItemMeta possibleSfItemMeta = sfitem.getItemMeta();
                 String id = null;
                 if (itemMeta != null) {
-                	id = Slimefun.getItemDataService().getItemData(itemMeta).orElse(null);
+                    id = Slimefun.getItemDataService().getItemData(itemMeta).orElse(null);
                 }
                 String possibleItemId = null;
                 if (possibleSfItemMeta != null) {
-                	possibleItemId = Slimefun.getItemDataService()
+                    possibleItemId = Slimefun.getItemDataService()
                             .getItemData(possibleSfItemMeta)
                             .orElse(null);
                 }
@@ -530,12 +527,12 @@ public final class SlimefunUtils {
             @Nonnull ItemMeta sfitemMeta,
             boolean checkLore,
             boolean checkCustomModelCheck) {
-    	if (itemMeta == null && sfitemMeta == null) {
-    		return true;
-    	}
-    	if (itemMeta == null || sfitemMeta == null) {
-    		return false;
-    	}
+        if (itemMeta == null && sfitemMeta == null) {
+            return true;
+        }
+        if (itemMeta == null || sfitemMeta == null) {
+            return false;
+        }
         if (itemMeta.hasDisplayName() != sfitemMeta.hasDisplayName()) {
             Debug.log(TestCase.CARGO_INPUT_TESTING, "  Comparing has display name failed");
             return false;

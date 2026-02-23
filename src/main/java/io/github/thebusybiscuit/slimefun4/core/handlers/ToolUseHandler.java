@@ -1,14 +1,12 @@
 package io.github.thebusybiscuit.slimefun4.core.handlers;
 
+import io.github.thebusybiscuit.slimefun4.api.items.ItemHandler;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import java.util.List;
-
 import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
-
-import io.github.thebusybiscuit.slimefun4.api.items.ItemHandler;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 
 /**
  * This {@link ItemHandler} is called when a {@link Block} is broken with a {@link SlimefunItem}

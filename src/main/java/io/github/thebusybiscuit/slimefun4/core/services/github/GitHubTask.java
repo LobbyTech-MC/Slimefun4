@@ -1,5 +1,10 @@
 package io.github.thebusybiscuit.slimefun4.core.services.github;
 
+import com.google.gson.JsonParser;
+import io.github.bakedlibs.dough.skins.CustomGameProfile;
+import io.github.bakedlibs.dough.skins.PlayerSkin;
+import io.github.bakedlibs.dough.skins.UUIDLookup;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -15,19 +20,10 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.logging.Level;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.net.ssl.HttpsURLConnection;
-
 import org.bukkit.Bukkit;
-
-import com.google.gson.JsonParser;
-
-import io.github.bakedlibs.dough.skins.CustomGameProfile;
-import io.github.bakedlibs.dough.skins.PlayerSkin;
-import io.github.bakedlibs.dough.skins.UUIDLookup;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 
 /**
  * This {@link GitHubTask} represents a {@link Runnable} that is run every X minutes.
@@ -151,29 +147,31 @@ class GitHubTask implements Runnable {
         return 0;
     }
 
-    public static String getContent(String link){
+    public static String getContent(String link) {
         try {
             URL url = new URL(link);
             HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String outputLine = "";
-       
+
             String inputLine;
             while ((inputLine = br.readLine()) != null) {
                 outputLine += inputLine;
             }
             br.close();
             return outputLine;
-   
+
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
-}
-    static private JsonParser parser = new JsonParser();
-    static private String API_PROFILE_LINK = "https://sessionserver.mojang.com/session/minecraft/profile/";
+    }
+
+    private static JsonParser parser = new JsonParser();
+    private static String API_PROFILE_LINK = "https://sessionserver.mojang.com/session/minecraft/profile/";
+
     private @Nullable String pullTexture(@Nonnull Contributor contributor, @Nonnull Map<String, String> skins)
             throws InterruptedException, ExecutionException, TimeoutException {
         Optional<UUID> uuid = contributor.getUniqueId();

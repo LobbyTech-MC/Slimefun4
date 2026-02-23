@@ -1,11 +1,17 @@
 package io.github.thebusybiscuit.slimefun4.integrations;
 
+import com.gmail.nossr50.events.fake.FakeBlockBreakEvent;
+import com.gmail.nossr50.util.skills.SkillUtils;
+import dev.lone.itemsadder.api.CustomBlock;
+import dev.lone.itemsadder.api.ItemsAdder;
+import io.github.bakedlibs.dough.protection.ProtectionManager;
+import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import io.github.thebusybiscuit.slimefun4.implementation.items.electric.machines.enchanting.AutoDisenchanter;
 import java.util.function.Consumer;
 import java.util.logging.Level;
-
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Server;
@@ -13,16 +19,6 @@ import org.bukkit.block.Block;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
-
-import com.gmail.nossr50.events.fake.FakeBlockBreakEvent;
-import com.gmail.nossr50.util.skills.SkillUtils;
-
-import dev.lone.itemsadder.api.CustomBlock;
-import dev.lone.itemsadder.api.ItemsAdder;
-import io.github.bakedlibs.dough.protection.ProtectionManager;
-import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-import io.github.thebusybiscuit.slimefun4.implementation.items.electric.machines.enchanting.AutoDisenchanter;
 
 /**
  * This Service holds all interactions and hooks with third-party {@link Plugin Plugins}
@@ -130,8 +126,8 @@ public class IntegrationsManager {
 
         // ItemsAdder Integration (custom blocks)
         load("ItemsAdder", integration -> isItemsAdderInstalled = true);
-        
-     // Residence
+
+        // Residence
         load("Residence", integration -> isResidenceInstalled = true);
     }
 
@@ -339,7 +335,7 @@ public class IntegrationsManager {
     public boolean isOrebfuscatorInstalled() {
         return isOrebfuscatorInstalled;
     }
-    
+
     public boolean isResidenceInstalled() {
         return isResidenceInstalled;
     }

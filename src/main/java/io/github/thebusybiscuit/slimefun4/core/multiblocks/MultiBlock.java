@@ -1,22 +1,19 @@
 package io.github.thebusybiscuit.slimefun4.core.multiblocks;
 
+import io.github.thebusybiscuit.slimefun4.api.events.MultiBlockInteractEvent;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.core.handlers.MultiBlockInteractionHandler;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import org.apache.commons.lang.Validate;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.World;
 import org.bukkit.block.BlockFace;
-
-import io.github.thebusybiscuit.slimefun4.api.events.MultiBlockInteractEvent;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
-import io.github.thebusybiscuit.slimefun4.core.handlers.MultiBlockInteractionHandler;
 
 /**
  * A {@link MultiBlock} represents a structure build in a {@link World}.

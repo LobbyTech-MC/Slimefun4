@@ -1,11 +1,10 @@
 package city.norain.slimefun4.timings;
 
+import city.norain.slimefun4.timings.entry.TimingEntry;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import java.util.Map;
 import java.util.function.Supplier;
 import java.util.logging.Level;
-
-import city.norain.slimefun4.timings.entry.TimingEntry;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 
 public class SlowSqlCheckTask implements Runnable {
     private final Supplier<Map<TimingEntry, Long>> statusChecker;

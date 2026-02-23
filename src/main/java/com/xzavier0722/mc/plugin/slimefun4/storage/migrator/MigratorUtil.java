@@ -1,5 +1,6 @@
 package com.xzavier0722.mc.plugin.slimefun4.storage.migrator;
 
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,8 +9,6 @@ import java.nio.file.Path;
 import java.util.logging.Level;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
-
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 
 class MigratorUtil {
     protected static boolean createDirBackup(File dir) {

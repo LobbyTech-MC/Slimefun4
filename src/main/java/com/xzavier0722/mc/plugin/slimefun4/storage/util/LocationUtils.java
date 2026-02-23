@@ -1,11 +1,10 @@
 package com.xzavier0722.mc.plugin.slimefun4.storage.util;
 
+import city.norain.slimefun4.SlimefunExtended;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
-
-import city.norain.slimefun4.SlimefunExtended;
 
 public class LocationUtils {
     /**

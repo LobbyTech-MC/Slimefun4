@@ -1,12 +1,10 @@
 package io.github.thebusybiscuit.slimefun4.api;
 
-import javax.annotation.Nonnull;
-
-import org.apache.commons.lang.Validate;
-import org.bukkit.Server;
-
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.papermc.lib.PaperLib;
+import javax.annotation.Nonnull;
+import org.apache.commons.lang.Validate;
+import org.bukkit.Server;
 
 /**
  * This enum holds all versions of Minecraft that we currently support.

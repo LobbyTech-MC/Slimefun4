@@ -1,9 +1,8 @@
 package com.xzavier0722.mc.plugin.slimefun4.storage.controller;
 
-import java.util.UUID;
-
 import com.xzavier0722.mc.plugin.slimefun4.storage.common.DataScope;
 import com.xzavier0722.mc.plugin.slimefun4.storage.common.ScopeKey;
+import java.util.UUID;
 
 class UUIDKey extends ScopeKey {
     private final UUID uuid;

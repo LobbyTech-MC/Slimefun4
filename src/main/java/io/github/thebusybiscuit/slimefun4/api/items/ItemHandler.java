@@ -1,9 +1,5 @@
 package io.github.thebusybiscuit.slimefun4.api.items;
 
-import java.util.Optional;
-
-import javax.annotation.Nonnull;
-
 import io.github.thebusybiscuit.slimefun4.api.exceptions.IncompatibleItemHandlerException;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockUseHandler;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BowShootHandler;
@@ -11,6 +7,8 @@ import io.github.thebusybiscuit.slimefun4.core.handlers.EntityInteractHandler;
 import io.github.thebusybiscuit.slimefun4.core.handlers.EntityKillHandler;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemConsumptionHandler;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
+import java.util.Optional;
+import javax.annotation.Nonnull;
 
 /**
  * An {@link ItemHandler} represents a certain action that a {@link SlimefunItem}

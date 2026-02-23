@@ -1,19 +1,16 @@
 package me.mrCookieSlime.Slimefun.Objects.handlers;
 
-import java.util.Optional;
-
-import org.bukkit.block.Block;
-
 import com.xzavier0722.mc.plugin.slimefun4.storage.controller.BlockDataConfigWrapper;
 import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunBlockData;
 import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunUniversalData;
-
 import io.github.thebusybiscuit.slimefun4.api.exceptions.IncompatibleItemHandlerException;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemHandler;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;
+import java.util.Optional;
 import lombok.Getter;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
+import org.bukkit.block.Block;
 
 public abstract class BlockTicker implements ItemHandler {
 

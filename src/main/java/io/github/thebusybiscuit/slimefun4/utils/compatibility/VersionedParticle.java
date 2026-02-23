@@ -1,14 +1,11 @@
 package io.github.thebusybiscuit.slimefun4.utils.compatibility;
 
-import java.lang.reflect.Field;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import org.bukkit.Particle;
-
 import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import java.lang.reflect.Field;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import org.bukkit.Particle;
 
 // https://hub.spigotmc.org/stash/projects/SPIGOT/repos/craftbukkit/browse/src/main/java/org/bukkit/craftbukkit/legacy/FieldRename.java?until=2a6207fe150b6165722fce94c83cc1f206620ab5&untilPath=src%2Fmain%2Fjava%2Forg%2Fbukkit%2Fcraftbukkit%2Flegacy%2FFieldRename.java#281-318
 public class VersionedParticle {

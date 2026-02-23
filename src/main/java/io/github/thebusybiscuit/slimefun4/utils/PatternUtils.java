@@ -1,8 +1,7 @@
 package io.github.thebusybiscuit.slimefun4.utils;
 
-import java.util.regex.Pattern;
-
 import io.github.bakedlibs.dough.common.ChatColors;
+import java.util.regex.Pattern;
 
 /**
  * This class is created for common-use patterns used in things such as {@link String#split(String)}. <br>

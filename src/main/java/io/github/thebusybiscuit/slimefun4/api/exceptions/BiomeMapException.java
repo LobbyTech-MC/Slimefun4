@@ -1,10 +1,8 @@
 package io.github.thebusybiscuit.slimefun4.api.exceptions;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import org.bukkit.NamespacedKey;
-
 import io.github.thebusybiscuit.slimefun4.utils.biomes.BiomeMap;
+import javax.annotation.ParametersAreNonnullByDefault;
+import org.bukkit.NamespacedKey;
 
 /**
  * A {@link BiomeMapException} is thrown whenever a {@link BiomeMap}

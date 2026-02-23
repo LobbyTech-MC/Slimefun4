@@ -1,14 +1,12 @@
 package io.github.thebusybiscuit.slimefun4.utils;
 
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import java.lang.reflect.Field;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.concurrent.FutureTask;
-
 import org.bukkit.Bukkit;
-
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 
 public class ThreadUtils {
     private static final Executor MAIN_THREAD_EXECUTOR;
