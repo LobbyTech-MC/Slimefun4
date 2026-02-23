@@ -5,7 +5,9 @@ import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.logging.Level;
+
 import javax.annotation.Nullable;
+
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;

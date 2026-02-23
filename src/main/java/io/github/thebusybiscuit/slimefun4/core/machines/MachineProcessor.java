@@ -13,8 +13,6 @@ import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.EnableAsync;
 
 import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunBlockData;
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;

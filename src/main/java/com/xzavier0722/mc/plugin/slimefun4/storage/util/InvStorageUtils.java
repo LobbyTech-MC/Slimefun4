@@ -1,16 +1,19 @@
 package com.xzavier0722.mc.plugin.slimefun4.storage.util;
 
-import io.github.bakedlibs.dough.collections.Pair;
-import io.github.thebusybiscuit.slimefun4.core.debug.Debug;
-import io.github.thebusybiscuit.slimefun4.core.debug.TestCase;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+
 import javax.annotation.Nonnull;
+
 import org.bukkit.inventory.ItemStack;
+
+import io.github.bakedlibs.dough.collections.Pair;
+import io.github.thebusybiscuit.slimefun4.core.debug.Debug;
+import io.github.thebusybiscuit.slimefun4.core.debug.TestCase;
 
 public class InvStorageUtils {
     private static final Pair<ItemStack, Integer> emptyPair = new Pair<>(null, 0);

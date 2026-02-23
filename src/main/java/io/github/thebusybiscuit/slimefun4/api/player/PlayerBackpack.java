@@ -1,24 +1,16 @@
 package io.github.thebusybiscuit.slimefun4.api.player;
 
-import city.norain.slimefun4.holder.SlimefunInventoryHolder;
-import city.norain.slimefun4.utils.InventoryUtil;
-import com.xzavier0722.mc.plugin.slimefun4.storage.util.InvSnapshot;
-import io.github.bakedlibs.dough.common.ChatColors;
-import io.github.bakedlibs.dough.common.CommonPatterns;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-import io.github.thebusybiscuit.slimefun4.implementation.items.backpacks.SlimefunBackpack;
-import io.github.thebusybiscuit.slimefun4.implementation.listeners.BackpackListener;
-import io.github.thebusybiscuit.slimefun4.utils.ThreadUtils;
 import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import lombok.Getter;
+
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
@@ -27,6 +19,18 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
+
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.InvSnapshot;
+
+import city.norain.slimefun4.holder.SlimefunInventoryHolder;
+import city.norain.slimefun4.utils.InventoryUtil;
+import io.github.bakedlibs.dough.common.ChatColors;
+import io.github.bakedlibs.dough.common.CommonPatterns;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import io.github.thebusybiscuit.slimefun4.implementation.items.backpacks.SlimefunBackpack;
+import io.github.thebusybiscuit.slimefun4.implementation.listeners.BackpackListener;
+import io.github.thebusybiscuit.slimefun4.utils.ThreadUtils;
+import lombok.Getter;
 
 /**
  * This class represents the instance of a {@link SlimefunBackpack} that is ready to

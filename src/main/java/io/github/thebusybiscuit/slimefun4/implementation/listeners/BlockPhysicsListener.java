@@ -1,13 +1,5 @@
 package io.github.thebusybiscuit.slimefun4.implementation.listeners;
 
-import java.util.ArrayList;
-import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
-import io.github.thebusybiscuit.slimefun4.core.attributes.WitherProof;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
-import io.papermc.lib.PaperLib;
-import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotResult;
 import java.util.Objects;
 
 import javax.annotation.Nonnull;
@@ -29,13 +21,10 @@ import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.inventory.ItemStack;
 
-import com.xzavier0722.mc.plugin.slimefun4.storage.callback.IAsyncReadCallback;
-import com.xzavier0722.mc.plugin.slimefun4.storage.controller.ASlimefunDataContainer;
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.core.attributes.WitherProof;
-import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
 import io.papermc.lib.PaperLib;

@@ -3,7 +3,6 @@ package io.github.thebusybiscuit.slimefun4.implementation.listeners;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;

@@ -21,8 +21,6 @@ import org.bukkit.block.data.type.PistonHead;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.EnableAsync;
 
 import io.github.bakedlibs.dough.blocks.BlockPosition;
 import io.github.bakedlibs.dough.inventory.InvUtils;
