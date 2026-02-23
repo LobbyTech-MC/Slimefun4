@@ -340,7 +340,6 @@ public final class SlimefunUtils {
             }
             return false;
         } else if (item.hasItemMeta()) {
-            Debug.log(TestCase.CARGO_INPUT_TESTING, "SlimefunUtils#isItemSimilar - item.hasItemMeta()");
             ItemMeta itemMeta = item.getItemMeta();
 
             if (sfitem instanceof SlimefunItemStack sfItemStack) {
@@ -428,8 +427,39 @@ public final class SlimefunUtils {
                         checkLore);
                 return equalsItemMeta(itemMeta, sfItemMeta, checkLore, checkCustomModelData);
             } else {
-                return false;
+                // issue # 1178 should compare sfid even if the second one isn't a ItemStackWrapper
+                if (sfitem.hasItemMeta()) {
+                    ItemMeta possibleSfItemMeta = sfitem.getItemMeta();
+                    String id =
+                            Slimefun.getItemDataService().getItemData(itemMeta).orElse(null);
+                    String possibleItemId = Slimefun.getItemDataService()
+                            .getItemData(possibleSfItemMeta)
+                            .orElse(null);
+                    // Prioritize SlimefunItem id comparison over ItemMeta comparison
+                    if (id != null && possibleItemId != null) {
+                        /*
+                         * PR #3417
+                         *
+                         * Some items can't rely on just IDs matching and will implement Distinctive Item
+                         * in which case we want to use the method provided to compare
+                         */
+                        // to fix issue #976
+                        var match = id.equals(possibleItemId);
+                        if (match) {
+                            Optional<DistinctiveItem> optionalDistinctive = getDistinctiveItem(id);
+                            if (optionalDistinctive.isPresent()) {
+                                return optionalDistinctive.get().canStack(possibleSfItemMeta, itemMeta);
+                            }
+                        }
+                        return match;
+                    } else {
+                        return equalsItemMeta(itemMeta, possibleSfItemMeta, checkLore, checkCustomModelData);
+                    }
+                } else {
+                    return false;
+                }
             }
+
         } else {
             return !sfitem.hasItemMeta();
         }

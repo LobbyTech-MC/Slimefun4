@@ -10,6 +10,11 @@ import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.WitherProof;
+import javax.annotation.ParametersAreNonnullByDefault;
+import org.bukkit.entity.Wither;
+import org.bukkit.entity.WitherSkull;
+import org.bukkit.event.entity.EntityChangeBlockEvent;
+import org.bukkit.inventory.ItemStack;
 
 /**
  * {@link HardenedGlass} is a special kind of block which cannot be destroyed by explosions.
@@ -22,7 +27,6 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.WitherProof;
  *
  */
 public class HardenedGlass extends WitherProofBlock {
-
     @ParametersAreNonnullByDefault
     public HardenedGlass(
             ItemGroup itemGroup,
@@ -31,5 +35,10 @@ public class HardenedGlass extends WitherProofBlock {
             ItemStack[] recipe,
             ItemStack recipeOutput) {
         super(itemGroup, item, recipeType, recipe, recipeOutput);
+    }
+
+    @Override
+    public void onAttackEvent(EntityChangeBlockEvent event) {
+        // the Hardened Glass does not proof wither , so event shouldn't be cancelled
     }
 }
